@@ -13,9 +13,7 @@
 import { spawn } from "child_process";
 import { projectRoot } from "./paths";
 
-// 自定义每个 task 的name
-export const withTaskName = <T>(name: string, fn: T) =>
-  Object.assign(fn, { displayname: name });
+// Object.assign(fn, { displayname: name });
 
 // 在 node 中开启一个子进程来运行脚本
 export const run = async (command: string) => {
