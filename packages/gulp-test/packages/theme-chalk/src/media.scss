@@ -1,0 +1,156 @@
+.f-24 {
+  font-size: 26px;
+}
+.f-20 {
+  font-size: 24px;
+}
+.f-18 {
+  font-size: 22px;
+}
+.f-17 {
+  font-size: 18px;
+}
+.f-16 {
+  font-size: 17px;
+}
+.f-15 {
+  font-size: 16px;
+}
+.f-14 {
+  font-size: 15px;
+}
+.f-12 {
+  font-size: 12px;
+}
+.el-media-input .el-input__inner {
+  font-size: 18px;
+  height: 42px;
+}
+.el-media-button.el-button {
+  font-size: 18px;
+  height: 42px;
+}
+
+@media only screen and (max-width: 1720px) {
+  html {
+    font-size: 11px;
+  }
+  .f-24 {
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 1480px) {
+  html {
+    font-size: 10px;
+  }
+  .f-24 {
+    font-size: 24px;
+  }
+  .f-20 {
+    font-size: 20px;
+  }
+  .f-18 {
+    font-size: 18px;
+  }
+  .f-17 {
+    font-size: 17px;
+  }
+  .f-16 {
+    font-size: 16px;
+  }
+  .f-15 {
+    font-size: 15px;
+  }
+  .f-14 {
+    font-size: 14px;
+  }
+  .el-media-input .el-input__inner {
+    font-size: 17px;
+    height: 40px;
+  }
+  .el-media-button.el-button {
+    font-size: 17px;
+    height: 40px;
+  }
+}
+
+@media screen and (max-width: 1240px) {
+  html {
+    font-size: 9px;
+  }
+  .f-24 {
+    font-size: 23px;
+  }
+  .f-17 {
+    font-size: 16px;
+  }
+  .f-16 {
+    font-size: 15px;
+  }
+  .f-14 {
+    font-size: 13px;
+  }
+  .el-media-input .el-input__inner {
+    font-size: 16px;
+    height: 38px;
+  }
+  .el-media-button.el-button {
+    font-size: 16px;
+    height: 38px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  html {
+    font-size: 7.5px;
+  }
+  .f-24 {
+    font-size: 22px;
+  }
+  .f-17 {
+    font-size: 15px;
+  }
+  .f-16 {
+    font-size: 14px;
+  }
+  .f-15 {
+    font-size: 14px;
+  }
+
+  .el-media-input .el-input__inner {
+    font-size: 15px;
+    height: 36px;
+  }
+  .el-media-button.el-button {
+    font-size: 15px;
+    height: 36px;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  html {
+    font-size: 6px;
+  }
+  .f-24 {
+    font-size: 20px;
+  }
+  .f-17 {
+    font-size: 14px;
+  }
+  .f-16 {
+    font-size: 13px;
+  }
+  .f-15 {
+    font-size: 12px;
+  }
+  .f-14 {
+    font-size: 12px;
+  }
+  .el-media-input .el-input__inner {
+    font-size: 14px;
+  }
+  .el-media-button.el-button {
+    font-size: 14px;
+  }
+}

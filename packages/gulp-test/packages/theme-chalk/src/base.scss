@@ -1,0 +1,161 @@
+@import './normalize.scss';
+@import './media.scss';
+
+// 规范提取 https://www.figma.com/file/E6VAw3MeLpAvRc8HTGJfl9/%E9%9B%B7%E5%A3%AB%E7%85%A7%E6%98%8E?node-id=67%3A877&t=4VY5EFsdTAE4ssS7-0
+
+:root {
+  --white: #ffffff;
+  --ys-bg-light: #f8fcfb;
+  --ys-bg: #f5f5f5;
+  --ys-line-light: #eeeeee;
+  --ys-line: #dddddd;
+  --ys-text-light: #999;
+  --ys-text: #666;
+  --ys-text-dark: #333;
+
+  --ys-primary-bg: #f4f7f6;
+  --ys-primary: #008755;
+  --ys-primary-hover: #007d4b;
+  --ys-primary-line: #c9ddd2;
+
+  --ys-font-family: 'Microsoft JhengHei', 'Source Han Sans CN', 'PingFang SC', 'Source Han Serif SC',
+    'Microsoft YaHei', sans-serif;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+#__layout {
+  min-height: 100vh;
+  margin: 0 auto;
+  position: relative;
+}
+
+/****************** 字体系列 start ******************/
+@font-face {
+  font-family: en;
+  src: url(../font/Nexa-Book.otf);
+}
+.en {
+  font-family: en;
+}
+@font-face {
+  font-family: en_t;
+  src: url(../font/NexaThin.otf);
+}
+.en_t {
+  font-family: en_t;
+}
+@font-face {
+  font-family: en_b;
+  src: url(../font/Nexa-Bold.otf);
+}
+.en_b {
+  font-family: en_b;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+/****************** 字体系列 end ******************/
+
+/****************** 颜色系列 start ******************/
+.c-text-dark {
+  color: var(--ys-text-dark);
+}
+.c-text {
+  color: var(--ys-text);
+}
+.c-text-light {
+  color: var(--ys-text-light);
+}
+.c-line {
+  color: var(--ys-line);
+}
+.c-line-light {
+  color: var(--ys-line-light);
+}
+
+.c-primary {
+  color: var(--ys-primary);
+}
+/****************** 颜色系列 end ******************/
+
+/****************** 盒模型 start ******************/
+.flex {
+  display: flex;
+}
+.items-center {
+  align-items: center;
+}
+.w-full {
+  width: 100%;
+}
+/****************** 盒模型 end ******************/
+
+/****************** 组件库系列 start ******************/
+.css-dev-only-do-not-override-zfrjq5 {
+  .ant-dropdown {
+    max-height: var(--a-dropdown-container-max-height);
+    overflow: auto;
+    width: var(--a-dropdown-container-width) !important;
+    background-color: var(--white);
+    &::-webkit-scrollbar {
+      width: 6px;
+      background-color: var(--white);
+    }
+    &::-webkit-scrollbar-corner {
+      background-color: var(--white);
+    }
+    &::-webkit-scrollbar-thumb {
+      border: solid 1px #c7c9cc;
+      width: 3px;
+      border-radius: 4px;
+      background-color: #c7c9cc;
+    }
+  }
+  .ant-input {
+    font-size: inherit;
+  }
+}
+/****************** 组件库系列 end ******************/
+
+/****************** 动画系列 start ******************/
+.g-animated {
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+}
+.matrixUp {
+  transform-origin: 0 0;
+  animation: matrixUp 1.2s cubic-bezier(0.49, 0.54, 0.16, 1);
+  animation-fill-mode: both;
+}
+.matrixDown {
+  transform-origin: 0 0;
+  animation: matrixDown 1.2s cubic-bezier(0.49, 0.54, 0.16, 1);
+  animation-fill-mode: both;
+}
+@keyframes matrixUp {
+  0% {
+    opacity: 0;
+    transform: matrix(1, -0.1, 0, 1, 0, -20);
+  }
+  100% {
+    opacity: 1;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+  }
+}
+@keyframes matrixDown {
+  0% {
+    opacity: 0;
+    transform: matrix(1, 0.1, 0, 1, 0, 20);
+  }
+  100% {
+    opacity: 1;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+  }
+}
+/****************** 动画系列 end ******************/
