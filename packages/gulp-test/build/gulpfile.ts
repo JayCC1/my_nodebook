@@ -1,6 +1,6 @@
 // 打包方式：串行(series) 并行(parallel)
-import { series, parallel } from "gulp";
-import { withTaskName, run } from "./utils";
+import { series } from "gulp";
+import { run } from "./utils";
 // gulp 不叫打包，做代码转化 vite
 
 /**
@@ -11,5 +11,19 @@ import { withTaskName, run } from "./utils";
  * 5. 生成一个组件库
  * 6. 发布组件
  */
+async function clean() {
+  run("rimraf ./dist");
+}
 
-export default series(withTaskName("clean", async () => run("rimraf ./dist"))); // 删除 dist 目录
+async function buildPackages() {
+  console.log("---------------------------------");
+  console.dir(clean);
+  console.log("---------------------------------");
+
+  run("pnpm run -C packages --parallel build");
+}
+
+export default series(
+  clean, // 删除 dist 目录
+  buildPackages // 打包packages
+);
