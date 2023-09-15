@@ -1,0 +1,24 @@
+{
+  "name": "@jaycce/gulp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "gulp -f build/gulpfile.ts",
+    "tasks:nums": "gulp -f build/gulpfile.ts --tasks",
+    "preinstall": "npm i gulp-cli -g"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/gulp": "^4.0.13",
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.3.0",
+    "rimraf": "^5.0.1",
+    "sucrase": "^3.34.0"
+  },
+  "dependencies": {
+    "sass": "^1.67.0"
+  }
+}

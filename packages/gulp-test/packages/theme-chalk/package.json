@@ -1,0 +1,21 @@
+{
+  "name": "@jaycce/gulp-theme-chalk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "gulp"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/gulp-autoprefixer": "^0.0.34",
+    "@types/gulp-clean-css": "^4.3.1",
+    "@types/gulp-sass": "^5.0.1",
+    "@types/sass": "^1.45.0",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-sass": "^5.1.0"
+  }
+}
