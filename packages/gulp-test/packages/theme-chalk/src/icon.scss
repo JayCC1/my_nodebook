@@ -1,0 +1,739 @@
+@use './mixins/mixins.scss' as * ;
+
+
+@font-face {
+    font-family: "w-ui-icons"; /* Project id 2885434 */
+    src: url('./fonts/iconfont.woff2') format('woff2'),
+         url('./fonts/iconfont.woff') format('woff'),
+         url('./fonts/iconfont.ttf') format('truetype');
+  }
+  
+  [class^='#{$namespace}-icon'],[class*='#{$namespace}-icon'] {
+    font-family: "w-ui-icons" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .#{$namespace}-icon-customer-service:before {
+    content: "\e682";
+  }
+  
+  .#{$namespace}-icon-delete:before {
+    content: "\e683";
+  }
+  
+  .#{$namespace}-icon-direction-down:before {
+    content: "\e684";
+  }
+  
+  .#{$namespace}-icon-copy:before {
+    content: "\e685";
+  }
+  
+  .#{$namespace}-icon-cut:before {
+    content: "\e686";
+  }
+  
+  .#{$namespace}-icon-data-view:before {
+    content: "\e687";
+  }
+  
+  .#{$namespace}-icon-direction-down-circle:before {
+    content: "\e688";
+  }
+  
+  .#{$namespace}-icon-direction-right:before {
+    content: "\e689";
+  }
+  
+  .#{$namespace}-icon-direction-up:before {
+    content: "\e68a";
+  }
+  
+  .#{$namespace}-icon-discount:before {
+    content: "\e68b";
+  }
+  
+  .#{$namespace}-icon-direction-left:before {
+    content: "\e68c";
+  }
+  
+  .#{$namespace}-icon-download:before {
+    content: "\e68d";
+  }
+  
+  .#{$namespace}-icon-electronics:before {
+    content: "\e68e";
+  }
+  
+  .#{$namespace}-icon-drag:before {
+    content: "\e68f";
+  }
+  
+  .#{$namespace}-icon-elipsis:before {
+    content: "\e690";
+  }
+  
+  .#{$namespace}-icon-export:before {
+    content: "\e691";
+  }
+  
+  .#{$namespace}-icon-explain:before {
+    content: "\e692";
+  }
+  
+  .#{$namespace}-icon-edit:before {
+    content: "\e693";
+  }
+  
+  .#{$namespace}-icon-eye-close:before {
+    content: "\e694";
+  }
+  
+  .#{$namespace}-icon-email:before {
+    content: "\e695";
+  }
+  
+  .#{$namespace}-icon-error:before {
+    content: "\e696";
+  }
+  
+  .#{$namespace}-icon-favorite:before {
+    content: "\e697";
+  }
+  
+  .#{$namespace}-icon-file-common:before {
+    content: "\e698";
+  }
+  
+  .#{$namespace}-icon-file-delete:before {
+    content: "\e699";
+  }
+  
+  .#{$namespace}-icon-file-add:before {
+    content: "\e69a";
+  }
+  
+  .#{$namespace}-icon-film:before {
+    content: "\e69b";
+  }
+  
+  .#{$namespace}-icon-fabulous:before {
+    content: "\e69c";
+  }
+  
+  .#{$namespace}-icon-file:before {
+    content: "\e69d";
+  }
+  
+  .#{$namespace}-icon-folder-close:before {
+    content: "\e69e";
+  }
+  
+  .#{$namespace}-icon-filter:before {
+    content: "\e69f";
+  }
+  
+  .#{$namespace}-icon-good:before {
+    content: "\e6a0";
+  }
+  
+  .#{$namespace}-icon-hide:before {
+    content: "\e6a1";
+  }
+  
+  .#{$namespace}-icon-home:before {
+    content: "\e6a2";
+  }
+  
+  .#{$namespace}-icon-history:before {
+    content: "\e6a3";
+  }
+  
+  .#{$namespace}-icon-file-open:before {
+    content: "\e6a4";
+  }
+  
+  .#{$namespace}-icon-forward:before {
+    content: "\e6a5";
+  }
+  
+  .#{$namespace}-icon-import:before {
+    content: "\e6a6";
+  }
+  
+  .#{$namespace}-icon-image-text:before {
+    content: "\e6a7";
+  }
+  
+  .#{$namespace}-icon-keyboard-26:before {
+    content: "\e6a8";
+  }
+  
+  .#{$namespace}-icon-keyboard-9:before {
+    content: "\e6a9";
+  }
+  
+  .#{$namespace}-icon-link:before {
+    content: "\e6aa";
+  }
+  
+  .#{$namespace}-icon-layout:before {
+    content: "\e6ab";
+  }
+  
+  .#{$namespace}-icon-fullscreen-shrink:before {
+    content: "\e6ac";
+  }
+  
+  .#{$namespace}-icon-layers:before {
+    content: "\e6ad";
+  }
+  
+  .#{$namespace}-icon-lock:before {
+    content: "\e6ae";
+  }
+  
+  .#{$namespace}-icon-fullscreen-expand:before {
+    content: "\e6af";
+  }
+  
+  .#{$namespace}-icon-map:before {
+    content: "\e6b0";
+  }
+  
+  .#{$namespace}-icon-meh:before {
+    content: "\e6b1";
+  }
+  
+  .#{$namespace}-icon-menu:before {
+    content: "\e6b2";
+  }
+  
+  .#{$namespace}-icon-loading:before {
+    content: "\e6b3";
+  }
+  
+  .#{$namespace}-icon-help:before {
+    content: "\e6b4";
+  }
+  
+  .#{$namespace}-icon-minus-circle:before {
+    content: "\e6b5";
+  }
+  
+  .#{$namespace}-icon-modular:before {
+    content: "\e6b6";
+  }
+  
+  .#{$namespace}-icon-notification:before {
+    content: "\e6b7";
+  }
+  
+  .#{$namespace}-icon-mic:before {
+    content: "\e6b8";
+  }
+  
+  .#{$namespace}-icon-more:before {
+    content: "\e6b9";
+  }
+  
+  .#{$namespace}-icon-pad:before {
+    content: "\e6ba";
+  }
+  
+  .#{$namespace}-icon-operation:before {
+    content: "\e6bb";
+  }
+  
+  .#{$namespace}-icon-play:before {
+    content: "\e6bc";
+  }
+  
+  .#{$namespace}-icon-print:before {
+    content: "\e6bd";
+  }
+  
+  .#{$namespace}-icon-mobile-phone:before {
+    content: "\e6be";
+  }
+  
+  .#{$namespace}-icon-minus:before {
+    content: "\e6bf";
+  }
+  
+  .#{$namespace}-icon-navigation:before {
+    content: "\e6c0";
+  }
+  
+  .#{$namespace}-icon-pdf:before {
+    content: "\e6c1";
+  }
+  
+  .#{$namespace}-icon-prompt:before {
+    content: "\e6c2";
+  }
+  
+  .#{$namespace}-icon-move:before {
+    content: "\e6c3";
+  }
+  
+  .#{$namespace}-icon-refresh:before {
+    content: "\e6c4";
+  }
+  
+  .#{$namespace}-icon-run-up:before {
+    content: "\e6c5";
+  }
+  
+  .#{$namespace}-icon-picture:before {
+    content: "\e6c6";
+  }
+  
+  .#{$namespace}-icon-run-in:before {
+    content: "\e6c7";
+  }
+  
+  .#{$namespace}-icon-pin:before {
+    content: "\e6c8";
+  }
+  
+  .#{$namespace}-icon-save:before {
+    content: "\e6c9";
+  }
+  
+  .#{$namespace}-icon-search:before {
+    content: "\e6ca";
+  }
+  
+  .#{$namespace}-icon-share:before {
+    content: "\e6cb";
+  }
+  
+  .#{$namespace}-icon-scanning:before {
+    content: "\e6cc";
+  }
+  
+  .#{$namespace}-icon-security:before {
+    content: "\e6cd";
+  }
+  
+  .#{$namespace}-icon-sign-out:before {
+    content: "\e6ce";
+  }
+  
+  .#{$namespace}-icon-select:before {
+    content: "\e6cf";
+  }
+  
+  .#{$namespace}-icon-stop:before {
+    content: "\e6d0";
+  }
+  
+  .#{$namespace}-icon-success:before {
+    content: "\e6d1";
+  }
+  
+  .#{$namespace}-icon-smile:before {
+    content: "\e6d2";
+  }
+  
+  .#{$namespace}-icon-switch:before {
+    content: "\e6d3";
+  }
+  
+  .#{$namespace}-icon-setting:before {
+    content: "\e6d4";
+  }
+  
+  .#{$namespace}-icon-survey:before {
+    content: "\e6d5";
+  }
+  
+  .#{$namespace}-icon-task:before {
+    content: "\e6d6";
+  }
+  
+  .#{$namespace}-icon-skip:before {
+    content: "\e6d7";
+  }
+  
+  .#{$namespace}-icon-text:before {
+    content: "\e6d8";
+  }
+  
+  .#{$namespace}-icon-time:before {
+    content: "\e6d9";
+  }
+  
+  .#{$namespace}-icon-telephone-out:before {
+    content: "\e6da";
+  }
+  
+  .#{$namespace}-icon-toggle-left:before {
+    content: "\e6db";
+  }
+  
+  .#{$namespace}-icon-toggle-right:before {
+    content: "\e6dc";
+  }
+  
+  .#{$namespace}-icon-telephone:before {
+    content: "\e6dd";
+  }
+  
+  .#{$namespace}-icon-top:before {
+    content: "\e6de";
+  }
+  
+  .#{$namespace}-icon-unlock:before {
+    content: "\e6df";
+  }
+  
+  .#{$namespace}-icon-user:before {
+    content: "\e6e0";
+  }
+  
+  .#{$namespace}-icon-upload:before {
+    content: "\e6e1";
+  }
+  
+  .#{$namespace}-icon-work:before {
+    content: "\e6e2";
+  }
+  
+  .#{$namespace}-icon-training:before {
+    content: "\e6e3";
+  }
+  
+  .#{$namespace}-icon-warning:before {
+    content: "\e6e4";
+  }
+  
+  .#{$namespace}-icon-zoom-in:before {
+    content: "\e6e5";
+  }
+  
+  .#{$namespace}-icon-zoom-out:before {
+    content: "\e6e6";
+  }
+  
+  .#{$namespace}-icon-add-bold:before {
+    content: "\e6e7";
+  }
+  
+  .#{$namespace}-icon-arrow-left-bold:before {
+    content: "\e6e8";
+  }
+  
+  .#{$namespace}-icon-arrow-up-bold:before {
+    content: "\e6e9";
+  }
+  
+  .#{$namespace}-icon-close-bold:before {
+    content: "\e6ea";
+  }
+  
+  .#{$namespace}-icon-arrow-down-bold:before {
+    content: "\e6eb";
+  }
+  
+  .#{$namespace}-icon-minus-bold:before {
+    content: "\e6ec";
+  }
+  
+  .#{$namespace}-icon-arrow-right-bold:before {
+    content: "\e6ed";
+  }
+  
+  .#{$namespace}-icon-select-bold:before {
+    content: "\e6ee";
+  }
+  
+  .#{$namespace}-icon-arrow-up-filling:before {
+    content: "\e6ef";
+  }
+  
+  .#{$namespace}-icon-arrow-down-filling:before {
+    content: "\e6f0";
+  }
+  
+  .#{$namespace}-icon-arrow-left-filling:before {
+    content: "\e6f1";
+  }
+  
+  .#{$namespace}-icon-arrow-right-filling:before {
+    content: "\e6f2";
+  }
+  
+  .#{$namespace}-icon-caps-unlock-filling:before {
+    content: "\e6f3";
+  }
+  
+  .#{$namespace}-icon-comment-filling:before {
+    content: "\e6f4";
+  }
+  
+  .#{$namespace}-icon-check-item-filling:before {
+    content: "\e6f5";
+  }
+  
+  .#{$namespace}-icon-clock-filling:before {
+    content: "\e6f6";
+  }
+  
+  .#{$namespace}-icon-delete-filling:before {
+    content: "\e6f7";
+  }
+  
+  .#{$namespace}-icon-decline-filling:before {
+    content: "\e6f8";
+  }
+  
+  .#{$namespace}-icon-dynamic-filling:before {
+    content: "\e6f9";
+  }
+  
+  .#{$namespace}-icon-intermediate-filling:before {
+    content: "\e6fa";
+  }
+  
+  .#{$namespace}-icon-favorite-filling:before {
+    content: "\e6fb";
+  }
+  
+  .#{$namespace}-icon-layout-filling:before {
+    content: "\e6fc";
+  }
+  
+  .#{$namespace}-icon-help-filling:before {
+    content: "\e6fd";
+  }
+  
+  .#{$namespace}-icon-history-filling:before {
+    content: "\e6fe";
+  }
+  
+  .#{$namespace}-icon-filter-filling:before {
+    content: "\e6ff";
+  }
+  
+  .#{$namespace}-icon-file-common-filling:before {
+    content: "\e700";
+  }
+  
+  .#{$namespace}-icon-news-filling:before {
+    content: "\e701";
+  }
+  
+  .#{$namespace}-icon-edit-filling:before {
+    content: "\e702";
+  }
+  
+  .#{$namespace}-icon-fullscreen-expand-filling:before {
+    content: "\e703";
+  }
+  
+  .#{$namespace}-icon-smile-filling:before {
+    content: "\e704";
+  }
+  
+  .#{$namespace}-icon-rise-filling:before {
+    content: "\e705";
+  }
+  
+  .#{$namespace}-icon-picture-filling:before {
+    content: "\e706";
+  }
+  
+  .#{$namespace}-icon-notification-filling:before {
+    content: "\e707";
+  }
+  
+  .#{$namespace}-icon-user-filling:before {
+    content: "\e708";
+  }
+  
+  .#{$namespace}-icon-setting-filling:before {
+    content: "\e709";
+  }
+  
+  .#{$namespace}-icon-switch-filling:before {
+    content: "\e70a";
+  }
+  
+  .#{$namespace}-icon-work-filling:before {
+    content: "\e70b";
+  }
+  
+  .#{$namespace}-icon-task-filling:before {
+    content: "\e70c";
+  }
+  
+  .#{$namespace}-icon-success-filling:before {
+    content: "\e70d";
+  }
+  
+  .#{$namespace}-icon-warning-filling:before {
+    content: "\e70e";
+  }
+  
+  .#{$namespace}-icon-folder-filling:before {
+    content: "\e70f";
+  }
+  
+  .#{$namespace}-icon-map-filling:before {
+    content: "\e710";
+  }
+  
+  .#{$namespace}-icon-prompt-filling:before {
+    content: "\e711";
+  }
+  
+  .#{$namespace}-icon-meh-filling:before {
+    content: "\e712";
+  }
+  
+  .#{$namespace}-icon-cry-filling:before {
+    content: "\e713";
+  }
+  
+  .#{$namespace}-icon-top-filling:before {
+    content: "\e714";
+  }
+  
+  .#{$namespace}-icon-home-filling:before {
+    content: "\e715";
+  }
+  
+  .#{$namespace}-icon-sorting:before {
+    content: "\e716";
+  }
+  
+  .#{$namespace}-icon-3column:before {
+    content: "\e663";
+  }
+  
+  .#{$namespace}-icon-column-4:before {
+    content: "\e664";
+  }
+  
+  .#{$namespace}-icon-add:before {
+    content: "\e665";
+  }
+  
+  .#{$namespace}-icon-add-circle:before {
+    content: "\e666";
+  }
+  
+  .#{$namespace}-icon-adjust:before {
+    content: "\e667";
+  }
+  
+  .#{$namespace}-icon-arrow-up-circle:before {
+    content: "\e668";
+  }
+  
+  .#{$namespace}-icon-arrow-right-circle:before {
+    content: "\e669";
+  }
+  
+  .#{$namespace}-icon-arrow-down:before {
+    content: "\e66a";
+  }
+  
+  .#{$namespace}-icon-ashbin:before {
+    content: "\e66b";
+  }
+  
+  .#{$namespace}-icon-arrow-right:before {
+    content: "\e66c";
+  }
+  
+  .#{$namespace}-icon-browse:before {
+    content: "\e66d";
+  }
+  
+  .#{$namespace}-icon-bottom:before {
+    content: "\e66e";
+  }
+  
+  .#{$namespace}-icon-back:before {
+    content: "\e66f";
+  }
+  
+  .#{$namespace}-icon-bad:before {
+    content: "\e670";
+  }
+  
+  .#{$namespace}-icon-arrow-double-left:before {
+    content: "\e671";
+  }
+  
+  .#{$namespace}-icon-arrow-left-circle:before {
+    content: "\e672";
+  }
+  
+  .#{$namespace}-icon-arrow-double-right:before {
+    content: "\e673";
+  }
+  
+  .#{$namespace}-icon-caps-lock:before {
+    content: "\e674";
+  }
+  
+  .#{$namespace}-icon-camera:before {
+    content: "\e675";
+  }
+  
+  .#{$namespace}-icon-chart-bar:before {
+    content: "\e676";
+  }
+  
+  .#{$namespace}-icon-attachment:before {
+    content: "\e677";
+  }
+  
+  .#{$namespace}-icon-code:before {
+    content: "\e678";
+  }
+  
+  .#{$namespace}-icon-close:before {
+    content: "\e679";
+  }
+  
+  .#{$namespace}-icon-check-item:before {
+    content: "\e67a";
+  }
+  
+  .#{$namespace}-icon-calendar:before {
+    content: "\e67b";
+  }
+  
+  .#{$namespace}-icon-comment:before {
+    content: "\e67c";
+  }
+  
+  .#{$namespace}-icon-column-vertical:before {
+    content: "\e67d";
+  }
+  
+  .#{$namespace}-icon-column-horizontal:before {
+    content: "\e67e";
+  }
+  
+  .#{$namespace}-icon-complete:before {
+    content: "\e67f";
+  }
+  
+  .#{$namespace}-icon-chart-pie:before {
+    content: "\e680";
+  }
+  
+  .#{$namespace}-icon-cry:before {
+    content: "\e681";
+  }
+  
+  
