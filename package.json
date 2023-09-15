@@ -3,11 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "workspaces": [
+    "packages/**/*"
+  ],
   "scripts": {
     "gulp:build": "pnpm --filter @jaycce/gulp run build",
+    "gulp:build-theme": "pnpm --filter @jaycce/gulp run build:theme",
+    "gulp:build-utils": "pnpm --filter @jaycce/gulp run build:utils",
     "gulp:nums": "pnpm --filter @jaycce/gulp run tasks:nums"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "notebook",
+    "JayCC1",
+    "jaycce"
+  ],
+  "author": "JayCC1",
   "license": "ISC"
 }
