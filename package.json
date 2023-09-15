@@ -1,0 +1,13 @@
+{
+  "name": "docs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "gulp:build": "pnpm --filter @jaycce/gulp run build",
+    "gulp:nums": "pnpm --filter @jaycce/gulp run tasks:nums"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
