@@ -8,7 +8,7 @@
     "tasks:nums": "gulp -f build/gulpfile.ts --tasks",
     "build:theme": "pnpm --filter @jaycce/gulp-theme-chalk build",
     "build:utils": "pnpm --filter @jaycce/gulp-utils build",
-    "prepare": "npm i gulp-cli -g"
+    "prepare": "npm i gulp-cli -g && node ./scripts/create-link.js"
   },
   "keywords": [],
   "author": "",
