@@ -1,3 +1,3 @@
-import { buildTheme } from "./build/theme-build";
+import { buildTheme } from "./common/build/theme-build";
 
 export default buildTheme(__dirname, "theme-chalk");
