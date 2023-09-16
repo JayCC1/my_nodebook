@@ -4,7 +4,7 @@ const { resolve } = require("path");
 const target = [
   {
     src: resolve(__dirname, "../build"),
-    dest: "build",
+    dest: "common/build",
   },
 ];
 
