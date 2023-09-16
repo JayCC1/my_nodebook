@@ -13,8 +13,6 @@
 import { spawn } from "child_process";
 import { projectRoot } from "./paths";
 
-// Object.assign(fn, { displayname: name });
-
 // 在 node 中开启一个子进程来运行脚本
 export const run = async (command: string) => {
   return new Promise((resolve) => {
@@ -30,3 +28,14 @@ export const run = async (command: string) => {
     app.on("close", resolve);
   });
 };
+
+// 由于使用的是将 build 文件夹创建软连接的方式存在于需要打包的子工作空间中
+// 所以打包时，需要把 build 文件忽略，所以提取方法统一处理
+const needIgnoreCommonDir = "common";
+export function buildInputIgnore(params: string | string[]) {
+  if (typeof params === "string") {
+    return [params, `!${needIgnoreCommonDir}/**`];
+  } else {
+    return [...params, `!${needIgnoreCommonDir}/**`];
+  }
+}
