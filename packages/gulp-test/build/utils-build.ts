@@ -4,20 +4,25 @@ import { buildConfig } from "./utils/config";
 import { resolve } from "path";
 import { outDir, projectRoot } from "./utils/paths";
 import ts from "gulp-typescript";
-import { run } from "./utils";
+import { buildInputIgnore, run } from "./utils";
 import { cwd } from "process";
 
 // 打包处理
 export const buildUtils = (dirname: string, name: string) => {
+  // 请空之前打包的文件
+  const clean = async () => run(`rimraf ${resolve(cwd(), "./dist")}`);
   const tasks = Object.entries(buildConfig).map(([module, config]) => {
     const output = resolve(dirname, `dist/${config.output.name}`);
 
     // task 任务列表
-    const seriesTasks = {
-      clean: async () => run(`rimraf ${resolve(cwd(), "./dist")}`),
+    const seriesTasks: Record<string, any> = {
       [`build:${dirname}`]: () => {
         const tsConfig = resolve(projectRoot, "tsconfig.json");
-        const inputs = ["**/*.ts", "!gulpfile.ts", "!node_modules"];
+        const inputs = buildInputIgnore([
+          "**/*.ts",
+          "!gulpfile.ts",
+          "!node_modules",
+        ]);
         return src(inputs)
           .pipe(
             ts.createProject(tsConfig, {
@@ -40,11 +45,10 @@ export const buildUtils = (dirname: string, name: string) => {
     // 安装依赖 gulp-typescript
     return series(
       // 清空之前的文件
-      seriesTasks.clean,
       // 处理 ts 文件
       seriesTasks[`build:${dirname}`],
       seriesTasks[`copy:${dirname}`]
     );
   });
-  return parallel(...tasks);
+  return series(clean, parallel(...tasks));
 };

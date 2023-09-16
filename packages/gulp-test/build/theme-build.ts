@@ -16,8 +16,13 @@ import { resolve } from "path";
  */
 import { series, parallel, src, dest } from "gulp";
 import { outDir } from "./utils/paths";
+import { buildInputIgnore, run } from "./utils";
+import { cwd } from "process";
 
 export const buildTheme = (dirname: string, name: string) => {
+  // 请空之前打包的文件
+  const clean = async () => run(`rimraf ${resolve(cwd(), "./dist")}`);
+
   /**
    * 对 sass 文件做处理
    */
@@ -28,7 +33,7 @@ export const buildTheme = (dirname: string, name: string) => {
     //    ==> 添加前缀
     //    ==> 压缩
     //    ==> 最终输出到当前目录下 dist 下的目录
-    return src(resolve(dirname, "./src/*.scss"))
+    return src(buildInputIgnore(resolve(dirname, "./src/*.scss")))
       .pipe(sass.sync())
       .pipe(autoprefixer())
       .pipe(cleanCss())
@@ -42,7 +47,7 @@ export const buildTheme = (dirname: string, name: string) => {
     // 从 src 下fonts文件夹中的所有文件开始
     //  ==> 压缩
     //  ==> 最终输出到当前目录下 dist 下的font目录
-    return src(resolve(dirname, "./src/fonts/**"))
+    return src(buildInputIgnore(resolve(dirname, "./src/fonts/**")))
       .pipe(cleanCss())
       .pipe(dest(resolve(dirname, "./dist/fonts")));
   }
@@ -52,8 +57,10 @@ export const buildTheme = (dirname: string, name: string) => {
    */
   function copyFullStyle() {
     const rootDistPath = resolve(dirname, resolve(outDir, name));
-    return src(resolve(dirname, "./dist/**")).pipe(dest(rootDistPath));
+    return src(buildInputIgnore(resolve(dirname, "./dist/**"))).pipe(
+      dest(rootDistPath)
+    );
   }
 
-  return series(parallel(compile, copyFont), copyFullStyle);
+  return series(clean, parallel(compile, copyFont), copyFullStyle);
 };
