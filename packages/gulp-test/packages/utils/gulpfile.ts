@@ -1,3 +1,3 @@
-import { buildPackages } from "../../build/packages";
+import { buildUtils } from "../../build/utils-build";
 
-export default buildPackages(__dirname, "utils");
+export default buildUtils(__dirname, "utils");

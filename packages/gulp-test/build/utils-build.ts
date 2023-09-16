@@ -8,7 +8,7 @@ import { run } from "./utils";
 import { cwd } from "process";
 
 // 打包处理
-export const buildPackages = (dirname: string, name: string) => {
+export const buildUtils = (dirname: string, name: string) => {
   const tasks = Object.entries(buildConfig).map(([module, config]) => {
     const output = resolve(dirname, `dist/${config.output.name}`);
 
