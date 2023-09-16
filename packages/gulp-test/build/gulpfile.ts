@@ -16,10 +16,6 @@ async function clean() {
 }
 
 async function buildPackages() {
-  console.log("---------------------------------");
-  console.dir(clean);
-  console.log("---------------------------------");
-
   run("pnpm run -C packages --parallel build");
 }
 
