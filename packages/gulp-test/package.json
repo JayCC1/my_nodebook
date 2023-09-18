@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "@jaycce/gulp-theme-chalk": "workspace:^",
-    "@jaycce/gulp-utils": "workspace:^"
+    "@jaycce/gulp-utils": "workspace:^",
+    "element-plus": "^2.3.14"
   }
 }
