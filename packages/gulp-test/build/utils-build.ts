@@ -1,11 +1,11 @@
 // 专门打包 utils指令hook
 import { series, parallel, src, dest } from "gulp";
-import { buildConfig } from "./utils/config";
-import { resolve } from "path";
-import { outDir, projectRoot } from "./utils/paths";
 import ts from "gulp-typescript";
-import { buildInputIgnore, run } from "./utils";
+import { resolve } from "path";
 import { cwd } from "process";
+import { buildConfig } from "./utils/config";
+import { outDir, projectRoot } from "./utils/paths";
+import { buildInputIgnore, run } from "./utils";
 
 // 打包处理
 export const buildUtils = (dirname: string, name: string) => {
