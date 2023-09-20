@@ -49,7 +49,7 @@ function cleanCssAfter(details) {
 
 export const buildTheme = () => {
   // 请空之前打包的文件
-  const clean = async () => {
+  const cleanTheme = async () => {
     rimraf.sync(resolve(themeRoot, "dist"));
   };
 
@@ -98,5 +98,5 @@ export const buildTheme = () => {
     return parallel(...tasks);
   }
 
-  return series(clean, parallel(compile, copyFont), copyFullStyle());
+  return series(cleanTheme, parallel(compile, copyFont), copyFullStyle());
 };
