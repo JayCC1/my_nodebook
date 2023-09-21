@@ -3,7 +3,7 @@ import { series, parallel, src, dest } from "gulp";
 import ts from "gulp-typescript";
 import { resolve } from "path";
 import { utilsConfig } from "../utils/config";
-import { projectRoot, utilsRoot } from "../utils/paths";
+import { utilsRoot } from "../utils/paths";
 import { rimraf } from "rimraf";
 
 // 打包处理
@@ -14,7 +14,7 @@ export const buildUtils = () => {
     // task 任务列表
     const seriesTasks: Record<string, any> = {
       [`build:utils-${config.rootOutput.name}`]: () => {
-        const tsConfig = resolve(projectRoot, "tsconfig.json");
+        const tsConfig = resolve(utilsRoot, "tsconfig.json");
         const inputs = [resolve(utilsRoot, "**/*.ts"), "!node_modules"];
         return src(inputs)
           .pipe(
