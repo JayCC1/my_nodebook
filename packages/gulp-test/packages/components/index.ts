@@ -1,2 +1,2 @@
-export * from './icon'
-export * from './button'
+export * from "./src/button";
+export * from "./src/icon";
