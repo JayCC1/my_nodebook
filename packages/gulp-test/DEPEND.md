@@ -79,3 +79,61 @@ fast-glob 是一个快速、高效的文件和目录匹配库，它使用 Node.j
 #### @types/node
 
 为 Node.js 的 API 提供类型声明
+
+#### @rollup/plugin-node-resolve
+
+帮助 Rollup 处理 Node.js 模块。具体来说，该插件会在 Rollup 打包过程中解析 Node.js 模块的导入语句（例如 require() 或 import 语句），然后查找并打包这些依赖的 Node.js 模块。
+
+#### rollup-plugin-typescript2
+
+rollup-plugin-typescript 的重写
+
+- 将 TypeScript 文件编译为 JavaScript；
+- 自动处理 TypeScript 中的 import 和 export 语句；
+- 为 Rollup 提供捆绑支持，以创建最终的捆绑包。
+
+#### @vue/compiler-sfc
+
+是 Vue.js 的官方编译器，用于将 .vue 文件中的模板、脚本和样式编译成可执行的 JavaScript 代码。它使用 Vue.js 的模板编译器和运行时库来解析和编译 .vue 文件，并生成可在浏览器中运行的 JavaScript 文件。
+
+#### rollup-plugin-vue
+
+- 将 Vue 组件编译成 JavaScript 模块；
+- 自动处理 Vue 组件中的模板、样式和交互；
+- (重点)为 Rollup 提供捆绑支持，以创建最终的捆绑包。
+
+#### @vitejs/plugin-vue
+
+插件允许你在 Vite 应用程序中使用 Vue.js。它提供了对 Vue 组件、Vue 单文件组件（.vue 文件）以及 Vue 特性（如 Vue Router 和 Vuex）的支持,可以将 Vue 单文件组件转换为 JavaScript 模块，以便在浏览器中使用。
+
+#### @vitejs/plugin-vue-jsx
+
+是一个用于支持在 Vue.js 项目中使用 JSX/TSX 语法的插件,主要作用就是将 JSX/TSX 模板解析并编译成 Vue 模板。
+
+#### unplugin-vue-define-options
+
+选项 API 可以使用＜ script setup ＞中的 defineOptions 声明，特别是可以在一个函数内设置 name, props, emits, and render
+
+#### @rollup/plugin-commonjs
+
+CommonJs 是一种用于在浏览器之外执行 JavaScript 代码的模块规范，Rollup 默认只支持 ES 模块。这个插件的作用就是将 CommonJS 模块转换为 ES 模块，以便在 Rollup 中进行打包。
+
+#### @esbuild-kit/cjs-loader
+
+加载 ESM 和 typeScript 并按需转为 commonJS
+
+#### esbuild
+
+Esbuild 是一个快速的 JavaScript 打包器,主要的特点是极速和简洁。Esbuild 可以自动识别和处理 JSX 和 CSS 等文件，同时也支持通过命令行进行调用和配置,Esbuild 从零开始造轮子，没有任何第三方库的黑盒逻辑，保证极致的代码性能，同时高效利用内存。
+
+#### rollup-plugin-esbuild
+
+是一个 Rollup 插件，用于使用 esbuild 来执行 JavaScript 代码转换和打包。
+
+#### ts-morph
+
+- 解析 TypeScript 代码并生成 AST（抽象语法树）；
+- 在代码中进行搜索和导航，找到符合特定要求的部分；
+- 通过操作树来修改代码;
+- 生成类型定义文件;
+- 格式化代码.

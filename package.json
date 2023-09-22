@@ -8,8 +8,6 @@
   ],
   "scripts": {
     "gulp:build": "pnpm --filter @jaycce/gulp run build",
-    "gulp:build-theme": "pnpm --filter @jaycce/gulp run build:theme",
-    "gulp:build-utils": "pnpm --filter @jaycce/gulp run build:utils",
     "gulp:nums": "pnpm --filter @jaycce/gulp run tasks:nums"
   },
   "keywords": [
