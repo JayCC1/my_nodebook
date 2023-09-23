@@ -2,7 +2,6 @@
   "name": "@jaycce/gulp",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "build": "gulp -f build/gulpfile.ts",
     "tasks:nums": "gulp -f build/gulpfile.ts --tasks",

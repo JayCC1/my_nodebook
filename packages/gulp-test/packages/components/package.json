@@ -1,11 +1,41 @@
 {
   "name": "@jaycce/gulp-components",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
+  "description": "JayCC1 gulp & rollup test-components",
+  "main": "lib/index.js",
+  "module": "es/index.mjs",
+  "types": "es/index.d.ts",
+  "style": "dist/index.css",
+  "unpkg": "dist/index.min.js",
+  "jsdelivr": "dist/index.min.js",
+  "scripts": {},
+  "keywords": [
+    "gulp-components",
+    "JayCC1",
+    "jaycce",
+    "gulp",
+    "rollup"
+  ],
+  "author": "JayCC1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JayCC1/my_nodebook.git",
+    "directory": "packages/gulp-test/packages/components"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "vue": ">=3.2.0",
+    "element-plus": ">=2.3.14",
+    "@jaycce/gulp-utils": "workspace:^"
+  },
+  "dependencies": {
+    "@jaycce/gulp-utils": "workspace:^"
+  }
 }
