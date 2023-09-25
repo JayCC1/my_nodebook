@@ -13,9 +13,4 @@ const style = computed(() => ({
   ["--j-icon-color"]: props.color,
 }));
 </script>
-<style>
-.j-icon {
-  font-size: var(--j-icon-font-size);
-  color: var(--j-icon-color);
-}
-</style>
+<style></style>
