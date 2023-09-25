@@ -32,6 +32,18 @@ gulp-sass 是一个 Gulp 插件，用于将 Sass（Syntactically Awesome Style S
 
 gulp-typescript 是一个 Gulp 插件，用于将 TypeScript 代码编译成 JavaScript 代码。它集成了 TypeScript 编译器，可以在 Gulp 任务中直接使用。
 
+#### gulp-uglify
+
+压缩 JavaScript 代码
+
+#### gulp-concat
+
+合并文件
+
+#### gulp-rename
+
+重命名文件或更改文件名
+
 #### rimraf
 
 rimraf 是一个用于删除文件和文件夹的 Node.js 模块。
@@ -137,3 +149,17 @@ Esbuild 是一个快速的 JavaScript 打包器,主要的特点是极速和简�
 - 通过操作树来修改代码;
 - 生成类型定义文件;
 - 格式化代码.
+
+#### @babel/core
+
+Babel 是一个工具链，用于将最新的 ECMAScript 语法转换为较旧的 JavaScript 版本
+@babel/core 是 Babel 工具链的核心包，提供了一些基础的函数和工具，用于解析、转换和生成 JavaScript 代码
+
+#### @babel\preset-env
+
+是一个 Babel 预设，它可以根据指定的目标环境自动确定需要的 Babel 插件和 polyfill，以将 ECMAScript 2015+ 代码转换为向后兼容的 JavaScript 版本
+可以根据目标环境自动确定需要的插件和 polyfill
+
+#### gulp-babel
+
+是一个 gulp 插件，用于将 JavaScript 代码转换为向后兼容的 JavaScript 版本，以便在不同的环境中运行。它的主要作用是利用 Babel 工具链对 JavaScript 代码进行转码和编译

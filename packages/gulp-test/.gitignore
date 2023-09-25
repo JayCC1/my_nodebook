@@ -1,2 +1,4 @@
 # gulp-test files
 packages/**/build/*
+es
+lib

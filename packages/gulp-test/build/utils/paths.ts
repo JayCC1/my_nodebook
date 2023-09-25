@@ -8,11 +8,12 @@ export const outDir = resolve(__dirname, "../../dist");
 
 export const pkgRoot = resolve(projectRoot, "packages");
 
-// theme 打包根目录
+// **************** theme ****************
 export const themeRoot = resolve(pkgRoot, "theme-chalk");
 
-// utils 打包目录
+// **************** utils ****************
 export const utilsRoot = resolve(pkgRoot, "utils");
 
-// components 打包目录
+// **************** components ****************
 export const componentsRoot = resolve(pkgRoot, "components");
+export const componentsPkg = resolve(componentsRoot, "package.json");
