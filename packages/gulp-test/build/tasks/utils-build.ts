@@ -90,7 +90,7 @@ function buildFullUtilsForCjs() {
     )
     .pipe(concat(`utils.${utilsConfig.cjs.format}.js`)) // 将编译后的文件合并为一个名为utils.es.js的文件
     .pipe(uglify()) // 压缩utils.es.js文件
-    .pipe(rename(`utils.min.js`))
+    .pipe(rename(`index.min.js`))
     .pipe(dest(resolve(utilsRoot, "dist")));
 }
 
