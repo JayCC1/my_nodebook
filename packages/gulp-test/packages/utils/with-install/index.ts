@@ -1,4 +1,4 @@
-import type { App, Plugin } from "vue"; // 只是导入类型不是导入App的值
+import type { App, Plugin, Component } from "vue"; // 只是导入类型不是导入App的值
 
 /**
  * 组件外部使用use时执行install，然后将组件注册为全局
@@ -17,7 +17,7 @@ export const withInstall = <T>(comp: T) => {
    * 所以从vue中引入Plugin类型，断言comp的类型为T&Plugin
    */
   (comp as SFCWithInstall<T>).install = function (app: App) {
-    app.component((comp as any).name, comp);
+    app.component((comp as any).name, comp as Component);
   };
   return comp as SFCWithInstall<T>;
 };
