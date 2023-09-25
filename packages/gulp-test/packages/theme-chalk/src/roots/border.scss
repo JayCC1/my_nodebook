@@ -1,0 +1,8 @@
+:root {
+  --j-border-color: #dddddd;
+  --j-border-color-light: #eeeeee;
+  --j-border-color-dark: #999999;
+  --j-border: 1px solid var(--j-border-color);
+  --j-border-light: 1px solid var(--j-border-color-light);
+  --j-border-dark: 1px solid var(--j-border-color-dark);
+}

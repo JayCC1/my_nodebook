@@ -1,11 +1,19 @@
-$namespace: "j";
+$namespace: "j" !default; // 命名空间
+$common-separator: "-" !default; // 连接命名空间与组件名称
+$element-separator: "__" !default; // 连接子(子孙)元素
+$modifier-separator: "--" !default; // 紧接修饰词
+$state-prefix: "j-is" !default; // 状态前缀
 
 /**
 * 命名规范 BEM规范
 
-<div class="z-cell">
-    <div class="z-cell__label"></div>
-    <div class="z-cell__value is_check"></div>
+<div class="j-cell">
+    <div class="j-cell__label"></div>
+    <div class="j-cell__value"></div>
 </div>
 
+<div class="j-cell j-cell--show">
+    <div class="j-cell__label"></div>
+    <div class="j-cell__value"></div>
+</div>
 */

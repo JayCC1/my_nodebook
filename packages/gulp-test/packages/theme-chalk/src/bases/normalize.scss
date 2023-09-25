@@ -1,0 +1,49 @@
+html {
+  font: normal normal var(--ys-font-weight) var(--ys-font-size) / var(--ys-line-height)
+    var(--ys-font-sans-serif);
+}
+
+body {
+  color: var(--ys-text);
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+button,
+input[type='submit'],
+input[type='button'] {
+  cursor: pointer;
+}
+
+input::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  margin: 0;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: var(--ys-text-200);
+}
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+  color: var(--ys-text-200);
+}
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: var(--ys-text-200);
+}
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: var(--ys-text-200);
+}

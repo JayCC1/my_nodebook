@@ -1,0 +1,35 @@
+@use "config" as *;
+
+$block: "";
+
+// --------------------- 建立bem规范类名方法 ---------------------
+// 创建 bem 中的 b(block 块类名)
+@mixin b() {
+  $class: #{$namespace}#{$common-separator}#{$block};
+  .#{$class} {
+    @content;
+  }
+}
+
+// 创建 bem 中的 e(element -> block 块中的成员)
+@mixin e($element) {
+  $class: #{$namespace}#{$common-separator}#{$block}#{$element-separator}#{$element};
+  .#{$class} {
+    @content;
+  }
+}
+
+// 创建 bem 中的 m(modifier -> block 的不同状态或不同版本)
+@mixin m($modifier) {
+  $class: #{$namespace}#{$common-separator}#{$block}#{$modifier-separator}#{$modifier};
+  .#{$class} {
+    @content;
+  }
+}
+
+@mixin bem($element, $modifier) {
+  $class: #{$namespace}#{$common-separator}#{$block}#{$element-separator}#{$element}#{$modifier-separator}#{$modifier};
+  .#{$class} {
+    @content;
+  }
+}

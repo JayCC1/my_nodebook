@@ -1,0 +1,8 @@
+:root {
+  --j-shadow-color: #dddddd;
+  --j-shadow-color-light: #eeeeee;
+  --j-shadow-color-dark: #999999;
+  --j-box-shadow: 0 0 4px 2px var(--j-shadow-color);
+  --j-box-shadow-light: 0 0 4px 2px var(--j-shadow-color-light);
+  --j-box-shadow-dark: 0 0 4px 2px var(--j-shadow-color-dark);
+}
