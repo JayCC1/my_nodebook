@@ -32,6 +32,10 @@ gulp-sass 是一个 Gulp 插件，用于将 Sass（Syntactically Awesome Style S
 
 gulp-typescript 是一个 Gulp 插件，用于将 TypeScript 代码编译成 JavaScript 代码。它集成了 TypeScript 编译器，可以在 Gulp 任务中直接使用。
 
+#### gulp-sourcemaps
+
+生成 source map
+
 #### gulp-uglify
 
 压缩 JavaScript 代码
@@ -132,11 +136,16 @@ CommonJs 是一种用于在浏览器之外执行 JavaScript 代码的模块规�
 
 #### @esbuild-kit/cjs-loader
 
-加载 ESM 和 typeScript 并按需转为 commonJS
+将 ESM 和 TypeScript 模块转换为 CommonJS 格式
+
+#### @esbuild-kit/esm-loader
+
+将 TypeScript 模块转换为 ESM 格式的加载器
 
 #### esbuild
 
 Esbuild 是一个快速的 JavaScript 打包器,主要的特点是极速和简洁。Esbuild 可以自动识别和处理 JSX 和 CSS 等文件，同时也支持通过命令行进行调用和配置,Esbuild 从零开始造轮子，没有任何第三方库的黑盒逻辑，保证极致的代码性能，同时高效利用内存。
+对于.ts 和.tsx 文件是默认启用 ts 或者 tsx-loader,内置了对 TypeScript 语法的解析和丢弃类型注释的支持,需要注意的是，esbuild 在编译时不会进行类型检查，这应该在编译之前使用 ide 去检查。
 
 #### rollup-plugin-esbuild
 

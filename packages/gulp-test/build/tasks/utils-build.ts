@@ -6,6 +6,7 @@ import concat from "gulp-concat";
 import uglify from "gulp-uglify";
 import rename from "gulp-rename";
 import babel from "gulp-babel";
+import sourcemaps from "gulp-sourcemaps";
 import esbuild, { minify as minifyPlugin } from "rollup-plugin-esbuild";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import { rimraf } from "rimraf";
@@ -14,7 +15,7 @@ import { utilsConfig } from "../utils/config";
 import { utilsRoot } from "../utils/paths";
 
 // 模块打包处理
-export const buildUtils = () => {
+export const buildModuleUtils = () => {
   const tsConfig = resolve(utilsRoot, "tsconfig.json");
   const inputs = [
     resolve(utilsRoot, "**/*.ts"),
@@ -61,11 +62,8 @@ export const buildUtils = () => {
 };
 
 export const buildFullUtils = () => {
-  const inputs = [resolve(utilsRoot, "index.ts")];
-  const tsConfig = resolve(utilsRoot, "tsconfig.json");
   // 清空 dist 目录
   const cleanUtilsFull = async () => rimraf.sync(resolve(utilsRoot, "dist"));
-
   return series(
     cleanUtilsFull,
     parallel(buildFullUtilsForCjs, buildFullUtilsForEjs)
@@ -89,8 +87,10 @@ function buildFullUtilsForCjs() {
       })
     )
     .pipe(concat(`utils.${utilsConfig.cjs.format}.js`)) // 将编译后的文件合并为一个名为utils.es.js的文件
+    .pipe(sourcemaps.init()) // 初始化 source map
     .pipe(uglify()) // 压缩utils.es.js文件
     .pipe(rename(`index.min.js`))
+    .pipe(sourcemaps.write("./")) // 将source map写入到与输出文件统一目录下
     .pipe(dest(resolve(utilsRoot, "dist")));
 }
 
@@ -122,4 +122,8 @@ async function buildFullUtilsForEjs() {
       sourcemap: hasSourceMap, // 生成 sourcemap
     })
   );
+}
+
+export function buildUtils() {
+  return parallel(buildModuleUtils(), buildFullUtils());
 }
