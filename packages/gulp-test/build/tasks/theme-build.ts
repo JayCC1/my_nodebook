@@ -20,17 +20,19 @@ import chalk from "chalk";
  */
 import gulp from "gulp";
 import { themeRoot } from "../utils/paths";
-import { themeConfig } from "../utils/config";
 
-const { series, src, dest } = gulp;
+const { series, src, dest, parallel } = gulp;
 const { green, cyan, yellow } = chalk;
 
-export const buildTheme = () => {
-  // 请空之前打包的文件
-  const cleanTheme = async () => {
-    rimraf.sync(resolve(themeRoot, "dist"));
-  };
+const buildThemePath = resolve(themeRoot, "./scss/*.scss");
+const buildThemeOutDir = resolve(themeRoot, "dist");
+// 清空之前打包的文件
+async function cleanTheme() {
+  rimraf.sync(resolve(themeRoot, "dist"));
+}
 
+// --------------- 打包 样式 相关文件编译为css并压缩 ---------------
+function buildStyle() {
   /**
    * 对 sass 文件做处理
    */
@@ -41,7 +43,6 @@ export const buildTheme = () => {
     //    ==> 添加前缀
     //    ==> 压缩
     //    ==> 最终输出到当前目录下 dist 下的目录
-    const buildThemePath = resolve(themeRoot, "./scss/*.scss");
     const excludeFilter = gulpFilter([buildThemePath, "!mixin.scss"], {
       restore: true,
     });
@@ -63,8 +64,17 @@ export const buildTheme = () => {
           );
         })
       )
-      .pipe(dest(themeConfig.css.output));
+      .pipe(dest(buildThemeOutDir));
   }
 
-  return series(cleanTheme, compile);
-};
+  return compile;
+}
+
+// --------------- 拷贝 scss，提供原始scss文件，有需求的用户可以直接引用 ---------------
+function buildScssCopy() {
+  return src(`${themeRoot}/**/*.scss`).pipe(dest(buildThemeOutDir));
+}
+
+export function buildTheme() {
+  return series(cleanTheme, parallel(buildStyle(), buildScssCopy));
+}

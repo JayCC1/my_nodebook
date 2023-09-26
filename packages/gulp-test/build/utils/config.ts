@@ -1,5 +1,5 @@
 import { resolve } from "path";
-import { outDir, themeRoot, utilsRoot } from "./paths";
+import { outDir, utilsRoot } from "./paths";
 
 //
 export const utilsConfig = {
@@ -30,30 +30,3 @@ export const utilsConfig = {
 };
 
 export type UtilsConfig = typeof utilsConfig;
-
-export const themeConfig = {
-  css: {
-    name: "css",
-    output: resolve(themeRoot, "dist/css"),
-    rootOutput: {
-      name: "css",
-      path: resolve(outDir, "theme-chalk/css"),
-    },
-    bundle: {
-      path: "@jaycce/theme-chalk/css",
-    },
-  },
-  fonts: {
-    name: "fonts",
-    output: resolve(themeRoot, "dist/fonts"),
-    rootOutput: {
-      name: "fonts",
-      path: resolve(outDir, "theme-chalk/fonts"),
-    },
-    bundle: {
-      path: "@jaycce/theme-chalk/fonts",
-    },
-  },
-};
-
-export type ThemeConfig = typeof themeConfig;

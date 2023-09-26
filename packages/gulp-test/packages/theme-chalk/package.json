@@ -2,7 +2,15 @@
   "name": "@jaycce/gulp-theme-chalk",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "style": "./dist/index.css",
+  "exports": {
+    ".": {
+      "import": "./dist/index.css",
+      "require": "./dist/index.css"
+    },
+    "./index-scss": "./dist/scss/index.scss",
+    "./mixin-scss": "./dist/scss/mixin.scss"
+  },
   "scripts": {},
   "keywords": [],
   "author": "",
