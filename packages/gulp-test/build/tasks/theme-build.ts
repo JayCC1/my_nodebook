@@ -6,9 +6,10 @@
  */
 
 import gulpSass from "gulp-sass";
-import dartSass from "sass";
 import autoprefixer from "gulp-autoprefixer";
 import cleanCss from "gulp-clean-css";
+import gulpFilter from "gulp-filter";
+import dartSass from "sass";
 import consola from "consola";
 import { resolve } from "path";
 import { rimraf } from "rimraf";
@@ -17,35 +18,12 @@ import chalk from "chalk";
 /**
  * gulp 是类似一个管道的方法执行，从入口开始到出口，中间一步步执行
  */
-import { series, parallel, src, dest } from "gulp";
+import gulp from "gulp";
 import { themeRoot } from "../utils/paths";
-import { buildInputIgnore } from "../utils";
 import { themeConfig } from "../utils/config";
 
-// cleanCss 优化成功后命令行输出优化信息hook
-function cleanCssAfter(details) {
-  /**
-   * - detail:
-   *  - stats: 优化信息
-   *    - originalSize: 导入内联后的原始内容大小
-   *    - minifiedSize: 优化的内容大小
-   *    - timeSpent: 用于优化的时间(以毫秒为单位)
-   *    - efficiency: ' (originalSize - minifiedSize) / originalSize '，例如，如果大小从100字节减少到75字节，则为0.25
-   *  - errors: 一个错误列表
-   *  - warnings: 一个警告列表
-   *  - path: 文件路径
-   *  - name: 文件名称
-   */
-  // console.log(chalk.green("test"));
-
-  consola.success(
-    "123"
-    // chalk.green("test")
-    // `${chalk.green("THEME: ")}${chalk.cyan(details.name)} => ${chalk.yellow(
-    //   details.stats.originalSize / 1000
-    // )} KB -> ${chalk.green(details.stats.minifiedSize)} KB`
-  );
-}
+const { series, src, dest } = gulp;
+const { green, cyan, yellow } = chalk;
 
 export const buildTheme = () => {
   // 请空之前打包的文件
@@ -63,40 +41,30 @@ export const buildTheme = () => {
     //    ==> 添加前缀
     //    ==> 压缩
     //    ==> 最终输出到当前目录下 dist 下的目录
-    return src(buildInputIgnore(resolve(themeRoot, "./src/*.scss")))
+    const buildThemePath = resolve(themeRoot, "./scss/*.scss");
+    const excludeFilter = gulpFilter([buildThemePath, "!mixin.scss"], {
+      restore: true,
+    });
+
+    return src(buildThemePath)
+      .pipe(excludeFilter)
       .pipe(sass.sync())
-      .pipe(autoprefixer())
-      .pipe(cleanCss({}, cleanCssAfter))
+      .pipe(
+        autoprefixer({
+          cascade: false, // 为 true 时会对 CSS 规则进行重新排序，使得属性的连写更加优雅
+        })
+      )
+      .pipe(
+        cleanCss({}, (details) => {
+          consola.success(
+            `${green("CHALK: ")}${cyan(details.name)} => ${yellow(
+              details.stats.originalSize / 1000
+            )} KB -> ${green(details.stats.minifiedSize / 1000)} KB`
+          );
+        })
+      )
       .pipe(dest(themeConfig.css.output));
   }
 
-  /**
-   * 处理 font 文件
-   */
-  function copyFont() {
-    // 从 src 下fonts文件夹中的所有文件开始
-    //  ==> 压缩
-    //  ==> 最终输出到当前目录下 dist 下的font目录
-    return src(buildInputIgnore(resolve(themeRoot, "./src/fonts/**")))
-      .pipe(cleanCss({}, cleanCssAfter))
-      .pipe(dest(themeConfig.fonts.output));
-  }
-
-  /**
-   * 把打包好的css输出到根目录的dist
-   */
-  function copyFullStyle() {
-    const tasks = Object.values(themeConfig).map((config) => {
-      const obj = {
-        [`copyFull${config.name}`]: () =>
-          src(resolve(config.output, "./**")).pipe(
-            dest(config.rootOutput.path)
-          ),
-      };
-      return series(obj[`copyFull${config.name}`]);
-    });
-    return parallel(...tasks);
-  }
-
-  return series(cleanTheme, parallel(compile, copyFont), copyFullStyle());
+  return series(cleanTheme, compile);
 };

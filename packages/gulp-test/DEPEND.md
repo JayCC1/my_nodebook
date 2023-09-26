@@ -16,6 +16,10 @@ gulp-cli 是一个用于创建和管理 gulp 任务的命令行工具。
 
 用于将 JavaScript 代码中的 ES6+ 语法转换为 ES5 语法，我们需要使用 ts 以及新的 es6 语法，而 gulp 是不支持的，所以我们需要安装 sucrase 让我们执行 gulp 可以使用最新的语法并且支持 ts
 
+#### @rollup/plugin-sucrase
+
+一个 Rollup 插件，它使用 Sucrase 编译 TypeScript，Flow，JSX 等。
+
 #### gulp-autoprefixer
 
 是一个 Gulp 插件，用于自动添加 CSS 前缀以确保跨浏览器兼容性。它使用 Autoprefixer 库来确定需要添加哪些前缀，并自动将它们添加到您的 CSS 代码中。
@@ -47,6 +51,10 @@ gulp-typescript 是一个 Gulp 插件，用于将 TypeScript 代码编译成 Jav
 #### gulp-rename
 
 重命名文件或更改文件名
+
+#### gulp-filter
+
+用于在 Gulp 流中过滤文件,它可以根据指定的条件过滤文件，并将符合条件的文件传递给下一个插件或任务，而不符合条件的文件则会被忽略。
 
 #### rimraf
 

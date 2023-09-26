@@ -1,10 +1,11 @@
 import { resolve } from "path";
+import { cwd } from "process";
 
 // gulp 项目的根目录
-export const projectRoot = resolve(__dirname, "../../");
+export const projectRoot = resolve(cwd(), "../../");
 
 // gulp 打包输出目录
-export const outDir = resolve(__dirname, "../../dist");
+export const outDir = resolve(cwd(), "../../dist");
 
 export const pkgRoot = resolve(projectRoot, "packages");
 

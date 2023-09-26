@@ -1,5 +1,5 @@
 // 专门打包 utils指令hook
-import { series, parallel, src, dest } from "gulp";
+import gulp from "gulp";
 import ts from "gulp-typescript";
 import { resolve } from "path";
 import concat from "gulp-concat";
@@ -14,6 +14,8 @@ import { rollup } from "rollup";
 import { utilsConfig } from "../utils/config";
 import { utilsRoot } from "../utils/paths";
 
+const { series, parallel, src, dest } = gulp;
+
 // 模块打包处理
 export const buildModuleUtils = () => {
   const tsConfig = resolve(utilsRoot, "tsconfig.json");
@@ -24,7 +26,7 @@ export const buildModuleUtils = () => {
     "!lib",
     "!dist",
   ];
-  const tasks = Object.entries(utilsConfig).map(([module, config]) => {
+  const tasks = Object.entries(utilsConfig).map(([_, config]) => {
     // task 任务列表
     const seriesTasks: Record<string, any> = {
       [`clean:utils-${config.rootOutput.name}`]: async () =>
