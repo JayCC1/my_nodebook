@@ -1,7 +1,7 @@
 {
   "name": "@jaycce/gulp-theme-chalk",
   "version": "1.0.0",
-  "description": "",
+  "description": "主题样式及部分scss函数工具",
   "style": "./dist/index.css",
   "exports": {
     ".": {
@@ -12,7 +12,23 @@
     "./mixin-scss": "./dist/scss/mixin.scss"
   },
   "scripts": {},
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "gulp",
+    "sass",
+    "scss",
+    "theme-chalk",
+    "gulp-theme-chalk",
+    "Jaycce",
+    "JayCC1"
+  ],
+  "author": "JayCC1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JayCC1/my_nodebook.git",
+    "directory": "packages/gulp-test/packages/theme-chalk"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
 }
