@@ -1,8 +1,12 @@
 import { componentsPkg } from "./paths";
+import { readFileSync } from "node:fs";
+import parseJson from "parse-json";
 
 // 获取 components 目录下的 package.json 中的信息
 export const getCompPackage = () => {
-  const { version, dependencies, peerDependencies } = require(componentsPkg);
+  const { version, dependencies, peerDependencies } = parseJson(
+    readFileSync(componentsPkg, "utf-8")
+  );
   return {
     version,
     dependencies: Object.keys(dependencies),

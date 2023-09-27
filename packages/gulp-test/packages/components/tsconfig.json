@@ -3,7 +3,8 @@
   "compilerOptions": {
     "declaration": true, // 声明文件生成到的文件目录
     "emitDeclarationOnly": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "types": ["node", "@vue/runtime-core"] // 需要包含的类型声明文件名列表
   },
   "include": ["src/**/*"],
   "exclude": ["dist", "node_modules"]

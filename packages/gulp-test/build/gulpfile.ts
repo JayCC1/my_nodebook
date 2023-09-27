@@ -1,6 +1,6 @@
 // 打包方式：串行(series) 并行(parallel)
 import gulp from "gulp";
-import { buildTheme, buildUtils } from "./tasks";
+import { buildTheme, buildUtils, buildComponent } from "./tasks";
 import { run } from "./utils";
 // gulp 不叫打包，做代码转化 vite
 
@@ -21,6 +21,6 @@ async function clean() {
 export default series(
   clean, // 删除 dist 目录
   buildTheme(),
-  buildUtils()
-  // buildComponent
+  buildUtils(),
+  buildComponent()
 );
