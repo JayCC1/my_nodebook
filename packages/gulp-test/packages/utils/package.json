@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "JayCC1 gulp & rollup test-utils",
   "main": "lib/index.js",
-  "module": "es/index.js",
+  "module": "es/index.mjs",
   "types": "es/index.d.ts",
   "unpkg": {
     "main": "dist/index.min.js",

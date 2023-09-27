@@ -7,6 +7,7 @@ import uglify from "gulp-uglify";
 import rename from "gulp-rename";
 import babel from "gulp-babel";
 import sourcemaps from "gulp-sourcemaps";
+import gulpFilter from "gulp-filter";
 import esbuild, { minify as minifyPlugin } from "rollup-plugin-esbuild";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import { rimraf } from "rimraf";
@@ -26,7 +27,11 @@ export const buildModuleUtils = () => {
     "!lib",
     "!dist",
   ];
+
   const tasks = Object.entries(utilsConfig).map(([_, config]) => {
+    const extname = config.module === "ESNext" ? ".mjs" : ".js";
+    const renameExcludeFilter = gulpFilter("*.js", { restore: true });
+
     // task 任务列表
     const seriesTasks: Record<string, any> = {
       [`clean:utils-${config.rootOutput.name}`]: async () =>
@@ -40,6 +45,9 @@ export const buildModuleUtils = () => {
               module: config.module,
             })()
           )
+          .pipe(renameExcludeFilter)
+          .pipe(rename({ extname }))
+          .pipe(renameExcludeFilter.restore)
           .pipe(dest(config.output));
       },
       [`copy:utils-${config.rootOutput.name}`]: () => {
@@ -90,7 +98,7 @@ function buildFullUtilsForCjs() {
     )
     .pipe(concat(`utils.${utilsConfig.cjs.format}.js`)) // 将编译后的文件合并为一个名为utils.es.js的文件
     .pipe(sourcemaps.init()) // 初始化 source map
-    .pipe(uglify()) // 压缩utils.es.js文件
+    .pipe(uglify()) // 压缩utils.es.js文件,uglify 只能压缩 cjs格式代码所以es规范的全量包由rollup完成
     .pipe(rename(`index.min.js`))
     .pipe(sourcemaps.write("./")) // 将source map写入到与输出文件统一目录下
     .pipe(dest(resolve(utilsRoot, "dist")));
