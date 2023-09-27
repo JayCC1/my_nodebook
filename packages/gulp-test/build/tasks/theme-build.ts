@@ -9,7 +9,7 @@ import gulpSass from "gulp-sass";
 import autoprefixer from "gulp-autoprefixer";
 import cleanCss from "gulp-clean-css";
 import gulpFilter from "gulp-filter";
-import dartSass from "sass";
+import * as dartSass from "sass";
 import consola from "consola";
 import { resolve } from "path";
 import { rimraf } from "rimraf";
