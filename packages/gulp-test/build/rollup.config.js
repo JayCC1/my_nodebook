@@ -21,7 +21,11 @@ export default {
     dir: "./dist",
     preserveModules: true,
   },
-  external: [...Object.keys(pkg.devDependencies)],
+  external: [
+    ...Object.keys(pkg.devDependencies),
+    "parse-json",
+    "unplugin-vue-define-options/rollup",
+  ],
   watch: {
     exclude: ["./node_modules/**", "./dist/**"],
   },
