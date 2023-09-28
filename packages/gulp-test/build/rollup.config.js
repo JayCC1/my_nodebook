@@ -1,7 +1,7 @@
 // rollup.config.js
 import { readFileSync } from "node:fs";
 
-import typescript from "rollup-plugin-typescript2";
+import sucrase from "@rollup/plugin-sucrase";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 
@@ -13,7 +13,10 @@ export default {
   input: "./gulpfile.ts",
   plugins: [
     nodeResolve(),
-    typescript({ tsconfig: "./tsconfig.json" }),
+    sucrase({
+      exclude: ["node_modules/**"],
+      transforms: ["typescript"],
+    }),
     commonjs(),
   ],
   output: {
