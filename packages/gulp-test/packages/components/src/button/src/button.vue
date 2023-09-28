@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import { ElButton } from "element-plus";
-import { buttonProps } from "./button";
+import { buttonProps } from "./props";
 
 defineProps(buttonProps);
 

@@ -8,6 +8,14 @@
   "style": "dist/index.css",
   "unpkg": "dist/index.min.js",
   "jsdelivr": "dist/index.min.js",
+  "exports": {
+    ".": {
+      "types": "./es/index.d.ts",
+      "import": "./es/index.mjs",
+      "require": "./lib/index.js"
+    },
+    "./*": "./*"
+  },
   "scripts": {},
   "keywords": [
     "gulp-components",

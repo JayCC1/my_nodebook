@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { iconProps } from "./icon";
+import { iconProps } from "./props";
 const props = defineProps(iconProps);
 const style = computed(() => ({
   ["--j-icon-font-size"]: `${props.size || 12}px`,
@@ -14,3 +14,4 @@ const style = computed(() => ({
 }));
 </script>
 <style></style>
+./props
