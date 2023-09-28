@@ -8,6 +8,7 @@ import rename from "gulp-rename";
 import babel from "gulp-babel";
 import sourcemaps from "gulp-sourcemaps";
 import gulpFilter from "gulp-filter";
+import gulpUmd from "gulp-umd";
 import esbuild, { minify as minifyPlugin } from "rollup-plugin-esbuild";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import { rimraf } from "rimraf";
@@ -97,6 +98,26 @@ function buildFullUtilsForCjs() {
       })
     )
     .pipe(concat(`utils.${utilsConfig.cjs.format}.js`)) // 将编译后的文件合并为一个名为utils.es.js的文件
+    .pipe(
+      gulpUmd({
+        exports: function () {
+          return "gulpUtils"; // 这里设置 UMD 模块的名字为 gulpUtils
+        },
+        namespace: function () {
+          return "gulpUtils"; // 这里也将模块命名为 gulpUtils
+        },
+        dependencies: function () {
+          return [
+            {
+              name: "Vue", // 这里指定外部依赖的名称
+              amd: "vue",
+              cjs: "vue",
+              global: "Vue",
+            },
+          ];
+        },
+      })
+    )
     .pipe(sourcemaps.init()) // 初始化 source map
     .pipe(uglify()) // 压缩utils.es.js文件,uglify 只能压缩 cjs格式代码所以es规范的全量包由rollup完成
     .pipe(rename(`index.min.js`))

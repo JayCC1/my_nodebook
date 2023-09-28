@@ -164,6 +164,9 @@ importers:
       gulp-uglify:
         specifier: ^3.0.2
         version: 3.0.2
+      gulp-umd:
+        specifier: ^2.0.0
+        version: 2.0.0
       rimraf:
         specifier: ^5.0.1
         version: 5.0.1
@@ -4013,6 +4016,14 @@ packages:
       vinyl-sourcemaps-apply: 0.2.1
     dev: true
 
+  /gulp-umd@2.0.0:
+    resolution: {integrity: sha512-zA0RDIITdOwpVUBQ6vy2R+iCsTXwDImPnWreNBmVJQAg3nDGefowV7KYwWoIeEVoxyHZT2CR50nEF6ovUh5/2A==}
+    dependencies:
+      concat-stream: 1.6.2
+      lodash.template: 4.5.0
+      through2: 2.0.5
+    dev: true
+
   /gulp@4.0.2:
     resolution: {integrity: sha512-dvEs27SCZt2ibF29xYgmnwwCYZxdxhQ/+LFWlbAW8y7jt68L/65402Lz3+CKy0Ov4rOs+NERmDq7YlZaDqUIfA==}
     engines: {node: '>= 0.10'}
@@ -4539,12 +4550,29 @@ packages:
       lodash-es: 4.17.21
     dev: false
 
+  /lodash._reinterpolate@3.0.0:
+    resolution: {integrity: sha512-xYHt68QRoYGjeeM/XOE1uJtvXQAgvszfBhjV4yvsQH0u2i9I6cI6c6/eG4Hh3UAOVn0y/xAXwmTzEay49Q//HA==}
+    dev: true
+
   /lodash.clonedeep@4.5.0:
     resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
     dev: true
 
   /lodash.debounce@4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
+    dev: true
+
+  /lodash.template@4.5.0:
+    resolution: {integrity: sha512-84vYFxIkmidUiFxidA/KjjH9pAycqW+h980j7Fuz5qxRtO9pgB7MDFTdys1N7A5mcucRiDyEq4fusljItR1T/A==}
+    dependencies:
+      lodash._reinterpolate: 3.0.0
+      lodash.templatesettings: 4.2.0
+    dev: true
+
+  /lodash.templatesettings@4.2.0:
+    resolution: {integrity: sha512-stgLz+i3Aa9mZgnjr/O+v9ruKZsPsndy7qPZOchbqk2cnTU1ZaldKK+v7m54WoKIyxiuMZTKT2H81F8BeAc3ZQ==}
+    dependencies:
+      lodash._reinterpolate: 3.0.0
     dev: true
 
   /lodash@4.17.21:

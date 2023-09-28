@@ -55,7 +55,7 @@
     // "emitDecoratorMetadata": true // 为装饰器提供元数据的支持
   },
   /* 指定编译文件或排除指定编译文件 */
-  "include": ["gulpfile.ts"],
+  "include": ["gulpfile.ts", "globe.d.ts"],
   "exclude": ["__tests__/**/*", "dist", "node_modules"]
   // "files": ["index.ts", "test.ts"],
   // 从另一个配置文件里继承配置

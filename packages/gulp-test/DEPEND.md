@@ -56,6 +56,10 @@ gulp-typescript 是一个 Gulp 插件，用于将 TypeScript 代码编译成 Jav
 
 用于在 Gulp 流中过滤文件,它可以根据指定的条件过滤文件，并将符合条件的文件传递给下一个插件或任务，而不符合条件的文件则会被忽略。
 
+#### gulp-umd
+
+构建构建 通用模块定义 （UMD）
+
 #### rimraf
 
 rimraf 是一个用于删除文件和文件夹的 Node.js 模块。
