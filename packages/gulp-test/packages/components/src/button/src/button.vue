@@ -13,8 +13,8 @@ defineOptions({
 defineProps(buttonProps);
 const emit = defineEmits(buttonEmits);
 
-function handlerClick() {
-  emit("click");
+function handlerClick(e: MouseEvent) {
+  emit("click", e);
   alert("jaycceButton!");
 }
 </script>
