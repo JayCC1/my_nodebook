@@ -34,3 +34,5 @@ gulp-test 工作空间是 gulp + rollup 练习空间，如果您热爱贡献，�
 ### 相关依赖介绍
 
 如果你对该项目的相关依赖不是那么的了解，可阅读 [依赖介绍](./DEPEND.md)
+如果你对 `package.json` 中的属性存在着疑惑，可阅读 [package 属性介绍](./PACKAGE.md)
+如果你对 `rollup 插件开发` 感兴趣，可阅读 [Rollup 开发](./ROLLUP-PLUGIN.md)

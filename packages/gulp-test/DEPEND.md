@@ -184,3 +184,11 @@ Babel 是一个工具链，用于将最新的 ECMAScript 语法转换为较旧�
 #### gulp-babel
 
 是一个 gulp 插件，用于将 JavaScript 代码转换为向后兼容的 JavaScript 版本，以便在不同的环境中运行。它的主要作用是利用 Babel 工具链对 JavaScript 代码进行转码和编译
+
+#### execa
+
+一个 Node.js 库，可以替代 Node.js 的原生 child_process 模块，用于执行外部命令。Execa 提供了更好的性能、可靠性和易用性，并具有流式传输、输出控制、交互式 shell 等功能，同时支持跨平台的 Windows、macOS 和 Linux 等操作系统。
+
+#### vue-tsc
+
+vue-tsc 是对 TypeScript 自身命令行界面 tsc 的一个封装，它让你可以在 Vue 项目中使用 TypeScript。具体来说，vue-tsc 的工作方式基本和 tsc 一致，除了 TypeScript 文件，它还支持 Vue 的单文件组件
