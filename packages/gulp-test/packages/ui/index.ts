@@ -1,9 +1,9 @@
 import type { App } from "vue";
-import JButton from "./src/button";
-import JIcon from "./src/icon";
+import JButton from "./components/button";
+import JIcon from "./components/icon";
 
-export * from "./src/button";
-export * from "./src/icon";
+export * from "./components/button";
+export * from "./components/icon";
 
 const components = [JButton, JIcon];
 

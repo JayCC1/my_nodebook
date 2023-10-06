@@ -16,5 +16,6 @@ export const themeRoot = resolve(pkgRoot, "theme-chalk");
 export const utilsRoot = resolve(pkgRoot, "utils");
 
 // **************** components ****************
-export const componentsRoot = resolve(pkgRoot, "components");
+export const componentsRoot = resolve(pkgRoot, "ui");
 export const componentsPkg = resolve(componentsRoot, "package.json");
+export const componentsTsConfig = resolve(componentsRoot, "tsconfig.json");

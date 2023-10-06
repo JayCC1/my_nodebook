@@ -3,10 +3,13 @@
   "compilerOptions": {
     "lib": ["ESNext", "DOM", "DOM.Iterable"], // 指定要包含在编译中的库文件
     "declaration": true, // 生成相应的 '.d.ts' 文件
+    "isolatedModules": true, // 将每个文件做为单独的模块 （与 'ts.transpileModule' 类似）.
     "emitDeclarationOnly": true,
-    "outDir": "es",
+    "outDir": "./es",
+    "rootDir": "./", // 用来控制输出目录结构 --outDir.
+    "baseUrl": "./",
     "types": ["node", "@vue/runtime-core"] // 需要包含的类型声明文件名列表
   },
-  "include": ["src"],
+  "include": ["components", "index.mjs"],
   "exclude": ["dist", "node_modules"]
 }

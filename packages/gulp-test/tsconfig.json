@@ -5,10 +5,12 @@
     "module": "ESNext", // 指定使用模块: 'commonjs', 'amd', 'system', 'umd' or 'es2015'
     "lib": ["ESNext"], // 指定要包含在编译中的库文件
     "composite": false, // 当前项目是否为子项目
-    // "allowJs": true, // 允许编译 javascript 文件
+    "allowJs": false, // 允许编译 javascript 文件
     // "checkJs": true, // 报告 javascript 文件中的错误
-    // "jsx": "preserve", // 指定 jsx 代码的生成: 'preserve', 'react-native', or 'react'
+    "jsx": "preserve", // 指定 jsx 代码的生成: 'preserve', 'react-native', or 'react'
+    // "emitDeclarationOnly": true, // 控制 TypeScript 是否只生成声明文件（.d.ts 文件）而不生成实际的 JavaScript 输出文件
     "declaration": true, // 生成相应的 '.d.ts' 文件
+    "skipLibCheck": true, // 跳过 '.d.ts' 文件的类型检查
     // "declarationDir": "./types", // 生成的 '.d.ts' 文件保存文件夹
     // "sourceMap": true, // 生成相应的 '.map' 文件
     // "outFile": "./", // 将输出文件合并为一个文件
@@ -36,13 +38,14 @@
     /* 模块解析选项 */
     "resolveJsonModule": true, // 解析json模块
     "moduleResolution": "Node", // 选择模块解析策略： 'node' (Node.js) or 'classic' (TypeScript pre-1.6)
-    // "baseUrl": "./", // 用于解析非相对模块名称的基础目录
+    "baseUrl": "./", // 用于解析非相对模块名称的基础目录
     // "paths": {}, // 模块名到基于 baseUrl 的路径映射的列表
     // "rootDirs": [], // 根文件夹列表，其组合内容表示项目运行时的结构内容
     // "typeRoots": [], // 包含类型声明的文件列表
-    // "types": ["node"], // 需要包含的类型声明文件名列表
+    "types": ["node"], // 需要包含的类型声明文件名列表
     // "allowSyntheticDefaultImports": true, // 允许从没有设置默认导出的模块中默认导入。
     "esModuleInterop": true // 支持合成模块的默认导入
+    // "preserveSymlinks": true // 用于控制 TypeScript 是否应该保留符号链接（symlinks）
 
     /* Source Map Options */
     // "sourceRoot": "./", // 指定调试器应该找到 TypeScript 文件而不是源文件的位置
