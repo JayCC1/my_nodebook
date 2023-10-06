@@ -16,6 +16,7 @@
   "author": "JayCC1",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^20.6.2",
     "sass": "^1.67.0",
     "symlink-dir": "^5.2.0",
     "typescript": "^5.2.2",

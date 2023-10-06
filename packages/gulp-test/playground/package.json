@@ -1,0 +1,12 @@
+{
+  "name": "@jaycce/playground",
+  "scripts": {
+    "dev": "vite"
+  },
+  "author": "JayCC1",
+  "license": "ISC",
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.9.3",
+    "vite": "^2.5.10"
+  }
+}
