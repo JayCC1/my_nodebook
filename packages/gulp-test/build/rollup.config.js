@@ -28,6 +28,7 @@ export default {
     ...Object.keys(pkg.devDependencies),
     "parse-json",
     "unplugin-vue-define-options/rollup",
+    "vue/compiler-sfc",
   ],
   watch: {
     exclude: ["./node_modules/**", "./dist/**"],
