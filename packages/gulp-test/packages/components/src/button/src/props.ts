@@ -7,4 +7,8 @@ export const buttonProps = {
   },
 };
 
+export const buttonEmits = {
+  click: (e: MouseEvent) => e instanceof MouseEvent,
+};
+
 export type ButtonProps = ExtractPropTypes<typeof buttonProps>;

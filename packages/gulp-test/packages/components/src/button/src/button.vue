@@ -4,11 +4,17 @@
 
 <script setup lang="ts">
 import { ElButton } from "element-plus";
-import { buttonProps } from "./props";
+import { buttonProps, buttonEmits } from "./props";
+
+defineOptions({
+  name: "JButton",
+});
 
 defineProps(buttonProps);
+const emit = defineEmits(buttonEmits);
 
 function handlerClick() {
+  emit("click");
   alert("jaycceButton!");
 }
 </script>
