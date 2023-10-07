@@ -36,7 +36,8 @@ export const generateExternal = (options: { full: boolean }) => {
 // 这种情况则需要借助 rollup output 中的 path 属性进行处理
 export const generateCjsPaths = () => {
   const paths: Array<string[]> = [
-    // ["lodash-es","lodash"], // 目前暂时没有用到类似场景，所以不需要
+    ["lodash-es", "lodash"], // 目前暂时没有用到类似场景，所以不需要
+    ["element-plus/es", "element-plus/lib"], // 目前暂时没有用到类似场景，所以不需要
   ];
   return (id: string) => {
     for (const [oldPath, newPath] of paths) {

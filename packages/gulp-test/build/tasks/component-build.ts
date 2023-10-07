@@ -15,7 +15,7 @@ import {
   componentsRoot,
   componentsTsConfig,
 } from "../utils/paths";
-import { generateExternal } from "../utils/rollup-utils";
+import { generateCjsPaths, generateExternal } from "../utils/rollup-utils";
 import { generateTypesPlugin } from "../plugins/generateTypePlugin";
 
 const { src, dest, series, parallel } = gulp;
@@ -88,6 +88,7 @@ const buildEachComponent = async () => {
     }),
     bundle.write({
       format: "cjs",
+      paths: generateCjsPaths(), // 最终打包后的文件中重写导入路径
       dir: resolve(componentsRoot, "lib"),
       exports: "named",
       preserveModules: true,
