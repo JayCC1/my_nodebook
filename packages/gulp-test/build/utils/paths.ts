@@ -19,3 +19,7 @@ export const utilsRoot = resolve(pkgRoot, "utils");
 export const componentsRoot = resolve(pkgRoot, "ui");
 export const componentsPkg = resolve(componentsRoot, "package.json");
 export const componentsTsConfig = resolve(componentsRoot, "tsconfig.json");
+export const componentsLibTsConfig = resolve(
+  componentsRoot,
+  "tsconfig-lib.json"
+);
