@@ -122,7 +122,7 @@ rollup-plugin-typescript 的重写
 
 #### @vue/compiler-sfc
 
-是 Vue.js 的官方编译器，用于将 .vue 文件中的模板、脚本和样式编译成可执行的 JavaScript 代码。它使用 Vue.js 的模板编译器和运行时库来解析和编译 .vue 文件，并生成可在浏览器中运行的 JavaScript 文件。
+是 Vue.js 的官方编译器，用于将 .vue 文件中的模板、脚本和样式编译成可执行的 JavaScript 代码 或者 AST 抽象语法树。它使用 Vue.js 的模板编译器和运行时库来解析和编译 .vue 文件，并生成可在浏览器中运行的 JavaScript 文件。
 
 #### rollup-plugin-vue
 
