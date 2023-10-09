@@ -26,7 +26,6 @@
   "dependencies": {
     "@jaycce/gulp-theme-chalk": "workspace:^",
     "@jaycce/gulp-utils": "workspace:^",
-    "dayjs": "^1.11.10",
-    "element-plus": "^2.3.14"
+    "dayjs": "^1.11.10"
   }
 }
