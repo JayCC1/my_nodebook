@@ -1,5 +1,7 @@
 <template>
-  <ElButton :type="type" @click="handlerClick">Primary</ElButton>
+  <ElButton :type="type" @click="handlerClick">
+    <slot></slot>
+  </ElButton>
 </template>
 
 <script setup lang="ts">
