@@ -1,14 +1,14 @@
 ### main
 
-commonJs 引用路径
+commonJs 引用路径,默认的入口文件
 
 ### module
 
-es 引用路径
+ESM 规范的入口文件
 
 ### types
 
-ts 语法引用类型 路径
+ts 语法引用类型 路径,类型声明的入口文件
 
 ### style
 
@@ -16,10 +16,12 @@ ts 语法引用类型 路径
 
 ### jsdelivr
 
+cdn 服务指定的字段
 jsDelivr 是一个开源项目，它的主要目的是为开发者提供一个免费的、开源的 CDN。它的优势在于，它是开源的，开发者可以自由地使用和贡献代码。另外，jsDelivr 在中国大陆有官方的镜像站点，这使得在中国大陆访问 jsDelivr 的资源会比较快
 
 ### unpkg
 
+cdn 服务指定的字段
 商业 CDN 服务，它的目的是为 npm 包提供快速的 CDN 分发。unpkg 会自动从 npm 缓存中寻找资源并提供 CDN 服务。这使得当你在项目中使用 npm 包的时候，可以直接使用 unpkg 的 URL 来获取到这个 npm 包，而不需要从 npm 的服务器上下载。unpkg 的优势在于它是基于 npm 的，因此它能够很好地和 npm 包一起工作。同时，unpkg 的 CDN 节点部署在 Cloudflare 上，并且在中国香港有节点，所以在一些地区访问速度会比较快
 
 ### exports
