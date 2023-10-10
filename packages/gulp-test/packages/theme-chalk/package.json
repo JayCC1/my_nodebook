@@ -11,6 +11,9 @@
     "./index-scss": "./dist/scss/index.scss",
     "./mixin-scss": "./dist/scss/mixin.scss"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {},
   "keywords": [
     "gulp",

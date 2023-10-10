@@ -1,13 +1,20 @@
 import { resolve } from "path";
 
-import vuePlugin from "@vitejs/plugin-vue";
-import { rollup } from "rollup";
-import { nodeResolve } from "@rollup/plugin-node-resolve";
 import gulp from "gulp";
-import { execa } from "execa";
+import gulpSass from "gulp-sass";
+import gulpFilter from "gulp-filter";
+import vuePlugin from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import vueDefineOptions from "unplugin-vue-define-options/rollup";
 import esbuild, { minify as minifyPlugin } from "rollup-plugin-esbuild";
+import autoPrefixer from "gulp-autoprefixer";
+import cleanCss from "gulp-clean-css";
+import consola from "consola";
+import chalk from "chalk";
+import * as dartSass from "sass";
+import { rollup } from "rollup";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
+import { execa } from "execa";
 import { rimraf } from "rimraf";
 
 import {
@@ -19,6 +26,7 @@ import { generateCjsPaths, generateExternal } from "../utils/rollup-utils";
 import { generateTypesPlugin } from "../plugins/generateTypePlugin";
 
 const { src, dest, series, parallel } = gulp;
+const { green, cyan, yellow } = chalk;
 // 入口文件
 const input = resolve(componentsRoot, "index.ts");
 const esbuildTarget = "esnext";
@@ -155,9 +163,69 @@ const generateTypes = async () => {
   );
 };
 
+// ------------------ copy 原始的 scss 文件需要时可直接使用 ------------------
+const buildCopyScss = async () => {
+  await new Promise((res) => {
+    src(`${componentsRoot}/**/*.scss`)
+      .pipe(dest(resolve(componentsRoot, "es")))
+      .pipe(dest(resolve(componentsRoot, "lib")))
+      .on("end", res);
+  });
+};
+
+// ------------------ 将 scss 文件按模块编译为 css 文件并进行压缩，方便样式文件可单独引入 ------------------
+const buildModuleScss = () => {
+  const sass = gulpSass(dartSass);
+  return src([
+    `${componentsRoot}/**/style/*.scss`,
+    `!${componentsRoot}/node_modules/**`,
+  ])
+    .pipe(
+      sass.sync({ includePaths: [resolve(componentsRoot, "./node_modules")] })
+    )
+    .pipe(autoPrefixer({ cascade: false }))
+    .pipe(
+      cleanCss({}, (details) => {
+        consola.success(
+          `${green("uiModuleStyle: ")}${cyan(details.name)} => ${yellow(
+            details.stats.originalSize / 1000
+          )} KB -> ${green(details.stats.minifiedSize / 1000)} KB`
+        );
+      })
+    )
+    .pipe(dest(resolve(componentsRoot, "es")))
+    .pipe(dest(resolve(componentsRoot, "lib")));
+};
+
+// ------------------ 将 scss 文件打包为全量的样式文件，提供给不需要按需引入或浏览器端直接引入 ------------------
+const buildFullScss = () => {
+  const sass = gulpSass(dartSass);
+  return src(resolve(componentsRoot, "styles/*scss"))
+    .pipe(
+      sass.sync({ includePaths: [resolve(componentsRoot, "./node_modules")] })
+    )
+    .pipe(autoPrefixer())
+    .pipe(
+      cleanCss({}, (details) => {
+        consola.success(
+          `${green("uiModuleStyle: ")}${cyan(details.name)} => ${yellow(
+            details.stats.originalSize / 1000
+          )} KB -> ${green(details.stats.minifiedSize / 1000)} KB`
+        );
+      })
+    )
+    .pipe(dest(resolve(componentsRoot, "dist")));
+};
+
 export const buildComponent = () => {
   return series(
     cleanComponents,
-    parallel(buildEachComponent, buildFullComponent)
+    parallel(
+      buildEachComponent,
+      buildFullComponent,
+      buildCopyScss,
+      buildModuleScss,
+      buildFullScss
+    )
   );
 };

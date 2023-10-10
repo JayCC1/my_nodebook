@@ -14,10 +14,10 @@
     "module": "dist/index.min.mjs"
   },
   "files": [
-    "/dist",
-    "/es",
-    "/lib",
-    "/package.json"
+    "dist",
+    "es",
+    "lib",
+    "package.json"
   ],
   "scripts": {},
   "keywords": [
