@@ -39,11 +39,12 @@
     "access": "public"
   },
   "peerDependencies": {
-    "vue": ">=3.2.0",
+    "@jaycce/gulp-utils": "workspace:^",
     "element-plus": ">=2.3.14",
-    "@jaycce/gulp-utils": "workspace:^"
+    "vue": ">=3.2.0"
   },
   "dependencies": {
+    "@jaycce/gulp-theme-chalk": "workspace:^",
     "@jaycce/gulp-utils": "workspace:^"
   }
 }

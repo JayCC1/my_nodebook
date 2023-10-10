@@ -1,4 +1,27 @@
-.j-icon {
-  font-size: var(--j-icon-font-size);
+@use "@jaycce/gulp-theme-chalk/scss/mixin.scss" as *;
+
+$block: "icon";
+
+@include b() {
+  font-size: var(--j-font-size);
   color: var(--j-icon-color);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  fill: currentColor;
+  height: 1em;
+  width: 1em;
+  @include m("loading") {
+    animation: icon-rotating 2s linear infinite;
+  }
+}
+
+@keyframes icon-rotating {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
 }

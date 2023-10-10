@@ -214,6 +214,9 @@ importers:
 
   packages/gulp-test/packages/ui:
     dependencies:
+      '@jaycce/gulp-theme-chalk':
+        specifier: workspace:^
+        version: link:../theme-chalk
       '@jaycce/gulp-utils':
         specifier: workspace:^
         version: link:../utils
