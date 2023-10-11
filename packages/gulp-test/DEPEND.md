@@ -146,6 +146,22 @@ rollup-plugin-typescript 的重写
 
 CommonJs 是一种用于在浏览器之外执行 JavaScript 代码的模块规范，Rollup 默认只支持 ES 模块。这个插件的作用就是将 CommonJS 模块转换为 ES 模块，以便在 Rollup 中进行打包。
 
+#### rollup-plugin-buble
+
+buble 插件的用途是在 rollup.js 打包的过程中进行代码编译，将 ES6+代码编译成 ES2015 标准
+
+#### rollup-plugin-alias
+
+alias 插件提供了为模块起别名的功能
+
+#### rollup-plugin-replace
+
+replace 插件的用途是在打包时动态替换代码的内容
+
+#### rollup-plugin-terser
+
+terser 插件帮助我们在 rollup.js 打包过程中实现代码压缩
+
 #### @esbuild-kit/cjs-loader
 
 将 ESM 和 TypeScript 模块转换为 CommonJS 格式
