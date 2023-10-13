@@ -2,7 +2,6 @@ import { resolve } from "path";
 
 import gulp from "gulp";
 import gulpSass from "gulp-sass";
-import gulpFilter from "gulp-filter";
 import vuePlugin from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import vueDefineOptions from "unplugin-vue-define-options/rollup";
@@ -16,6 +15,7 @@ import { rollup } from "rollup";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import { execa } from "execa";
 import { rimraf } from "rimraf";
+import fg from "fast-glob";
 
 import {
   componentsLibTsConfig,
@@ -217,6 +217,49 @@ const buildFullScss = () => {
     .pipe(dest(resolve(componentsRoot, "dist")));
 };
 
+// ------------------ 打包组件依赖的样式文件模块集合 ------------------
+const buildUiStyleDependMap = async () => {
+  const dependInput = [
+    ...(await fg.glob(["./**/style/*.ts", "!node_modules/**"], {
+      cwd: componentsRoot,
+      absolute: true,
+      onlyFiles: true,
+    })),
+  ];
+  const bundle = await rollup({
+    input: dependInput,
+    plugins: [
+      esbuild({
+        sourceMap: true,
+      }),
+    ],
+    external: [/./],
+    treeshake: false,
+  });
+
+  await Promise.all([
+    bundle.write({
+      format: "esm", // 模块格式
+      dir: resolve(componentsRoot, "es/components"), // 输出目录
+      exports: undefined, // 导出模式
+      preserveModules: true, // 与原始模块创建相同的文件结构
+      preserveModulesRoot: "components", // 默认情况下会将模块路径压缩为相对路径，设置之后则路径会以root路径为基础设置路径
+      sourcemap: true, // 是否生成 sourcemap
+      entryFileNames: `[name].mjs`, // 生成的文件名
+    }),
+    bundle.write({
+      format: "cjs",
+      paths: generateCjsPaths(), // 最终打包后的文件中重写导入路径
+      dir: resolve(componentsRoot, "lib/components"),
+      exports: "named",
+      preserveModules: true,
+      preserveModulesRoot: "components",
+      sourcemap: true,
+      entryFileNames: `[name].js`,
+    }),
+  ]);
+};
+
 export const buildComponent = () => {
   return series(
     cleanComponents,
@@ -225,7 +268,8 @@ export const buildComponent = () => {
       buildFullComponent,
       buildCopyScss,
       buildModuleScss,
-      buildFullScss
+      buildFullScss,
+      buildUiStyleDependMap
     )
   );
 };
