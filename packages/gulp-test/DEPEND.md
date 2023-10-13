@@ -208,3 +208,11 @@ Babel 是一个工具链，用于将最新的 ECMAScript 语法转换为较旧�
 #### vue-tsc
 
 vue-tsc 是对 TypeScript 自身命令行界面 tsc 的一个封装，它让你可以在 Vue 项目中使用 TypeScript。具体来说，vue-tsc 的工作方式基本和 tsc 一致，除了 TypeScript 文件，它还支持 Vue 的单文件组件
+
+#### lint-staged
+
+前端工具，过滤出 Git 代码暂存区的文件，对这些文件进行操作
+
+#### husky
+
+git 钩子
