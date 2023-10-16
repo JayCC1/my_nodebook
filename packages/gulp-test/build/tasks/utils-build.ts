@@ -109,10 +109,16 @@ function buildFullUtilsForCjs() {
         dependencies: function () {
           return [
             {
-              name: "Vue", // 这里指定外部依赖的名称
+              name: "Vue", // 这里指定外部依赖的名称,外部模块的全局名称
               amd: "vue",
               cjs: "vue",
               global: "Vue",
+            },
+            {
+              name: "UnPluginVueComponents",
+              amd: "UnPluginVueComponents",
+              cjs: "UnPluginVueComponents",
+              global: "UnPluginVueComponents",
             },
           ];
         },
@@ -143,6 +149,7 @@ async function buildFullUtilsForEjs() {
       }),
     ],
     treeshake: true,
+    external: ["vue", "unplugin-vue-components"],
   });
 
   await Promise.resolve(
