@@ -57,5 +57,11 @@
     // "emitDecoratorMetadata": true // 为装饰器提供元数据的支持
     "skipLibCheck": true // 忽略声明文件的类型检查
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "components.d.ts"
+  ]
 }
