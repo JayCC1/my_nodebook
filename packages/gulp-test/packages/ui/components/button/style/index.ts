@@ -15,3 +15,6 @@
  */
 
 import "element-plus/es/components/button/style/css";
+// 公共主题样式
+// 每个组件都需要进行引入，保持每个组件的独立
+import "@jaycce/gulp-theme-chalk/index";

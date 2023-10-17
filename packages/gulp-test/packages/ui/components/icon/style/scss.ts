@@ -6,3 +6,6 @@
  */
 
 import "./index.scss";
+// 公共主题样式
+// 每个组件都需要进行引入，保持每个组件的独立
+import "@jaycce/gulp-theme-chalk/scss";
