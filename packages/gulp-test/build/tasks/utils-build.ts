@@ -39,16 +39,19 @@ export const buildModuleUtils = () => {
         rimraf.sync(resolve(utilsRoot, config.rootOutput.name)),
       [`build:utils-${config.rootOutput.name}`]: () => {
         return src(inputs)
+          .pipe(sourcemaps.init())
           .pipe(
             ts.createProject(tsConfig, {
               declaration: true, // 需要生成声明文件
               strict: false, // 关闭严格模式
+              sourceMap: true, // 生成源映射文件
               module: config.module,
             })()
           )
           .pipe(renameExcludeFilter)
           .pipe(rename({ extname }))
           .pipe(renameExcludeFilter.restore)
+          .pipe(sourcemaps.write("./"))
           .pipe(dest(config.output));
       },
       [`copy:utils-${config.rootOutput.name}`]: () => {
@@ -85,6 +88,7 @@ function buildFullUtilsForCjs() {
   const inputs = [resolve(utilsRoot, "index.ts")];
   const tsConfig = resolve(utilsRoot, "tsconfig.json");
   return src(inputs)
+    .pipe(sourcemaps.init()) // 初始化 source map
     .pipe(
       ts.createProject(tsConfig, {
         declaration: true, // 需要生成声明文件
@@ -124,7 +128,6 @@ function buildFullUtilsForCjs() {
         },
       })
     )
-    .pipe(sourcemaps.init()) // 初始化 source map
     .pipe(uglify()) // 压缩utils.es.js文件,uglify 只能压缩 cjs格式代码所以es规范的全量包由rollup完成
     .pipe(rename(`index.min.js`))
     .pipe(sourcemaps.write("./")) // 将source map写入到与输出文件统一目录下
