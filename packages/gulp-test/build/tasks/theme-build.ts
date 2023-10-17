@@ -7,8 +7,10 @@
 
 import gulpSass from "gulp-sass";
 import autoprefixer from "gulp-autoprefixer";
+import ts from "gulp-typescript";
 import cleanCss from "gulp-clean-css";
 import gulpFilter from "gulp-filter";
+import sourcemaps from "gulp-sourcemaps";
 import * as dartSass from "sass";
 import consola from "consola";
 import { resolve } from "path";
@@ -75,6 +77,26 @@ function buildScssCopy() {
   return src(`${themeRoot}/**/*.scss`).pipe(dest(buildThemeOutDir));
 }
 
+// --------------- ts文件导入集合 ---------------
+const tsConfig = resolve(themeRoot, "tsconfig.json");
+const copyBaseImport = () => {
+  return src(`${themeRoot}/*.ts`)
+    .pipe(sourcemaps.init()) // 初始化 source map
+    .pipe(
+      ts.createProject(tsConfig, {
+        declaration: true, // 需要生成声明文件
+        strict: false, // 关闭严格模式
+        sourceMap: true, // 生成源映射文件
+        module: "ESNext",
+      })()
+    )
+    .pipe(sourcemaps.write("./")) // 将source map写入到与输出文件统一目录下
+    .pipe(dest(buildThemeOutDir));
+};
+
 export function buildTheme() {
-  return series(cleanTheme, parallel(buildStyle(), buildScssCopy));
+  return series(
+    cleanTheme,
+    parallel(buildStyle(), buildScssCopy, copyBaseImport)
+  );
 }
