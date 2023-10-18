@@ -10,6 +10,9 @@ importers:
 
   packages/gulp-test:
     dependencies:
+      '@jaycce/gulp-components':
+        specifier: workspace:^
+        version: link:packages/ui
       '@jaycce/gulp-theme-chalk':
         specifier: workspace:^
         version: link:packages/theme-chalk

@@ -24,6 +24,7 @@
     "vue": "^3.3.4"
   },
   "dependencies": {
+    "@jaycce/gulp-components": "workspace:^",
     "@jaycce/gulp-theme-chalk": "workspace:^",
     "@jaycce/gulp-utils": "workspace:^",
     "dayjs": "^1.11.10"
