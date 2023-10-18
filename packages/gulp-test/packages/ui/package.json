@@ -19,7 +19,8 @@
   "files": [
     "es",
     "lib",
-    "dist"
+    "dist",
+    "/global.d.ts"
   ],
   "scripts": {},
   "keywords": [
