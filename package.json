@@ -9,7 +9,8 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "gulp:build": "pnpm --filter @jaycce/gulp run build",
-    "gulp:nums": "pnpm --filter @jaycce/gulp run tasks:nums"
+    "gulp:nums": "pnpm --filter @jaycce/gulp run tasks:nums",
+    "gulp:dev": "pnpm --filter @jaycce/gulp-playground run dev"
   },
   "keywords": [
     "notebook",
