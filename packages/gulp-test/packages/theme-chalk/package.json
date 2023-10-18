@@ -8,8 +8,8 @@
       "import": "./dist/index.css",
       "require": "./dist/index.css"
     },
-    "./index-scss": "./dist/scss/index.scss",
-    "./mixin-scss": "./dist/scss/mixin.scss"
+    "./index": "./dist/index.js",
+    "./scss": "./dist/scss.js"
   },
   "files": [
     "dist"
