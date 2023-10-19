@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const WebSocket = require('ws')
 const express = require('express')
 const cors = require('cors')
@@ -13,12 +15,20 @@ const server = app.listen(8080, () => {
 const wss = new WebSocket.Server({ server })
 
 wss.on('connection', (ws) => {
-  ws.on('message', () => {
+  ws.on('message', (message) => {
     console.log(`Received message => ${message}`)
+    ws.on('ping', () => {
+      ws.send('pong')
+    })
     wss.clients.forEach((client) => {
-      if (client !== ws && client.readyState === WebSocket.OPEN) {
-        client.send(message)
-      }
+      const msg = JSON.stringify({
+        type: 'test',
+        data: '测试一下'
+      })
+      client.send(msg)
+      // if (client !== ws && client.readyState === WebSocket.OPEN) {
+      //   client.send(message)
+      // }
     })
   })
 })

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --fix",
-    "socketServer": "node ./scripts/server.js"
+    "socketServer": "nodemon ./scripts/server.js"
   },
   "keywords": [],
   "author": "",
