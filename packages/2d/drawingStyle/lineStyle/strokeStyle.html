@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>strokeStyle 描边样式</title>
+  </head>
+  <body>
+    <canvas
+      id="canvas"
+      width="500"
+      height="500"
+      style="box-shadow: 0px 0px 5px #ccc; border-radius: 8px"
+    >
+      当前浏览器不支持canvas元素，请升级或更换浏览器！
+    </canvas>
+    <script>
+      const canvas = document.getElementById("canvas"); // 获取Canvas
+      const ctx = canvas.getContext("2d"); // 获取绘制上下文
+      ctx.strokeStyle = "#f00"; // 描边样式设置为红色
+      ctx.fillStyle = "#00f"; // 填充样式设置为蓝色
+      ctx.lineWidth = 5;
+
+      // 绘制一个三角形
+      ctx.moveTo(50, 100);
+      ctx.lineTo(50, 400);
+      ctx.lineTo(400, 400);
+      ctx.lineTo(50, 100);
+      ctx.stroke();
+
+      // 如果是填充一个三角形，则只需两条直线就行，它会默认闭合。
+      ctx.beginPath();
+      ctx.moveTo(200, 200);
+      ctx.lineTo(400, 200);
+      ctx.lineTo(400, 370);
+      ctx.fill();
+    </script>
+  </body>
+</html>

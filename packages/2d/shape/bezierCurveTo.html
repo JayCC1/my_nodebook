@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>canvas - 绘制三次贝塞尔曲线</title>
+    <style>
+      /* 给画布增加一个阴影和圆角的样式 */
+      canvas {
+        box-shadow: 0px 0px 5px #ccc;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="500" height="500">
+      当前浏览器不支持 canvas 元素，请升级或更换浏览器
+    </canvas>
+    <script>
+      // 获取 canvas 元素
+      const canvas = document.getElementById("canvas");
+      // 通过判断 getContext 方法是否存在赖判断浏览器的支持性
+      if (canvas.getContext) {
+        // 获取绘图上下文
+        const ctx = canvas.getContext("2d");
+        // 绘制一段三次贝塞尔曲线
+        ctx.beginPath(); // 开启路径
+        ctx.moveTo(50, 200);
+        ctx.bezierCurveTo(150, 50, 250, 350, 350, 200);
+        // 绘制
+        ctx.stroke();
+        // 在线调试 三次贝塞尔曲线网址
+        // https://blogs.sitepointstatic.com/examples/tech/canvas-curves/bezier-curve.html
+      }
+    </script>
+  </body>
+</html>

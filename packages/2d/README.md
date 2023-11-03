@@ -173,3 +173,257 @@ if(canvas.getContext) {
 
 
 
+#### (2) bezierCurveTo(cp1x,cp1y,cp2x,cp2y,x,y)
+
+三次贝塞尔曲线和二次贝塞尔曲线不同的是多了一个控制点
+
+**参数说明：**
+
+- ``cp1x``：控制点1的x轴
+- ``cp1y``：控制点1的y轴位置
+- ``cp2x``：控制点2的x轴
+- ``cp2y``：控制点2的y轴位置
+- ``x``：结束点的x轴位置（与lineTo中的x作用一样）
+- ``y``：结束点的y轴位置（与lineTo中的y作用一样）
+
+**代码演示：**
+
+```javascript
+      // 获取 canvas 元素
+const canvas = document.getElementById("canvas");
+// 通过判断 getContext 方法是否存在赖判断浏览器的支持性
+if (canvas.getContext) {
+    // 获取绘图上下文
+    const ctx = canvas.getContext("2d");
+    // 绘制一段三次贝塞尔曲线
+    ctx.beginPath(); // 开启路径
+    ctx.moveTo(50, 200);
+    ctx.bezierCurveTo(150, 50, 250, 350, 350, 200);
+    // 绘制
+    ctx.stroke();
+}
+```
+
+**效果图如下：**
+
+![](./static/bezierCurveTo.png)
+
+## 二、绘制样式
+
+### 1、线条的样式
+
+#### (1)lineWidth
+
+lineWidth 设置当前绘线的粗细，属性必须为正数。默认值为1.0
+
+
+
+#### (2)lineCap
+
+lineCap 设置线段端点显示的样子。默认是 butt。
+
+**可选值：**
+
+- butt （末端结束，没有扩展超过其末端）
+- round （末端会以半圆形结束，半圆的直径等于线宽，端点处加上了半径为一半线宽的半圆）
+- square（末端会以矩形结束，矩形的长度等于线宽，端点处加上了等宽且高度为一半线宽的方块）
+
+
+
+#### (3)lineJoin
+
+lineJoin 该属性可以设置两线段连接处所显示的样子。默认是 miter。
+
+**可选值：**
+
+- miter（交点将显示为尖角）
+- round （交点将显示为圆角）
+- bevel（交点将显示为斜角）
+
+
+
+#### (4)miterLimit
+
+miterLimit 限制当两条线相交时交接处最大长度；所谓交接处长度（斜接长度）是指线条交接处内角顶点到外角顶点的长度。
+
+线段之间夹角比较大时，交点不会太远，但随着夹角变小，交点距离会呈指数级增大。
+
+
+
+![](./static/miterLimit_1.png)
+
+第一个接合处的夹角比较小，接合处会比较尖，交点距离比较大 第二个接合处的夹角比较大，接合处就比较平缓。
+
+
+
+`miterLimit` 属性就是用来设定外延交点与连接点的最大距离，默认值为 ``10``，如果交点距离大于此值，**``lineJoin``**  会变成了  **``bevel``**
+
+
+
+#### (5)setLineDash/getLineDash
+
+setLineDash 可以设置当前虚线样式。
+
+setLineDash(arr) 中的 arr 长度为 ``奇数`` 或 ``偶数`` 时的效果不太一样
+
+getLineDash 则是返回当前虚线设置的样式，长度为非负偶数的数组。
+
+**代码示例：**
+
+```javascript
+ // 获取绘图上下文
+      var ctx = canvas.getContext('2d');
+      // 绘制一条虚线
+      ctx.setLineDash([5, 10, 20]);
+      console.log(ctx.getLineDash()); // [5, 10, 20, 5, 10, 20]
+      ctx.beginPath();
+      ctx.moveTo(0,100);
+      ctx.lineTo(400, 100);
+      ctx.stroke();
+      // 再绘制一条虚线
+      ctx.setLineDash([5, 10, 20, 40]);
+      console.log(ctx.getLineDash()); // [5, 10, 20, 40]
+      ctx.beginPath();
+      ctx.moveTo(0,200);
+      ctx.lineTo(400, 200);
+      ctx.stroke();
+
+```
+
+**效果图如下：**
+
+![](./static/LineDash.png)
+
+**对比一下传参为奇数数组和偶数数组的区别：**
+
+设置虚线的时候，如果传参为奇数，例如：ctx.setLineDash([5, 10, 20])，那么 setLineDash 会复制一份数组补全为偶数，相当于我们设置的是：ctx.setLineDash([5, 10, 20, 5, 10, 20])。所以这也就是为什么上图中我们设置的是 [5, 10, 20]，结果打印出来是 [5, 10, 20, 5, 10, 20]
+
+
+
+#### (6)lineDashOffect
+
+lineDashOffset 设置虚线样式的起始偏移量。
+
+**代码示例：**
+
+```javascript
+// 再绘制一条虚线
+ctx.setLineDash([5, 10, 20, 40]);
+console.log("获取虚线样式", ctx.getLineDash()); // [5, 10, 20, 40]
+ctx.beginPath();
+ctx.moveTo(0, 200);
+ctx.lineTo(400, 200);
+ctx.stroke();
+ctx.closePath();
+
+// 添加 lineDashOffset 设置虚线样式的起始偏移量
+ctx.setLineDash([5, 10, 20, 40]);
+ctx.lineDashOffset = 3;
+ctx.beginPath();
+ctx.moveTo(0, 300);
+ctx.lineTo(400, 300);
+ctx.stroke();
+ctx.closePath();
+```
+
+**效果图如下：**
+
+![](./static/lineDashOffset.png)
+
+可以明显看出虚线的总长度没有变化，只是起始点向左位移了3像素。
+
+
+
+#### (7)strokeStyle
+
+设置描边样式
+
+**代码示例：**
+
+```javascript
+const ctx = canvas.getContext('2d'); // 获取绘制上下文
+ctx.strokeStyle = "#f00" // 描边样式设置为红色
+ctx.lineWidth = 5
+
+// 绘制一个三角形
+ctx.moveTo(50, 100) 
+ctx.lineTo(50, 400)
+ctx.lineTo(400, 400)
+ctx.lineTo(50, 100) 
+ctx.stroke();
+
+```
+
+**效果图如下：**
+
+![](./static/strokeStyle.png)
+
+
+
+(8)fillStyle
+
+设置填充的样式
+
+**代码示例：**
+
+```javascript
+const ctx = canvas.getContext('2d'); // 获取绘制上下文
+ctx.fillStyle = "#00f" // 填充样式设置为蓝色
+ctx.lineWidth = 5
+
+// 如果是填充一个三角形，则只需两条直线就行，它会默认闭合。
+ctx.beginPath()
+ctx.moveTo(200, 200) 
+ctx.lineTo(400, 200)
+ctx.lineTo(400, 370)
+ctx.fill();
+
+
+```
+
+**效果图如下：**
+
+![](./static/fillStyle.png)
+
+
+
+
+
+### 2、透明度
+
+(1)globalAlpha
+
+设置透明度值
+
+**代码示例：**
+
+```javascript
+const ctx = canvas.getContext('2d'); // 获取绘制上下文
+// 绘制一个圆
+ctx.beginPath()
+ctx.fillStyle = "rgba(255, 255, 0, 1)";
+// 设置透明度值
+ctx.globalAlpha = 0.5;
+ctx.arc(200, 200, 100, 0, Math.PI*2, true);
+ctx.fill();
+
+
+```
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\globalAlpha.png)
+
+
+
+### 3、渐变
+
+渐变分为 **两种** ，分别是 ``线性渐变`` 和 ``径向渐变`` ，在绘图中我们可以用线性或者径向来填充或描边。
+
+#### (1)createLinearGradient(x1,y1,x2,y2)
+
+线性渐变
+
+**参数说明：**
+
+- x1：起点的左边

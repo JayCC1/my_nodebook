@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>canvas - 绘制样式 - 两条线条相交时交接处的最大长度</title>
+    <style>
+      /* 给画布增加一个阴影和圆角的样式 */
+      canvas {
+        box-shadow: 0px 0px 5px #ccc;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="300" height="300">
+      当前浏览器不支持canvas元素，请升级或更换浏览器！
+    </canvas>
+    <script>
+      // 获取 canvas 元素
+      const canvas = document.getElementById("canvas");
+      // 通过判断 getContext 方法是否存在来判断浏览器的支持性
+      if (canvas.getContext) {
+        // 获取绘制上下文
+        const ctx = canvas.getContext("2d");
+        // miterLimit 为定值，角度越大
+        ctx.beginPath();
+        ctx.lineWidth = 5;
+        ctx.lineJoin = "miter";
+        ctx.miterLimit = 10;
+        ctx.moveTo(0, 100);
+        for (i = 0; i < 30; i++) {
+          const dy = i % 2 == 0 ? 200 : 100;
+          ctx.lineTo(Math.pow(i, 1.5) * 2, dy);
+        }
+        ctx.stroke();
+        ctx.closePath();
+      }
+    </script>
+  </body>
+</html>

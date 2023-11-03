@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>绘制二次贝塞尔曲线</title>
+    <title>canvas - 设置透明度</title>
     <style>
       /* 给画布增加一个阴影和圆角的样式 */
       canvas {
@@ -13,6 +13,7 @@
       }
     </style>
   </head>
+
   <body>
     <canvas id="canvas" width="500" height="500">
       当前浏览器不支持canvas元素，请升级或更换浏览器！
@@ -24,28 +25,27 @@
       if (canvas.getContext) {
         // 获取绘图上下文
         const ctx = canvas.getContext("2d");
-        // 绘制一段二次贝塞尔曲线
+
+        // 绘制一个矩形
         ctx.beginPath();
-        ctx.moveTo(50, 50); // 设置起始位置
-        /**
-         * @param1 cp1x 控制点的x轴
-         * @param2 cp1y 控制点的y轴位置
-         * @param3 x 结束点的x轴位置（与lineTo中的x作用一样）
-         * @param4 y 结束点的y轴位置（与lineTo中的y作用一样）
-         */
-        ctx.quadraticCurveTo(200, 200, 350, 50);
-        // 绘制
-        ctx.stroke();
+        // 指定填充样式，使用 rgba中实现 透明度
+        ctx.fillStyle = "rgba(0, 255, 0, 0.2)";
+        ctx.fillRect(10, 10, 300, 100);
         ctx.closePath();
 
-        // 绘制 二次贝塞尔曲线
+        // 绘制一个 矩形 边框
         ctx.beginPath();
-        ctx.moveTo(50, 250);
-        ctx.quadraticCurveTo(100, 400, 350, 250);
-        ctx.stroke();
+        ctx.strokeStyle = "rgba(255, 0, 0, 0.7)";
+        ctx.strokeRect(10, 90, 100, 300);
         ctx.closePath();
-        // 在线调试 二次贝塞尔曲线网址
-        // https://blogs.sitepointstatic.com/examples/tech/canvas-curves/quadratic-curve.html
+
+        // 绘制一个圆
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(255, 255, 0, 1)";
+        // 设置透明度
+        ctx.globalAlpha = 0.5;
+        ctx.arc(200, 200, 100, 0, Math.PI * 2, true);
+        ctx.fill();
       }
     </script>
   </body>

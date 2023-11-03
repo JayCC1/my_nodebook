@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>canvas - 绘制样式 - 线条段先显示的样子</title>
+    <style>
+      /* 给画布增加一个阴影和圆角的样式 */
+      canvas {
+        box-shadow: 0px 0px 5px #ccc;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="300" height="300">
+      当前浏览器不支持canvas元素，请升级或更换浏览器！
+    </canvas>
+    <script>
+      // 获取 canvas 元素
+      const canvas = document.getElementById("canvas");
+      // 通过判断 getContext 方法是否存在来判断浏览器的特性
+      if (canvas.getContext) {
+        // 获取绘图上下文
+        const ctx = canvas.getContext("2d");
+        // lineCap 的值为 butt 默认值,末端结束，没有扩展超过其末端
+        ctx.beginPath();
+        ctx.lineWidth = 10;
+        ctx.lineCap = "butt";
+        ctx.moveTo(50, 20);
+        ctx.lineTo(250, 20);
+        ctx.stroke();
+        ctx.closePath();
+
+        // lineCap 的值为 round，末端会以半圆形结束，半圆的直径等于线宽，端点处加上了半径为一半线宽的半圆
+        ctx.beginPath();
+        ctx.lineWidth = 10;
+        ctx.lineCap = "round";
+        ctx.moveTo(50, 50);
+        ctx.lineTo(250, 50);
+        ctx.stroke();
+        ctx.closePath();
+
+        // lineCap 值为 square,末端会以矩形结束，矩形的长度等于线宽，端点处加上了等宽且高度为一半线宽的方块
+        ctx.beginPath();
+        ctx.lineWidth = 10;
+        ctx.lineCap = "square";
+        ctx.moveTo(50, 80);
+        ctx.lineTo(250, 80);
+        ctx.stroke();
+        ctx.closePath();
+      }
+    </script>
+  </body>
+</html>
