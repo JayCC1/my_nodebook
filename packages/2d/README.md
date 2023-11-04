@@ -869,7 +869,7 @@ console.log("🚀 ~ 文案宽度：", text1.width);
 
 ### 3、阴影
 
-(1)shadowOffsetX、shadowOffsetY
+#### (1)shadowOffsetX、shadowOffsetY
 
 ``shadowOffsetX`` 和 ``shadowOffsetY`` 用来设定阴影在 X 和 Y 轴的延伸距离，它们是不受变换矩阵所影响的。**负值** 表示阴影会往上或左延伸，**正值** 表示会往下或右延伸。
 
@@ -877,4 +877,165 @@ console.log("🚀 ~ 文案宽度：", text1.width);
 
 
 
-(2)shadow
+#### (2)shadowBlur
+
+shadowBlur 用于设定阴影的模糊程度其数值并不跟像素数量挂钩，也不受变换矩阵的影响。
+
+**默认值：** 0
+
+
+
+#### (3)shadowColor
+
+shadowColor 是标准的 css 颜色值，用于设定阴影颜色效果，**默认为 全透明的黑色**
+
+**代码案例：**
+
+```` javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+ctx.font = "50px serif"; // 设置文案大小和字体
+
+// 模糊 1
+ctx.shadowColor = "#cccccc"; // 设置阴影颜色
+ctx.fillStyle = "#ee7934"; // 设置填充颜色
+ctx.shadowOffsetX = 10; // X 轴上的阴影
+ctx.shadowOffsetY = 10; // Y 轴上的阴影
+ctx.shadowBlur = 5; // 阴影的模糊程度
+ctx.fillText("Hi Canvas !", 100, 50);
+ctx.fillRect(100, 100, 200, 100);
+
+// 模糊 2
+ctx.shadowOffsetX = -10;
+ctx.shadowOffsetY = -10;
+ctx.fillText("Hi Canvas !", 100, 300);
+ctx.fillRect(100, 350, 200, 100);
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\shadow.png)
+
+
+
+## 四、绘制图片
+
+绘制图片和上面的图案样式绘制基本大同小异，不同的是所用方式不一样，绘制图片是使用 drawImage 方法将它渲染到 canvas 里。
+
+
+
+### 1、drawImage
+
+drawImage 方法与前文提及的 ``createPattern`` 方法功能类似，都是把图片绘制到 Canvas 中。但 drawImage 功能性相对来说更加的强大，drawImage 方法会根据不同入参实现不同的功能：
+
+1. 绘制图像
+2. 缩放图像
+3. 裁剪图像
+
+**语法：**
+
+drawImage(Image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
+
+**参数：**
+
+- image：绘制的元素 (图像)
+- sx、sy：裁剪框左上角的坐标
+- sWidth、sHeight：裁剪框的宽度和高度
+- dx、dy：绘制元素 (图像) 时左上角的坐标
+- dWidth、dHeight：绘制元素 (图像) 的宽度和高度。如果不设置，则在绘制时 image 宽度和高度不会缩放
+
+
+
+#### (1)绘制图像
+
+单纯的图片绘制只需要 ``image``、``dx``、``dy`` 三个参数。
+
+**代码案例：**
+
+```` javascript
+const canvas = document.getElementById("canvas"); // 获取Canvas
+const ctx = canvas.getContext("2d");
+
+const img = new Image();
+img.src = "../static/test/drawImage.webp";
+img.onload = () => {
+    // drawImage(image, dx, dy)
+    // image: 绘制的元素（图像）
+    // dx: 绘制元素时左上角的 x 轴坐标
+    // dy: 绘制元素时左上角的 y 轴坐标
+    ctx.drawImage(img, 0, 0);
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\drawimage-drawing.png)
+
+图片已经绘制到了 Canvas 中，但是可以看到在目前呈现出来的效果中，图片并没有完整的绘制出来。所以如果为了能让图片能够完整的呈现出来，那我们就需要将图片进行一个缩放
+
+
+
+#### (2)缩放图像
+
+想要缩放图片就需要在绘制的前提下再设置图片的宽高，也就还需要 ``dWidth`` 和 ``dHeight`` 这两个参数
+
+**代码案例：**
+
+```` javascript
+// 获取 canvas 元素
+const canvas = document.getElementById("canvas");
+// 获取绘制上下文
+const ctx = canvas.getContext("2d");
+
+const img = new Image();
+img.src = "../static/test/drawImage.webp";
+img.onload = () => {
+    ctx.drawImage(img, 0, 0, 550, 500);
+};
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\drawImage-zoom.png)
+
+经过缩放之后图片不仅绘制再 Canvas 中，并且也能够将图像完整的显示在Canvas中了，那么这时候如果想对图片进行一个裁剪，那么应该如何进行裁剪呢？
+
+
+
+#### (3)裁剪图像
+
+想裁剪图片就需要在缩放的前提下在设置图片要显示的位置和裁剪的大小，也就还需要 ``sx`` 、``sy`` 、``sWidth`` 、``sHeight`` 这四个参数
+
+**代码案例：**
+
+```` javascript
+// 获取 canvas 元素
+const canvas = document.getElementById("canvas");
+// 获取绘制上下文
+const ctx = canvas.getContext("2d");
+
+const img = new Image();
+img.src =
+    "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9f56ebb2a6674e1fbd55a3d92df042bd~tplv-k3u1fbpfcp-watermark.image";
+img.onload = () => {
+    // drawImage(image, dx, dy, dWidth, dHeight)
+    // image: 绘制的元素（图像）
+    // sx：裁剪框左上角的 x 轴坐标
+    // sy：裁剪框左上角的 y 轴坐标
+    // sWidth：裁剪框的宽度
+    // sHeight：裁剪框的高度
+    // dx: 绘制元素时左上角的 x 轴坐标
+    // dy: 绘制元素时左上角的 y 轴坐标
+    // dWidth: 绘制元素 (图像) 的宽度
+    // dHeight: 绘制元素 (图像) 的高度
+    // dWidth 和 dHeight 如果不设置，则在绘制时 image 宽度和高度不会缩放
+    ctx.drawImage(img, 0, 150, 1650, 700, 0, 0, 550, 500);
+    // ctx.drawImage(img, 0, 150, 1650, 700, 0, 0, 550, 500);
+};
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\drawImage-tailor.png)
+
+如上就是实现了将图像先进行裁剪在进行缩放显示绘制在canvas中的功能

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas - 图像绘制 - drawImage(image, dx, dy, dWidth, dHeight)</title>
+    <style>
+      canvas {
+        box-shadow: 0px 0px 5px #ccc;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="550" height="500">
+      当前浏览器不支持 canvas 元素，请升级或更换浏览器！
+    </canvas>
+    <script>
+      // 获取 canvas 元素
+      const canvas = document.getElementById("canvas");
+      // 获取绘制上下文
+      const ctx = canvas.getContext("2d");
+
+      const img = new Image();
+      img.src = "../static/test/drawImage.webp";
+      img.onload = () => {
+        // drawImage(image, dx, dy, dWidth, dHeight)
+        // image: 绘制的元素（图像）
+        // dx: 绘制元素时左上角的 x 轴坐标
+        // dy: 绘制元素时左上角的 y 轴坐标
+        // dWidth: 绘制元素 (图像) 的宽度
+        // dHeight: 绘制元素 (图像) 的高度
+        // dWidth 和 dHeight 如果不设置，则在绘制时 image 宽度和高度不会缩放
+        ctx.drawImage(img, 0, 0, 550, 500);
+      };
+    </script>
+  </body>
+</html>
