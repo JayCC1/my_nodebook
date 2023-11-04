@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>canvas - 图案样式</title>
+    <style>
+      /* 给画布增加一个阴影和圆角的样式 */
+      canvas {
+        box-shadow: 0px 0px 5px #ccc;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="500" height="500">
+      当前浏览器不支持canvas元素，请升级或更换浏览器！
+    </canvas>
+    <script>
+      const canvas = document.getElementById("canvas");
+      // 通过判断 getContext 方法是否存在来判断浏览器的支持性
+      if (canvas.getContext) {
+        // 获取绘制上下文
+        const ctx = canvas.getContext("2d");
+        // 创建一个 image 对象
+        const img = new Image();
+        img.src = "../../static/test/createPattern.png";
+        img.onload = () => {
+          // 图片加载完后回调
+          // 创建图案 1 no-repeat 不平铺
+          //   const pattern1 = ctx.createPattern(img, "no-repeat");
+          //   ctx.fillStyle = pattern1;
+          //   ctx.fillRect(0, 0, 500, 500);
+
+          // 创建图案 2 repeat 平铺
+          //   const pattern2 = ctx.createPattern(img, "repeat");
+          //   ctx.fillStyle = pattern2;
+          //   ctx.fillRect(0, 0, 500, 500);
+
+          // 创建图案 3 x 轴方向平铺
+          //   const pattern3 = ctx.createPattern(img, "repeat-x");
+          //   ctx.fillStyle = pattern3;
+          //   ctx.fillRect(0, 0, 500, 500);
+
+          // 创建图案 4 y 轴方向平铺
+          const pattern4 = ctx.createPattern(img, "repeat-y");
+          ctx.fillStyle = pattern4;
+          ctx.fillRect(0, 0, 500, 500);
+        };
+      }
+    </script>
+  </body>
+</html>

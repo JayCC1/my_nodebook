@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>canvas - 径向渐变</title>
+    <style>
+      /* 给画布增加一个阴影和圆角的样式 */
+      canvas {
+        box-shadow: 0px 0px 5px #ccc;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="500" height="500">
+      当前浏览器不支持canvas元素，请升级或更换浏览器！
+    </canvas>
+    <script>
+      const canvas = document.getElementById("canvas");
+      // 通过判断 getContext 方法是否存在来判断浏览器的支持性
+      if (canvas.getContext) {
+        // 获取绘制上下文
+        const ctx = canvas.getContext("2d");
+
+        // 创建径向渐变 1
+        // 结束坐标为点,从 外到里发生渐变
+        const radialGradient1 = ctx.createRadialGradient(
+          100,
+          100,
+          100,
+          100,
+          100,
+          0
+        );
+        radialGradient1.addColorStop(0, "#ff770f");
+        radialGradient1.addColorStop(1, "#ffffff");
+
+        // 创建径向渐变 2
+        // 结束坐标为半径 30 的圆
+        const radialGradient2 = ctx.createRadialGradient(
+          320,
+          100,
+          100,
+          320,
+          100,
+          30
+        );
+        radialGradient2.addColorStop(0, "#ff770f");
+        radialGradient2.addColorStop(1, "#ffffff");
+
+        // 创建径向渐变 3
+        // 从 0.5 的位置才开始渲染
+        const radialGradient3 = ctx.createRadialGradient(
+          100,
+          320,
+          100,
+          100,
+          320,
+          0
+        );
+        radialGradient3.addColorStop(0.5, "#ff770f");
+        radialGradient3.addColorStop(1, "#ffffff");
+
+        // 创建径向渐变 4
+        // 开始坐标 和 结束坐标 不一样
+        const radialGradient4 = ctx.createRadialGradient(
+          320,
+          320,
+          100,
+          250,
+          250,
+          0
+        );
+        radialGradient4.addColorStop(0, "#ff770f");
+        radialGradient4.addColorStop(1, "#ffffff");
+
+        // 矩形 1
+        ctx.beginPath();
+        ctx.fillStyle = radialGradient1;
+        ctx.fillRect(10, 10, 200, 200);
+        ctx.closePath();
+
+        // 矩形 2
+        ctx.beginPath();
+        ctx.fillStyle = radialGradient2;
+        ctx.fillRect(220, 10, 200, 200);
+        ctx.closePath();
+
+        // 矩形 3
+        ctx.beginPath();
+        ctx.fillStyle = radialGradient3;
+        ctx.fillRect(10, 220, 200, 200);
+        ctx.closePath();
+
+        // 矩形 4
+        ctx.beginPath();
+        ctx.fillStyle = radialGradient4;
+        ctx.fillRect(220, 220, 200, 200);
+        ctx.closePath();
+      }
+    </script>
+  </body>
+</html>

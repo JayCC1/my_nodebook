@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas绘制 - 绘制文本 - 样式 textAlign & direction</title>
+    <!-- 给画布增加一个 阴影 和 圆角的样式 -->
+    <style>
+      canvas {
+        box-shadow: 0px 0px 5px #ccc;
+        border-radius: 8px;
+        margin-right: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="500" height="700">
+      当前浏览器不支持canvas元素，请升级或更换浏览器
+    </canvas>
+    <script>
+      // 获取 canvas 元素
+      const canvas = document.getElementById("canvas");
+      // 通过判断 getcContext 方法是否存在来判断浏览器的支持性
+      if (canvas.getContext) {
+        // 获取绘图上下文
+        const ctx = canvas.getContext("2d");
+        ctx.font = "30px serif"; // 设置文案大小和字体
+
+        // 文字 1
+        ctx.direction = "ltr"; // 文本方向从左向右
+        ctx.textAlign = "left"; // 左对齐
+        ctx.strokeText("Hi Canvas !", 170, 100);
+
+        // 文字 2
+        ctx.direction = "ltr"; // 文本方向从左到右
+        ctx.textAlign = "center"; // 居中对齐
+        ctx.strokeText("Hi Canvas !", 170, 200);
+
+        // 文本 3
+        ctx.direction = "ltr"; // 文本方向从左到右
+        ctx.textAlign = "right"; // 右对齐
+        ctx.strokeText("Hi Canvas !", 170, 300);
+
+        // 文本 4
+        ctx.direction = "rtl"; // 文本方向从右到左
+        ctx.textAlign = "left"; // 左对齐
+        ctx.strokeText("Hi Canvas !", 170, 400);
+
+        // 文本 5
+        ctx.direction = "rtl"; // 文本方向从右到左
+        ctx.textAlign = "center"; // 居中对齐
+        ctx.strokeText("Hi Canvas !", 170, 500);
+
+        // 文本 6
+        ctx.direction = "rtl"; // 文本方向从右到左
+        ctx.textAlign = "right"; // 居中对齐
+        ctx.strokeText("Hi Canvas !", 170, 600);
+      }
+    </script>
+  </body>
+</html>

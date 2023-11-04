@@ -360,7 +360,7 @@ ctx.stroke();
 
 
 
-(8)fillStyle
+#### (8)fillStyle
 
 设置填充的样式
 
@@ -426,4 +426,455 @@ ctx.fill();
 
 **参数说明：**
 
-- x1：起点的左边
+- x1：起点的x轴坐标
+- y1：起点的y轴坐标
+- x2：终点的x轴坐标
+- y2：终点的y轴坐标
+
+```javascript
+// ****** 配合使用 api ******
+/* 1.gradient.addColorStop(offset,color) */
+// 在渐变的设置中还需要本方法来添加渐变的颜色
+// 参数说明：
+// 1. color：颜色
+// 2. offset：颜色的偏移值，只为 0 到 1 之间的值
+// 案例代码：
+
+// 获取绘制上下文
+const ctx = canvas.getContext("2d");
+// 创建渐变 1
+const gradient1 = ctx.createLinearGradient(10, 10, 400, 10);
+gradient1.addColorStop(0, "#00ff00");
+gradient1.addColorStop(1, "#ff0000");
+
+// 创建渐变 2
+const gradient2 = ctx.createLinearGradient(10, 10, 400, 10);
+// 从 0.5 的位置才开始渐变
+gradient2.addColorStop(0.5, "#00ff00");
+gradient2.addColorStop(1, "#ff0000");
+
+ctx.beginPath();
+ctx.fillStyle = gradient1;
+ctx.fillRect(10, 10, 400, 100);
+ctx.closePath();
+
+ctx.beginPath();
+ctx.fillStyle = gradient2;
+ctx.fillRect(10, 150, 400, 100);
+ctx.closePath();
+
+```
+
+​	**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\linearGradient.png)
+
+
+
+#### (2)createRadialGradient(x0,y0,r0,x1,y1,r1)
+
+径向渐变
+
+**参数说明**：
+
+- x0、y0：开始圆的坐标x和y轴坐标
+- r0：开始圆的半径
+- x1、y1：结束圆的坐标x和y轴坐标
+- r1：结束圆的半径
+
+**代码示例：**
+
+```javascript
+// 用法和 linearGradient类似都需要通过addColorStop添加颜色和偏移量
+// 获取绘制上下文
+const ctx = canvas.getContext("2d");
+
+// 创建径向渐变 1
+// 结束坐标为点,从 外到里发生渐变
+const radialGradient1 = ctx.createRadialGradient(
+    100,
+    100,
+    100,
+    100,
+    100,
+    0
+);
+radialGradient1.addColorStop(0, "#ff770f");
+radialGradient1.addColorStop(1, "#ffffff");
+
+// 创建径向渐变 2
+// 结束坐标为半径 30 的圆
+const radialGradient2 = ctx.createRadialGradient(
+    320,
+    100,
+    100,
+    320,
+    100,
+    30
+);
+radialGradient2.addColorStop(0, "#ff770f");
+radialGradient2.addColorStop(1, "#ffffff");
+
+// 创建径向渐变 3
+// 从 0.5 的位置才开始渲染
+const radialGradient3 = ctx.createRadialGradient(
+    100,
+    320,
+    100,
+    100,
+    320,
+    0
+);
+radialGradient3.addColorStop(0.5, "#ff770f");
+radialGradient3.addColorStop(1, "#ffffff");
+
+// 创建径向渐变 4
+// 开始坐标 和 结束坐标 不一样
+const radialGradient4 = ctx.createRadialGradient(
+    320,
+    320,
+    100,
+    250,
+    250,
+    0
+);
+radialGradient4.addColorStop(0, "#ff770f");
+radialGradient4.addColorStop(1, "#ffffff");
+
+// 矩形 1
+ctx.beginPath();
+ctx.fillStyle = radialGradient1;
+ctx.fillRect(10, 10, 200, 200);
+ctx.closePath();
+
+// 矩形 2
+ctx.beginPath();
+ctx.fillStyle = radialGradient2;
+ctx.fillRect(220, 10, 200, 200);
+ctx.closePath();
+
+// 矩形 3
+ctx.beginPath();
+ctx.fillStyle = radialGradient3;
+ctx.fillRect(10, 220, 200, 200);
+ctx.closePath();
+
+// 矩形 4
+ctx.beginPath();
+ctx.fillStyle = radialGradient4;
+ctx.fillRect(220, 220, 200, 200);
+ctx.closePath();
+```
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\radialGradient.png)
+
+
+
+### 4、图案样式
+
+#### (1)createPattern(image,type)
+
+Canvas 中想绘制的图案效果，个人理解为对标css中的background-image。
+
+**参数说明：**
+
+- image：可以是一个 ``Image`` 对象，也可以是 ``canvas``对象
+- type：图案绘制的类型，可用的类型分别有：``repeat``、``repeat-x``、``repeat-y``、``no-repeat``
+
+**代码案例：**
+
+```javascript
+// 创建一个 image 对象
+const img = new Image();
+img.src = "../../static/test/createPattern.png";
+img.onload = () => {
+    // 图片加载完后回调
+    // 创建图案 1 no-repeat 不平铺
+    //   const pattern1 = ctx.createPattern(img, "no-repeat");
+    //   ctx.fillStyle = pattern1;
+    //   ctx.fillRect(0, 0, 500, 500);
+
+    // 创建图案 2 repeat 平铺
+    //   const pattern2 = ctx.createPattern(img, "repeat");
+    //   ctx.fillStyle = pattern2;
+    //   ctx.fillRect(0, 0, 500, 500);
+
+    // 创建图案 3 x 轴方向平铺
+    //   const pattern3 = ctx.createPattern(img, "repeat-x");
+    //   ctx.fillStyle = pattern3;
+    //   ctx.fillRect(0, 0, 500, 500);
+
+    // 创建图案 4 y 轴方向平铺
+    const pattern4 = ctx.createPattern(img, "repeat-y");
+    ctx.fillStyle = pattern4;
+    ctx.fillRect(0, 0, 500, 500);
+```
+
+
+
+## 三、绘制文本
+
+canvas 中依旧提供了两种方法来渲染文本，一种是描边一种是填充。
+
+### 1、文字
+
+#### (1)strokeText(text,x,y,maxWidth)
+
+描边绘制文本
+
+**参数说明：**
+
+- text：绘制的文案
+- x、y：文本的起始位置
+- maxWidth：可选参数、最大宽度。需要注意的是当文案大于最大宽度时不是裁剪或者换行，而是缩小字体
+
+**代码案例：**
+
+```javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+ctx.font = "50px serif"; // 设置文案大小和字体
+ctx.strokeText("Canvas 详解", 50, 50);
+```
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\strokeText.png)
+
+
+
+#### (2)fillText(text,x,y,maxWidth)
+
+填充绘制文本
+
+**参数说明：**
+
+- text：绘制的文案
+- x、y：文本的起始位置
+- maxWidth：可选参数，最大宽度。需要注意的是当文案大于最大宽度时不是裁剪或者换行，而是缩小字体。
+
+**代码案例：**
+
+```javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+ctx.font = "50px serif"; // 设置文案大小和字体
+ctx.fillText("Canvas 详解", 50, 50);
+```
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\fillText.png)
+
+
+
+### 2、文本样式
+
+文本也是可以添加样式的，下面看一下可以设置哪些样式
+
+#### (1)font
+
+用于绘制文本的样式。
+
+默认的字体样式是 10px sans-serif
+
+​						      文案大小 字体
+
+
+
+#### (2)textAlign
+
+文本对齐的方式。**默认值：** ``start``
+
+**可选值：**
+
+- ``left``
+- ``right``
+- ``center``
+- ``start``
+- ``end``
+
+
+
+#### (3)direction
+
+文字的方向。**默认值：**``inherit``
+
+**可选值：**
+
+- ``ltr`` (文字方向从左到右)
+- ``rtl`` (文字方向从右到左)
+- ``inherit`` (根据情况继承Canvas元素或者Document)
+
+**注意：**
+
+direction 属性会对 textAlign 属性产生影响。
+
+1. 如果 direction 属性设置为 ``ltr``,则 textAlign 属性的 ``left`` 和 ``start`` 的效果相同，``right`` 和 ``end`` 的效果相同
+2. 如果 direction 属性设置为 ``rtl`` 则 textAlign 属性的 ``left`` 和 ``end`` 的效果相同，``right`` 和 ``start`` 的效果相同
+
+**代码案例：**
+
+```javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+ctx.font = "30px serif"; // 设置文案大小和字体
+
+// 文字 1
+ctx.direction = "ltr"; // 文本方向从左向右
+ctx.textAlign = "left"; // 左对齐
+ctx.strokeText("Hi Canvas !", 170, 100);
+
+// 文字 2
+ctx.direction = "ltr"; // 文本方向从左到右
+ctx.textAlign = "center"; // 居中对齐
+ctx.strokeText("Hi Canvas !", 170, 200);
+
+// 文本 3
+ctx.direction = "ltr"; // 文本方向从左到右
+ctx.textAlign = "right"; // 右对齐
+ctx.strokeText("Hi Canvas !", 170, 300);
+
+// 文本 4
+ctx.direction = "rtl"; // 文本方向从右到左
+ctx.textAlign = "left"; // 左对齐
+ctx.strokeText("Hi Canvas !", 170, 400);
+
+// 文本 5
+ctx.direction = "rtl"; // 文本方向从右到左
+ctx.textAlign = "center"; // 居中对齐
+ctx.strokeText("Hi Canvas !", 170, 500);
+
+// 文本 6
+ctx.direction = "rtl"; // 文本方向从右到左
+ctx.textAlign = "right"; // 居中对齐
+ctx.strokeText("Hi Canvas !", 170, 600);
+```
+
+**效果图如下：**
+
+![direction & textAlign](E:\resources\practice_test\docs\packages\2d\static\direction&textAlign.png)
+
+#### (4)textBaseline
+
+基线的对齐选项，决定文字垂直方向的对齐方式。**默认值：** ``alphabetic``
+
+**可选值：**
+
+- ``top``
+- ``hanging``
+- ``middle``
+- ``alphabetic``
+- ``ideographic``
+- ``bottom``
+
+**代码示例：**
+
+```` javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+ctx.font = "25px serif"; // 设置文案大小和字体
+ctx.strokeStyle = "red";
+const baselines = [
+    "top",
+    "hanging",
+    "middle",
+    "alphabetic",
+    "ideographic",
+    "bottom",
+];
+baselines.forEach((baseline, index) => {
+    ctx.textBaseline = baseline;
+    let y = 60 + index * 60;
+    ctx.beginPath();
+    ctx.moveTo(10, y + 0.5);
+    ctx.lineTo(500, y + 0.5);
+    ctx.stroke();
+    ctx.fillText(
+        `Hi Canvas，Welcome to my world！（${baseline}）`,
+        10,
+        y
+    );
+});
+````
+
+
+
+#### (5)measureText
+
+测量文本，返回一个 TextMetrics 对象
+
+**代码案例：**
+
+```` javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+ctx.font = "30px serif"; // 设置文案大小和字体
+
+// 测试文案 1
+ctx.beginPath();
+ctx.strokeText("Hi Canvas !", 150, 100);
+const text = ctx.measureText("Hi Canvas !");
+console.log("🚀 ~ 文案宽度：", text.width);
+
+// 测试文案 2
+ctx.beginPath();
+// 设置了文案最大宽度
+ctx.strokeText("Hi Canvas !", 150, 200, 100);
+const text1 = ctx.measureText("Hi Canvas !");
+console.log("🚀 ~ 文案宽度：", text1.width);
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\measureText.png)
+
+
+
+**总结：**
+
+返回的 TextMetrics对象不受最大宽度等外界因素所影响。
+
+**TextMetrics属性解析：**
+
+**所有属性都是使用 CSS 像素计算的，并且都是只读**
+
+- TextMetrics.width：基于当前上下文字体，计算内联字符串的宽度。
+
+- TextMetrics.actualBoundingBoxLeft：从 textAlign 属性确定的对齐点到文本矩形边界左侧的距离，使用 CSS 像素计算；正值表示文本矩形边界左侧在该对齐点的左侧。
+
+- TextMetrics.actualBoundingBoxRight：从 textAlign 属性确定的对齐点到文本矩形边界右侧的距离。
+
+- TextMetrics.fontBoundingBoxAscent：从 textBaseline 属性标明的水平线到渲染文本的所有字体的矩形最高边界顶部的距离。
+
+- TextMetrics.fontBoundingBoxDescent：从 textBaseline 属性标明的水平线到渲染文本的所有字体的矩形边界最底部的距离。
+
+- TextMetrics.actualBoundingBoxAscent：从 textBaseline 属性标明的水平线到渲染文本的矩形边界顶部的距离。
+
+- Textetrics.actualBoundingBoxDescent：从 textBaseline 属性标明的水平线到渲染文本的矩形边界底部的距离。
+
+- TextMetrics.emHeightAscent：从 textBaseline 属性标明的水平线到线框中 em 方块顶部的距离。
+
+- TextMetrics.emHeightDescent：从 textBaseline 属性标明的水平线到线框中 em 方块底部的距离。
+
+- TextMetrics.hangingBaseline：从 textBaseline 属性标明的水平线到线框的 hanging 基线的距离。
+
+- TextMetrics.alphabeticBaseline：从 textBaseline 属性标明的水平线到线框的 alphabetic 基线的距离。
+
+- TextMetrics.ideographicBaseline：从 textBaseline 属性标明的水平线到线框的 ideographic 基线的距离。
+
+
+
+### 3、阴影
+
+(1)shadowOffsetX、shadowOffsetY
+
+``shadowOffsetX`` 和 ``shadowOffsetY`` 用来设定阴影在 X 和 Y 轴的延伸距离，它们是不受变换矩阵所影响的。**负值** 表示阴影会往上或左延伸，**正值** 表示会往下或右延伸。
+
+**默认值：**都为0
+
+
+
+(2)shadow
