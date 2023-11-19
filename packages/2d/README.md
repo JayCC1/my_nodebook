@@ -1030,7 +1030,7 @@ img.onload = () => {
     // dHeight: 绘制元素 (图像) 的高度
     // dWidth 和 dHeight 如果不设置，则在绘制时 image 宽度和高度不会缩放
     ctx.drawImage(img, 0, 150, 1650, 700, 0, 0, 550, 500);
-    // ctx.drawImage(img, 0, 150, 1650, 700, 0, 0, 550, 500);
+    // 意思是 在原图片的 (0,150) 位置，裁剪一个宽 1650，高 700 的大小的内容，然后再将裁剪后的内容缩放至宽550，高500，然后绘制到canvas中的 (0,0)位置上
 };
 ````
 
@@ -1039,3 +1039,195 @@ img.onload = () => {
 ![](E:\resources\practice_test\docs\packages\2d\static\drawImage-tailor.png)
 
 如上就是实现了将图像先进行裁剪在进行缩放显示绘制在canvas中的功能
+
+
+
+## 五、变形
+
+### 1、状态的保存和恢复
+
+#### (1) save()
+
+保存 canvas 状态，对canvas状态的快照的保存
+
+#### (2)restore()
+
+恢复canvas 状态，对canvas 保存的快照进行恢复
+
+**代码案例：**
+
+```` javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 状态 1
+ctx.fillStyle = "#cccccc";
+ctx.fillRect(10, 10, 300, 100);
+// 保存状态 生成快照 1
+ctx.save();
+
+// 状态 2
+ctx.fillStyle = "#ee7034";
+ctx.fillRect(10, 150, 300, 100);
+
+// 恢复快照 1 的状态,还原到上次保存的状态
+ctx.restore();
+ctx.fillRect(10, 300, 300, 100);
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\save&restore.png)
+
+通过上图我们可以看出，当我们通过 ``save()`` 保存了一个状态以后，在之后的修改了其他状态后还是可以通过 ``restore()`` 来将上次保存的快照时的状态进行还原，然后继续使用这个状态。
+
+Canvas 的状态是存储在栈中的，每次调用 ``save()`` 方法后，当前的状态都会被推送到栈中保存起来。
+
+**一个绘画状态囊括的属性：**
+
+- 应用的变形：``移动`` 、``旋转`` 、``缩放`` 、``strokeStyle`` 、``fillStyle`` 、``globalAlpha`` 、``lineWidth`` 、``lineCap`` 、``lineJoin`` 、``miterLimit`` 、``lineDashOffset`` 、``shadowOffsetX`` 、``shadowOffsetY`` 、``shadowBlur`` 、``shadowColor`` 、``globalCompositeOperation`` 、``font`` 、``textAlign`` 、``textBaseline`` 、``direction`` 、``imageSmoothingEnabled`` 等。
+- 应用的裁切路径：``clipping path`` 
+
+**注意：保存和恢复可以多次调用，需要注意的是每一次调用 restore 方法，上一个保存的状态就从栈中弹出，所有设定都恢复。**
+
+
+
+### 2、移动、旋转和缩放
+
+#### (1)translate(x,y)
+
+移动
+
+**参数说明：**
+
+- x：左右偏移量
+- y：上下偏移量
+
+
+
+#### (2)rotate(angle)
+
+旋转
+
+**参数说明：**
+
+- angle：旋转的角度，他是顺时针的，以弧度为单位的值(如Math.PI)
+
+
+
+#### (3)scale(x,y)
+
+缩放
+
+**参数说明：**
+
+- x：为水平的缩放的值
+- y：为垂直的缩放的值
+
+
+
+**默认值：**1
+
+**注意：x 和 y  的值小于 1 则为缩小，大于 1 则为放大。**
+
+
+
+**代码案例：**
+
+```javascript
+// 获取绘图上下文
+const ctx = canvas.getContext('2d');
+ctx.fillStyle = '#ee7034';
+// save保存的状态可以多次保存的
+// 同时保存在栈中的元素遵循的时先进先出的顺序
+ctx.save();
+ctx.save();
+ctx.translate(100, 100); // x和y轴都移动了100
+ctx.fillRect(0, 0, 100, 100);
+ctx.restore();
+// 旋转的中心始终的 canvas 的原点
+ctx.rotate(Math.PI / 4); // 旋转了45度，Math.PI=180度
+ctx.fillRect(0, 0, 100, 100);
+ctx.restore();
+// 缩放如果是负值的话，则是一个镜像的效果
+ctx.scale(2, 1);
+ctx.fillRect(100, 300, 100, 100);
+
+
+```
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\translate&rotate&scale.png)
+
+
+
+### 3、transform、setTransform、resetTransform
+
+#### (1)transform(a,b,c,d,e,f)
+
+将当前的变形矩阵乘上一个基于自身参数的矩阵
+
+**参数说明：**
+
+- a：水平方向的缩放
+- b：竖直方向的倾斜偏移
+- c：水平方向的倾斜偏移
+- d：竖直方向的缩放
+- e：水平方向的移动
+- f：竖直方向的移动
+
+
+
+#### (2)setTransform(a,b,c,d,e,f)
+
+方法会将当前变形矩阵重置为单位矩阵，然后用相同的参数调用transform 方法
+
+
+
+#### (3)resetTransform
+
+方法为重置当前变形为单位矩阵。效果等同于调用 setTransform(1,0,0,1,0,0)
+
+**代码案例：**
+
+```` javascript
+// 倾斜偏移包括（角度偏移，以及原点位置偏移）
+// 测试代码 1
+ctx.fillStyle = "yellow";
+ctx.fillRect(250, 250, 50, 50)
+
+ctx.transform(1, 0.1, -0, 1, 0, 0);
+ctx.fillStyle = "red";
+ctx.fillRect(250, 250, 50, 50);
+
+ctx.transform(1, 0.5, -0.5, 1, 0, 0);
+ctx.fillStyle = "blue";
+ctx.fillRect(250, 250, 50, 50);
+
+// 测试代码 2
+const sin = Math.sin(Math.PI / 6);
+const cos = Math.cos(Math.PI / 6);
+ctx.translate(250, 250);
+
+let c = 0;
+for (let i = 0; i <= 12; i++) {
+    c = Math.floor((255 / 12) * i);
+    ctx.fillStyle = `rgba(${c},${c},${c})`;
+    ctx.beginPath(); // 开启路径
+    ctx.arc(60, 100, 100, 0, Math.PI * 2, false);
+    ctx.fill();
+    ctx.transform(cos, sin, -sin, cos, 0, 0);
+}
+ctx.fillStyle = "rgba(255, 128, 255, 0.5)";
+ctx.fillRect(0, 50, 100, 100);
+// 上面绘制的矩形不是我们想要的没因为它带上了上面transform的属性
+// 所以需要重置当前变形为单位矩阵
+ctx.resetTransform();
+ctx.fillStyle = "rgba(255, 128, 255, 0.5)";
+ctx.fillRect(0, 50, 100, 100);
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\transform.png)

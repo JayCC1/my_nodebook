@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>canvas - 绘制 - transform</title>
+    <style>
+      /* 给画布增加一个阴影和圆角的样式 */
+      canvas {
+        box-shadow: 0px 0px 5px #ccc;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="500" height="500">
+      当前浏览器不支持 canvas 元素，请升级或更换浏览器
+    </canvas>
+    <script>
+      // 获取 canvas 元素
+      const canvas = document.getElementById("canvas");
+      // 通过判断 getContext 方法是否存在来判断浏览器的支持性
+      if (canvas.getContext) {
+        // 获取绘图上下文
+        const ctx = canvas.getContext("2d");
+
+        const sin = Math.sin(Math.PI / 6);
+        const cos = Math.cos(Math.PI / 6);
+
+        console.log("🚀 ~ cos，sin", cos, sin);
+        ctx.translate(250, 250);
+
+        let c = 0;
+        for (let i = 0; i <= 12; i++) {
+          c = Math.floor((255 / 12) * i);
+          ctx.fillStyle = `rgba(${c},${c},${c})`;
+          ctx.beginPath(); // 开启路径
+          ctx.arc(60, 100, 100, 0, Math.PI * 2, false);
+          ctx.fill();
+          /**
+           * 参数说明：
+           *  - a：水平方向的缩放
+           *  - b：竖直方向的倾斜偏移
+           *  - c：水平方向的倾斜偏移
+           *  - d：竖直方向的缩放
+           *  - e：水平方向的移动
+           *  - f：竖直方向的移动
+           * */
+          ctx.transform(cos, sin, -sin, cos, 0, 0);
+        }
+
+        ctx.fillStyle = "rgba(255, 128, 255, 0.5)";
+        ctx.fillRect(0, 50, 100, 100);
+        // 上面绘制的矩形不是我们想要的没因为它带上了上面transform的属性
+        // 所以需要重置当前变形为单位矩阵
+        ctx.resetTransform();
+        ctx.fillStyle = "rgba(255, 128, 255, 0.5)";
+        ctx.fillRect(0, 50, 100, 100);
+      }
+    </script>
+  </body>
+</html>
