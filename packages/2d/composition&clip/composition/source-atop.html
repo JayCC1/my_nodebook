@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>canvas - 绘制 - composition - sourceAtop</title>
+    <style>
+      /* 给画布增加一个阴影和圆角的样式 */
+      canvas {
+        box-shadow: 0px 0px 5px #ccc;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="500" height="500">
+      当前浏览器不支持 canvas 元素，请升级或更换浏览器！
+    </canvas>
+    <script>
+      // 获取 canvas 元素
+      const canvas = document.getElementById("canvas");
+      // 通过判断 getContext 方法是否存在来判断浏览器支持性
+      if (canvas.getContext) {
+        // 获取绘图上下文
+        const ctx = canvas.getContext("2d");
+
+        // 图形 1
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(255,0,0,1)";
+        ctx.fillRect(50, 100, 300, 150);
+        // 图形 1 已经设置了 source-atop
+        // 1. 所以在绘制 图形2 时已经是只绘制图形1和图形2重叠的部分，
+        // 2. 但是 图形1与图形2不重叠的地方 不会和 source-in 模式一样变为透明，而是保留
+        // 3. 后续图形二再次设置 source-atop 的话 则是在 步骤1的基础上去绘制
+        ctx.globalCompositeOperation = "source-atop";
+        ctx.closePath();
+
+        // 图形 2
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(0,255,0,1)";
+        ctx.fillRect(50, 150, 150, 250);
+        ctx.globalCompositeOperation = "source-atop";
+        ctx.closePath();
+
+        // 图形 3
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(0,0,255,1)";
+        ctx.fillRect(150, 200, 150, 150);
+        ctx.closePath();
+      }
+    </script>
+  </body>
+</html>
