@@ -1,4 +1,4 @@
-# Canvas
+# Canvas 2d基础入门
 
 Canvas 最早是由 Apple 引入 WebKit，用于Mac OS X 的 Dashboard，随后被各个浏览器实现。如今除一些过时的浏览器不支持Canvas元素外，所有的新版本主流浏览器都支持它。
 
@@ -1436,3 +1436,372 @@ ctx.closePath();
 **效果图如下：**
 
 ![](E:\resources\practice_test\docs\packages\2d\static\componsition__source-atop.png)
+
+
+
+#### (5) destination-over
+
+在现有的画布内容后面绘制新的图形。
+
+功能与 ``source-over`` 类似，但是绘制层叠优先级与 ``sourcr-over`` 相反
+
+**案例代码：**
+
+````javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 图形 1
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.fillRect(50, 100, 300, 150);
+// 与 source-over 类似，但是层叠优先级与 source-over 相反
+ctx.globalCompositeOperation = "destination-over";
+ctx.closePath();
+
+// 图形 2
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,255,0,1)";
+ctx.fillRect(50, 150, 150, 250);
+ctx.globalCompositeOperation = "destination-over";
+ctx.closePath();
+
+// 图形 3
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,0,255,1)";
+ctx.fillRect(150, 200, 150, 150);
+ctx.closePath();
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\componsition__destination-over.png)
+
+
+
+#### (6) destination-in
+
+现有的画布内容保持在新图形和现有画布**内容重叠**的位置。其他都是透明的。
+
+功能与 ``source-in`` 类似，不同点在于：
+
+- ``source-in``：在新图形和现有画布内容重叠位置 **绘制新图形**。
+- ``destination-in``：在新图形和现有画布内容重叠位置 **保留现有的画布内容**。
+
+**代码案例：**
+
+````javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 图形 1
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.fillRect(50, 100, 300, 150);
+// 与 source-in 类似，但是层叠优先级与 source-in 相反
+ctx.globalCompositeOperation = "destination-in";
+ctx.closePath();
+
+// 图形 2
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,255,0,1)";
+ctx.fillRect(50, 150, 150, 250);
+ctx.globalCompositeOperation = "destination-in";
+ctx.closePath();
+
+// 图形 3
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,0,255,1)";
+ctx.fillRect(150, 200, 150, 150);
+ctx.closePath();
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\componsition__destination-in.png)
+
+#### (7) destination-out
+
+现有内容保持在新图形不重叠的地方。
+
+功能和 ``source-out`` 类似，不同点在于：
+
+- ``source-out``：显示不重叠部分，但 source-in 是绘制新图形与现有内容不重叠的部分，**主要针对新图形的不重叠的部分进行绘制**。
+- ``destination-out``：显示不重叠部分，但 destination-out 是现有内容与新图形不重叠的地方，**主要是针对现有内容部分，保留现有的内容部分**。
+
+**案例代码：**
+
+````javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 图形 1
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.fillRect(50, 100, 300, 150);
+// 与 source-out 类似，但是层叠优先级与 source-out 相反
+ctx.globalCompositeOperation = "destination-out";
+ctx.closePath();
+
+// 图形 2
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,255,0,1)";
+ctx.fillRect(50, 150, 150, 250);
+ctx.globalCompositeOperation = "destination-out";
+ctx.closePath();
+
+// 图形 3
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,0,255,1)";
+ctx.fillRect(150, 200, 150, 150);
+ctx.closePath();
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\componsition__destination-out.png)
+
+
+
+#### (8) destination-atop
+
+现有的画布只保留与新图形重叠的部分，新的图形是在画布内容后面绘制的。
+
+功能与 ``source-atop`` 类似，不同点在于：
+
+- ``source-atop``：是保留现有内容，在**现有内容上绘制与新图形重叠的部分，绘制新图形**。
+- ``destination-atop``：是绘制新的图形，然后**保留新图形和现有内容重叠部分中现有内容的部分**。
+
+**代码案例：**
+
+````javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 图形 1
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.fillRect(50, 100, 300, 150);
+// 与 source-atop 类似，但是层叠优先级与 source-atop 相反
+ctx.globalCompositeOperation = "destination-atop";
+ctx.closePath();
+
+// 图形 2
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,255,0,1)";
+ctx.fillRect(50, 150, 150, 250);
+ctx.globalCompositeOperation = "destination-atop";
+ctx.closePath();
+
+// 图形 3
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,0,255,1)";
+ctx.fillRect(150, 200, 150, 150);
+ctx.closePath();
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\componsition__destination-atop.png)
+
+
+
+#### (9) lighter
+
+两个重叠图形的颜色是通过颜色值相加来确定的。
+
+**案例代码：**
+
+````javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 图形 1
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.fillRect(50, 100, 300, 150);
+// 两个重叠图形的颜色是通过颜色值相加来确定的
+ctx.globalCompositeOperation = "lighter";
+ctx.closePath();
+
+// 图形 2
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,255,0,1)";
+ctx.fillRect(50, 150, 150, 250);
+ctx.globalCompositeOperation = "lighter";
+ctx.closePath();
+
+// 图形 3
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,0,255,1)";
+ctx.fillRect(150, 200, 150, 150);
+ctx.closePath();
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\componsition__lighter.png)
+
+
+
+#### (10) copy
+
+只显示新图形
+
+**代码案例：**
+
+````javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 图形 1
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.fillRect(50, 100, 300, 150);
+// 只显示新图形
+ctx.globalCompositeOperation = "copy";
+ctx.closePath();
+
+// 图形 2
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,255,0,1)";
+ctx.fillRect(50, 150, 150, 250);
+ctx.globalCompositeOperation = "copy";
+ctx.closePath();
+
+// 图形 3
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,0,255,1)";
+ctx.fillRect(150, 200, 150, 150);
+ctx.closePath();
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\componsition__copy.png)
+
+
+
+#### (11) xor
+
+现有内容与绘制新图形重叠部分显示透明。
+
+功能与 ``source-out`` 和 ``destination-out`` 类似，不同点在于：
+
+- ``source-out`` 和 ``destination-out``：对于保留不重叠部分，要么是只保留现有内容与新图形中不重叠的现有内容部分，或者只保留现有内容与新图形中不重叠的新图形的部分。
+- ``destination-out``：是保留现有内容和新图形中所有不重叠部分(包括**现有内容中**的和**新图形中**的)。
+
+有点儿绕，如果我形容的不明白可以自己结合这三个的效果图来琢磨一下😂。
+
+**案例代码：**
+
+````javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 图形 1
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.fillRect(50, 100, 300, 150);
+// 重叠部分显示透明
+ctx.globalCompositeOperation = "xor";
+ctx.closePath();
+
+// 图形 2
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,255,0,1)";
+ctx.fillRect(50, 150, 150, 250);
+ctx.globalCompositeOperation = "xor";
+ctx.closePath();
+
+// 图形 3
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,0,255,1)";
+ctx.fillRect(150, 200, 150, 150);
+ctx.closePath();
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\componsition__xor.png)
+
+
+
+#### (12) multiply
+
+将顶层像素与底层相应像素相乘，结果是一副更黑暗的图片。
+
+**代码案例：**
+
+````javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 图形 1
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.fillRect(50, 100, 300, 150);
+// 将顶层像素与底层相应像素相乘，结果是一副更黑暗的图片
+ctx.globalCompositeOperation = "multiply";
+ctx.closePath();
+
+// 图形 2
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,255,0,1)";
+ctx.fillRect(50, 150, 150, 250);
+ctx.globalCompositeOperation = "multiply";
+ctx.closePath();
+
+// 图形 3
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,0,255,1)";
+ctx.fillRect(150, 200, 150, 150);
+ctx.closePath();
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\componsition__multiply.png)
+
+
+
+#### (13) screen
+
+新绘制的图形会与已有的图形进行“屏幕混合”。具体来说，它会根据两者的颜色信息将它们混合在一起。这种混合方式会产生一种增亮的效果，通常会使颜色变得更亮、更鲜艳。
+
+功能与 ``lighter`` 类似，不同点在于：
+
+- `screen`：混合模式采用了一种逆向的颜色混合方式。它会反转两个颜色通道的值，然后将它们相乘并取反，最后得到的结果会被用作新的颜色。这种模式会增亮颜色，导致绘制的图形变得更亮、更鲜艳。
+- `lighter`：更类似于颜色的加法。在这个模式下，新绘制的颜色会与已有颜色相加，产生一个合并后的颜色。这种模式会增加颜色的亮度和饱和度，但不会改变颜色的基本属性。
+
+**案例代码：**
+
+````javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 图形 1
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.fillRect(50, 100, 300, 150);
+// 逆向的颜色混合方式
+ctx.globalCompositeOperation = "screen";
+ctx.closePath();
+
+// 图形 2
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,255,0,1)";
+ctx.fillRect(50, 150, 150, 250);
+ctx.globalCompositeOperation = "screen";
+ctx.closePath();
+
+// 图形 3
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,0,255,1)";
+ctx.fillRect(150, 200, 150, 150);
+ctx.closePath();
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\composition__screen.png)
