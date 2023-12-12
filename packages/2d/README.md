@@ -1389,7 +1389,7 @@ ctx.closePath();
 
 **效果图如下：**
 
-![](E:\resources\practice_test\docs\packages\2d\static\componsition__source-out.png)
+![](E:\resources\practice_test\docs\packages\2d\static\composition__source-out.png)
 
 
 
@@ -1435,7 +1435,7 @@ ctx.closePath();
 
 **效果图如下：**
 
-![](E:\resources\practice_test\docs\packages\2d\static\componsition__source-atop.png)
+![](E:\resources\practice_test\docs\packages\2d\static\composition__source-atop.png)
 
 
 
@@ -1475,7 +1475,7 @@ ctx.closePath();
 
 **效果图如下：**
 
-![](E:\resources\practice_test\docs\packages\2d\static\componsition__destination-over.png)
+![](E:\resources\practice_test\docs\packages\2d\static\composition__destination-over.png)
 
 
 
@@ -1518,7 +1518,7 @@ ctx.closePath();
 
 **效果图如下：**
 
-![](E:\resources\practice_test\docs\packages\2d\static\componsition__destination-in.png)
+![](E:\resources\practice_test\docs\packages\2d\static\composition__destination-in.png)
 
 #### (7) destination-out
 
@@ -1559,7 +1559,7 @@ ctx.closePath();
 
 **效果图如下：**
 
-![](E:\resources\practice_test\docs\packages\2d\static\componsition__destination-out.png)
+![](E:\resources\practice_test\docs\packages\2d\static\composition__destination-out.png)
 
 
 
@@ -1602,7 +1602,7 @@ ctx.closePath();
 
 **效果图如下：**
 
-![](E:\resources\practice_test\docs\packages\2d\static\componsition__destination-atop.png)
+![](E:\resources\practice_test\docs\packages\2d\static\composition__destination-atop.png)
 
 
 
@@ -1640,7 +1640,7 @@ ctx.closePath();
 
 **效果图如下：**
 
-![](E:\resources\practice_test\docs\packages\2d\static\componsition__lighter.png)
+![](E:\resources\practice_test\docs\packages\2d\static\composition__lighter.png)
 
 
 
@@ -1678,7 +1678,7 @@ ctx.closePath();
 
 **效果图如下：**
 
-![](E:\resources\practice_test\docs\packages\2d\static\componsition__copy.png)
+![](E:\resources\practice_test\docs\packages\2d\static\composition__copy.png)
 
 
 
@@ -1723,7 +1723,7 @@ ctx.closePath();
 
 **效果图如下：**
 
-![](E:\resources\practice_test\docs\packages\2d\static\componsition__xor.png)
+![](E:\resources\practice_test\docs\packages\2d\static\composition__xor.png)
 
 
 
@@ -1761,7 +1761,7 @@ ctx.closePath();
 
 **效果图如下：**
 
-![](E:\resources\practice_test\docs\packages\2d\static\componsition__multiply.png)
+![](E:\resources\practice_test\docs\packages\2d\static\composition__multiply.png)
 
 
 
@@ -1805,3 +1805,484 @@ ctx.closePath();
 **效果图如下：**
 
 ![](E:\resources\practice_test\docs\packages\2d\static\composition__screen.png)
+
+
+
+#### (14) overlay
+
+``multiply`` 和 ``screen`` 的结合，原本暗的地方更暗，原本亮的地方更亮。
+
+**代码案例：**
+
+````javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 图形 1
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.fillRect(50, 100, 300, 150);
+ctx.globalCompositeOperation = "overlay";
+ctx.closePath();
+
+// 图形 2
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,255,0,1)";
+ctx.fillRect(50, 150, 150, 250);
+ctx.globalCompositeOperation = "overlay";
+ctx.closePath();
+
+// 图形 3
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,0,255,1)";
+ctx.fillRect(150, 200, 150, 150);
+ctx.closePath();
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\composition__overlay.png)
+
+
+
+#### (15) darken
+
+保留两个图层中最暗的像素(与 ``multiply`` 类似)
+
+**代码案例：**
+
+````javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 图形 1
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.fillRect(50, 100, 300, 150);
+ctx.globalCompositeOperation = "darken";
+ctx.closePath();
+
+// 图形 2
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,255,0,1)";
+ctx.fillRect(50, 150, 150, 250);
+ctx.globalCompositeOperation = "darken";
+ctx.closePath();
+
+// 图形 3
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,0,255,1)";
+ctx.fillRect(150, 200, 150, 150);
+ctx.closePath();
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\composition__darken.png)
+
+
+
+#### (16) lighten
+
+保留两个图层中最亮的元素（与 ``lighter`` 类似）。
+
+**代码案例：**
+
+````javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 图形 1
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.fillRect(50, 100, 300, 150);
+ctx.globalCompositeOperation = "lighten";
+ctx.closePath();
+
+// 图形 2
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,255,0,1)";
+ctx.fillRect(50, 150, 150, 250);
+ctx.globalCompositeOperation = "lighten";
+ctx.closePath();
+
+// 图形 3
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,0,255,1)";
+ctx.fillRect(150, 200, 150, 150);
+ctx.closePath();
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\composition__lighten.png)
+
+
+
+#### (17) color-dodge
+
+将底层除以顶层的反置（与 ``overlay``、``destination-out`` 类似，与 ``source-out`` 效果相反）。
+
+**示例代码：**
+
+````javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 图形 1
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.fillRect(50, 100, 300, 150);
+ctx.globalCompositeOperation = "color-dodge";
+ctx.closePath();
+
+// 图形 2
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,255,0,1)";
+ctx.fillRect(50, 150, 150, 250);
+ctx.globalCompositeOperation = "color-dodge";
+ctx.closePath();
+
+// 图形 3
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,0,255,1)";
+ctx.fillRect(150, 200, 150, 150);
+ctx.closePath();
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\composition__color-dodge.png)
+
+
+
+#### (18) color-burn
+
+将反置的底层除以顶层，然后将结果反过来（与 ``overlay``、``destination-out``、``color-dodge`` 类似，与 ``source-out`` 效果相反）。
+
+**示例代码：**
+
+````javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 图形 1
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.fillRect(50, 100, 300, 150);
+ctx.globalCompositeOperation = "color-burn";
+ctx.closePath();
+
+// 图形 2
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,255,0,1)";
+ctx.fillRect(50, 150, 150, 250);
+ctx.globalCompositeOperation = "color-burn";
+ctx.closePath();
+
+// 图形 3
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,0,255,1)";
+ctx.fillRect(150, 200, 150, 150);
+ctx.closePath();
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\composition__color-burn.png)
+
+
+
+#### (19) hard-light
+
+屏幕相乘（a combination of multiply and screen）类似叠加，但上下图层互换了。
+
+**代码案例：**
+
+````javascript
+![componsition__hard-light](E:\resources\practice_test\docs\packages\2d\static\componsition__hard-light.png)// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 图形 1
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.fillRect(50, 100, 300, 150);
+ctx.globalCompositeOperation = "hard-light";
+ctx.closePath();
+
+// 图形 2
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,255,0,1)";
+ctx.fillRect(50, 150, 150, 250);
+ctx.globalCompositeOperation = "hard-light";
+ctx.closePath();
+
+// 图形 3
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,0,255,1)";
+ctx.fillRect(150, 200, 150, 150);
+ctx.closePath();
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\composition__hard-light.png)
+
+
+
+#### (20) soft-light
+
+用顶层减去底层或者相反来得到一个正值。
+
+**代码案例：**
+
+````javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 图形 1
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.fillRect(50, 100, 300, 150);
+ctx.globalCompositeOperation = "soft-light";
+ctx.closePath();
+
+// 图形 2
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,255,0,1)";
+ctx.fillRect(50, 150, 150, 250);
+ctx.globalCompositeOperation = "soft-light";
+ctx.closePath();
+
+// 图形 3
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,0,255,1)";
+ctx.fillRect(150, 200, 150, 150);
+ctx.closePath();
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\composition__soft-light.png)
+
+
+
+#### (21) difference
+
+一个柔和版本的强光(``hard-light``)。纯黑或纯白不会导致纯黑或纯白。
+
+**代码案例：**
+
+````javascript
+![componsition__difference](E:\resources\practice_test\docs\packages\2d\static\componsition__difference.png)// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 图形 1
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.fillRect(50, 100, 300, 150);
+ctx.globalCompositeOperation = "difference";
+ctx.closePath();
+
+// 图形 2
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,255,0,1)";
+ctx.fillRect(50, 150, 150, 250);
+ctx.globalCompositeOperation = "difference";
+ctx.closePath();
+
+// 图形 3
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,0,255,1)";
+ctx.fillRect(150, 200, 150, 150);
+ctx.closePath();
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\composition__difference.png)
+
+
+
+#### (22) exclusion
+
+和 ``difference`` 相似，但对比度较低。
+
+**代码案例：**
+
+````javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 图形 1
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.fillRect(50, 100, 300, 150);
+ctx.globalCompositeOperation = "exclusion";
+ctx.closePath();
+
+// 图形 2
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,255,0,1)";
+ctx.fillRect(50, 150, 150, 250);
+ctx.globalCompositeOperation = "exclusion";
+ctx.closePath();
+
+// 图形 3
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,0,255,1)";
+ctx.fillRect(150, 200, 150, 150);
+ctx.closePath();
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\composition__exclusion.png)
+
+
+
+#### (23) hue
+
+保留了底层的亮度（``luma``）和色度（``chroma``），同时采用了顶层的色调（``hue``）。
+
+**代码案例：**
+
+````javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 图形 1
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.fillRect(50, 100, 300, 150);
+ctx.globalCompositeOperation = "hue";
+ctx.closePath();
+
+// 图形 2
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,255,0,1)";
+ctx.fillRect(50, 150, 150, 250);
+ctx.globalCompositeOperation = "hue";
+ctx.closePath();
+
+// 图形 3
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,0,255,1)";
+ctx.fillRect(150, 200, 150, 150);
+ctx.closePath();
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\composition__hue.png)
+
+
+
+#### (24) saturation
+
+保留底层的亮度（``luma``）和色调（``hue``），同时采用顶层的色度（``chroma``）。
+
+**案例代码：**
+
+````javascript
+![composition__saturation](E:\resources\practice_test\docs\packages\2d\static\composition__saturation.png)// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 图形 1
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.fillRect(50, 100, 300, 150);
+ctx.globalCompositeOperation = "saturation";
+ctx.closePath();
+
+// 图形 2
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,255,0,1)";
+ctx.fillRect(50, 150, 150, 250);
+ctx.globalCompositeOperation = "saturation";
+ctx.closePath();
+
+// 图形 3
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,0,255,1)";
+ctx.fillRect(150, 200, 150, 150);
+ctx.closePath();
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\composition__saturation.png)
+
+
+
+#### (25) color
+
+保留了底层的亮度（``luma``），同时采用了顶层的色调（``hue``）和色度（``chroma``）。
+
+**案例代码：**
+
+````javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 图形 1
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.fillRect(50, 100, 300, 150);
+ctx.globalCompositeOperation = "color";
+ctx.closePath();
+
+// 图形 2
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,255,0,1)";
+ctx.fillRect(50, 150, 150, 250);
+ctx.globalCompositeOperation = "color";
+ctx.closePath();
+
+// 图形 3
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,0,255,1)";
+ctx.fillRect(150, 200, 150, 150);
+ctx.closePath();
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\composition__color.png)
+
+
+
+#### (26) luminosity
+
+保持底层的色调（``hue``）和色度（``chroma``），同时采用顶层的亮度（``luma``）。
+
+**案例代码：**
+
+````javascript
+![composition__luminosity](E:\resources\practice_test\docs\packages\2d\static\composition__luminosity.png)// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+
+// 图形 1
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.fillRect(50, 100, 300, 150);
+ctx.globalCompositeOperation = "luminosity";
+ctx.closePath();
+
+// 图形 2
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,255,0,1)";
+ctx.fillRect(50, 150, 150, 250);
+ctx.globalCompositeOperation = "luminosity";
+ctx.closePath();
+
+// 图形 3
+ctx.beginPath();
+ctx.fillStyle = "rgba(0,0,255,1)";
+ctx.fillRect(150, 200, 150, 150);
+ctx.closePath();
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\composition__luminosity.png)
