@@ -68,7 +68,7 @@ Canvas 最早是由 Apple 引入 WebKit，用于Mac OS X 的 Dashboard，随后�
 
 #### (3) clearRect(x,y,width,height)
 
-清除指定矩形区域，让清楚部分完全透明
+清除指定矩形区域，让清除部分完全透明
 
 **参数说明：**
 
@@ -965,6 +965,7 @@ img.onload = () => {
     // dx: 绘制元素时左上角的 x 轴坐标
     // dy: 绘制元素时左上角的 y 轴坐标
     ctx.drawImage(img, 0, 0);
+}
 ````
 
 **效果图如下：**
@@ -1107,7 +1108,10 @@ Canvas 的状态是存储在栈中的，每次调用 ``save()`` 方法后，当�
 
 #### (2) rotate(angle)
 
-旋转
+旋转，在rotate前使用 ``translate`` 则为将远点绘制在translate的位置，在 rotate 后使用则为旋转半径：
+
+- 因为旋转的中心点始终是 canvas 的原点
+- 在 rotate 前使用 ``translate``时，旋转的原点已经确认为rotate前使用 translate 后的原点，所以在 rotate 之后使用的 translate 则可以理解为是旋转的半径。
 
 **参数说明：**
 
@@ -2286,3 +2290,117 @@ ctx.closePath();
 **效果图如下：**
 
 ![](E:\resources\practice_test\docs\packages\2d\static\composition__luminosity.png)
+
+
+
+### 2、裁剪
+
+裁剪的作用是遮罩，用来隐藏不需要的部分，所有在路径以外的部分都不会在 canvas 上绘制出来。
+
+裁剪的效果和 ``globalCompositeOperation`` 属性的 ``source-in`` 和 ``source-atop`` 差不多，但也有区别，最重要的区别是裁剪路径不会在 canvas 上绘制东西，而且它永远不受新图形的影响。这些特性使得它在特定区域里绘制图形时特别好用。
+
+#### (1) clip()
+
+canvas 中裁剪使用的api为 ``clip()``,会将**当前正在构建的路径转换为当前的裁剪路径。**
+
+默认情况下，canvas 有一个与它自身一样大的裁剪路径（也就是没有裁剪效果）。现在可以通过clip()来创建一个裁剪路径（也就有裁剪效果了）。
+
+下面会通过之前学过的api ``drawImage`` 来举例练习。
+
+**案例代码：**
+
+````javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+const img = new Image();
+img.src = "https://hbimg.huaban.com/f86ec493465c8d98eb3c81df89acd79c9a07af1619e96-xnr03h_fw658";
+
+img.onload = () => {
+    // 创建圆形裁剪路径
+    ctx.arc(250, 250, 200, 0, Math.PI * 2, false);
+    // 裁剪
+    ctx.clip();
+    // 创建后绘制
+    ctx.drawImage(img, 0, 0, 500, 500);
+};
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\clip.png)
+
+
+
+#### (2) clip(path,fillRule)
+
+裁剪api ``clip`` 在传了参数和未传参数时进行的行为是不同的：
+
+1. **未传参时**：会将**当前正在构建的路径转换为当前的裁剪路径**。
+2. **传入参数时：**会**以传入的path为准**，正在构建的路径转换为当前的裁剪路径不会对裁剪造成影响。
+
+**参数说明：**
+
+- ``path``：为需要裁切的 Path2D 路径。
+- ``fillRule``：为判断是在路径内还是在路径外，允许的值有 ``nonzero(默认值)-非零环绕原则``，``evenodd-奇偶环绕原则``。
+
+>**Path2D：**
+>
+>- addPath()：添加一条新路径到对当前路径。
+>
+>- closePath()：使笔点返回到当前子路径的起始点。它尝试从当前点到起始点绘制一条直线。 如果图形已经是封闭的或者只有一个点，那么此函数不会做任何操作。
+>
+>- moveTo()：将一个新的子路径的起始点移动到 (x，y) 坐标。
+>
+>- lineTo()：使用直线连接子路径的终点到 x, y 坐标。
+>
+>- bezierCurveTo()：添加一条三次贝赛尔曲线到当前路径。 该方法需要三个点。 第一、第二个点是控制点，第三个点是结束点。起始点是当前路径的最后一个点，绘制贝赛尔曲线前，可以通过调用 moveTo() 进行修改。
+>
+>- quadraticCurveTo()：添加一条二次贝赛尔曲线到当前路径。
+>
+>- arc()：添加一条圆弧路径。 圆弧路径的圆心在 (x, y) 位置，半径为 r ，根据anticlockwise （默认为顺时针）指定的方向从 startAngle 开始绘制，到 endAngle 结束。
+>
+>- arcTo()：根据控制点和半径添加一条圆弧路径，使用直线连接前一个点。
+>
+>- ellipse()：添加一条椭圆路径。椭圆的圆心在（x,y）位置，半径分别是radiusX 和 radiusY ，按照anticlockwise （默认顺时针）指定的方向，从 startAngle 开始绘制，到 endAngle 结束。
+>
+>- rect()：创建一条矩形路径，矩形的起点位置是 (x, y) ，尺寸为 width 和 height。
+
+**案例代码：**
+
+````javascript
+// 获取绘图上下文
+const ctx = canvas.getContext("2d");
+const img = new Image();
+img.src =
+    "https://hbimg.huaban.com/f86ec493465c8d98eb3c81df89acd79c9a07af1619e96-xnr03h_fw658";
+
+img.onload = function () {
+    // 创建圆形裁剪路径
+    ctx.arc(250, 250, 200, 0, Math.PI * 2, false);
+    // 裁剪
+    var path1 = new Path2D();
+    path1.rect(100, 100, 300, 300);
+    ctx.clip(path1);
+    // 创建后绘制
+    ctx.drawImage(img, 0, 0, 500, 500);
+    ctx.stroke();
+};
+````
+
+**效果图如下：**
+
+![](E:\resources\practice_test\docs\packages\2d\static\clip__hasParam.png)
+
+
+
+## 七、动画
+
+在 canvas 上绘制内容是用 canvas 提供的或者自定义的方法，而通常我们仅仅在脚本执行结束后才能看间结果，所以想在 for 循环里面完成动画是不可能的。那么为了实现动画，我们需要一些定时执行重绘的方法。
+
+> - setInterval(function,delay)：定时器，当设定好间隔时间后，function 会定期执行。
+> - setTimeout(function,delay)：延时器，在设定好的时间之后执行函数。
+> - requestAnimationFrame(callback)：告诉浏览器你希望执行一个动画，并在重绘之前，请求浏览器执行一个特定的函数来更新动画。
+
+如果不需要与用户互动，可以使用 ``setInterval()`` 方法，它可以定期执行指定的代码。如果需要做游戏，可以使用键盘或者鼠标事件配合上 ``setTimeout()`` 方法来实现。通过设置事件监听，可以捕捉用户的交互，并执行相应的动作。
+
+下面我们采用 ``window.requestAnimationFrame()`` 来实现一个动画效果。requestAnimationFrame() 方法提供了更加平缓且有效率的方法来执行动画，当系统准备好重绘条件后才会调用绘制动画帧。一般每秒钟回调函数执行 60 次，也有可能会被降低，因为通常情况下 requestAnimationFrame()方法会遵循 W3C 的建议，浏览器中的回调函数执行次数通常与浏览器屏幕刷新次数相匹配。还有为了提高性能和电池寿命，通常 requestAnimationFrame() 方法运行在后台标签页或者隐藏在后台时，requestAnimationFrame() 方法会暂停调用以提升性能和电池寿命。
