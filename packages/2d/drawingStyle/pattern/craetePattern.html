@@ -44,9 +44,15 @@
           //   ctx.fillRect(0, 0, 500, 500);
 
           // 创建图案 4 y 轴方向平铺
-          const pattern4 = ctx.createPattern(img, "repeat-y");
-          ctx.fillStyle = pattern4;
-          ctx.fillRect(0, 0, 500, 500);
+          // const pattern4 = ctx.createPattern(img, "repeat-y");
+          // ctx.fillStyle = pattern4;
+          // ctx.fillRect(0, 0, 500, 500);
+
+          // 创建图案 5 y 轴方向平铺描边
+          ctx.lineWidth = 10;
+          const pattern5 = ctx.createPattern(img, "repeat-y");
+          ctx.strokeStyle = pattern5;
+          ctx.strokeRect(0, 0, 400, 400);
         };
       }
     </script>

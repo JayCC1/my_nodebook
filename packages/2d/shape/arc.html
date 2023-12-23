@@ -56,6 +56,11 @@
         ctx.arc(200, 60, 50, 0, Math.PI * 2, false);
         ctx.stroke();
         ctx.closePath(); // 闭合路径
+        // 绘制一个圆弧2
+        ctx.beginPath(); // 开启路径
+        ctx.arc(350, 60, 50, 0, Math.PI / 2, true);
+        ctx.stroke();
+        ctx.closePath(); // 闭合路径
       }
     </script>
   </body>

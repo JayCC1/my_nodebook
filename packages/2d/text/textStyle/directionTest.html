@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>canvas - 文本</title>
+  </head>
+  <body>
+    <canvas
+      id="canvas"
+      width="600"
+      height="950"
+      style="box-shadow: 0px 0px 5px #ccc; border-radius: 8px"
+    >
+      当前浏览器不支持canvas元素，请升级或更换浏览器！
+    </canvas>
+    <script>
+      const canvas = document.getElementById("canvas"); // 获取Canvas
+      const ctx = canvas.getContext("2d"); // 获取绘制上下文
+
+      // 设置字号为:20px 字体为:Arial
+      ctx.font = "18px Arial";
+
+      ctx.textAlign = "start"; // 起点对齐
+      ctx.fillText("携手创作，共同成长 -> start", 300, 50);
+      ctx.textAlign = "end"; // 结尾对齐
+      ctx.fillText("携手创作，共同成长 -> end", 300, 100);
+      ctx.textAlign = "left"; // 左对齐
+      ctx.fillText("携手创作，共同成长 -> left", 300, 150);
+      ctx.textAlign = "right"; // 右对齐
+      ctx.fillText("携手创作，共同成长 -> right", 300, 200);
+      ctx.textAlign = "center"; // 居中对齐
+      ctx.fillText("携手创作，共同成长 -> center", 300, 250);
+
+      // ltr: 文本方向从左向右
+      ctx.beginPath();
+      ctx.direction = "ltr";
+
+      ctx.textAlign = "start"; // 起点对齐
+      ctx.fillText("携手创作，共同成长 -> ltr - start", 300, 350);
+      ctx.textAlign = "end"; // 结尾对齐
+      ctx.fillText("携手创作，共同成长 -> ltr - end", 300, 400);
+      ctx.textAlign = "left"; // 左对齐
+      ctx.fillText("携手创作，共同成长 -> ltr - left", 300, 450);
+      ctx.textAlign = "right"; // 右对齐
+      ctx.fillText("携手创作，共同成长 -> ltr - right", 300, 500);
+      ctx.textAlign = "center"; // 居中对齐
+      ctx.fillText("携手创作，共同成长 -> ltr - center", 300, 550);
+
+      // 文本方向从左向右
+      ctx.beginPath();
+      ctx.direction = "rtl";
+
+      ctx.textAlign = "start"; // 起点对齐
+      ctx.fillText("携手创作，共同成长 -> rtl - start", 300, 650);
+      ctx.textAlign = "end"; // 结尾对齐
+      ctx.fillText("携手创作，共同成长 -> rtl - end", 300, 700);
+      ctx.textAlign = "left"; // 左对齐
+      ctx.fillText("携手创作，共同成长 -> rtl - left", 300, 750);
+      ctx.textAlign = "right"; // 右对齐
+      ctx.fillText("携手创作，共同成长 -> rtl - right", 300, 800);
+      ctx.textAlign = "center"; // 居中对齐
+      ctx.fillText("携手创作，共同成长 -> rtl - center", 300, 850);
+    </script>
+  </body>
+</html>
