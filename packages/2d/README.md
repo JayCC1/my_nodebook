@@ -2404,3 +2404,132 @@ img.onload = function () {
 如果不需要与用户互动，可以使用 ``setInterval()`` 方法，它可以定期执行指定的代码。如果需要做游戏，可以使用键盘或者鼠标事件配合上 ``setTimeout()`` 方法来实现。通过设置事件监听，可以捕捉用户的交互，并执行相应的动作。
 
 下面我们采用 ``window.requestAnimationFrame()`` 来实现一个动画效果。requestAnimationFrame() 方法提供了更加平缓且有效率的方法来执行动画，当系统准备好重绘条件后才会调用绘制动画帧。一般每秒钟回调函数执行 60 次，也有可能会被降低，因为通常情况下 requestAnimationFrame()方法会遵循 W3C 的建议，浏览器中的回调函数执行次数通常与浏览器屏幕刷新次数相匹配。还有为了提高性能和电池寿命，通常 requestAnimationFrame() 方法运行在后台标签页或者隐藏在后台时，requestAnimationFrame() 方法会暂停调用以提升性能和电池寿命。
+
+**案例代码1：**
+
+````javascript
+// 获取 canvas 元素
+const canvas = document.getElementById("canvas");
+// 通过判断 getContext 方法是否存在来判断浏览器的支持性
+if (canvas.getContext) {
+    // 获取绘图上下文你
+    const ctx = canvas.getContext("2d");
+    const sun = new Image();
+    const moon = new Image();
+    const earth = new Image();
+
+    // 图片初始化
+    function init() {
+        sun.src = "https://img.lovepik.com/element/40097/4339.png_300.png";
+        moon.src = "../static/test/moon.jpg";
+        earth.src = "../static/test/earth.jpg";
+        window.requestAnimationFrame(draw);
+    }
+
+    // 绘制
+    function draw() {
+        ctx.globalCompositeOperation = "destination-over";
+        // 清空画布
+        ctx.clearRect(0, 0, 500, 500);
+        ctx.fillStyle = "rgba(0,0,0,0.4)";
+        ctx.strokeStyle = "rgba(0,153,255,0.4)";
+        ctx.save(); // 第一次保存画布状态
+        ctx.translate(250, 250); // 把原心移到画布中间
+
+        // 画一个地球
+        const time = new Date();
+        const earthDeg =
+              ((2 * Math.PI) / 60) * time.getSeconds() +
+              ((2 * Math.PI) / 60000) * time.getMilliseconds();
+
+        ctx.rotate(earthDeg);
+        ctx.translate(200, 0);
+        ctx.drawImage(earth, -20, -20, 40, 40);
+
+        // 画一个月亮
+        ctx.save(); // 第二次保存画布状态
+        const moonDeg =
+              ((2 * Math.PI) / 6) * time.getSeconds() +
+              ((2 * Math.PI) / 6000) * time.getMilliseconds();
+
+        ctx.rotate(moonDeg);
+        ctx.translate(0, 40);
+        ctx.drawImage(moon, -7.5, -7.5, 15, 15);
+
+        // 恢复状态
+        ctx.restore();
+        ctx.restore();
+
+        // 画一个地球运行的轨迹
+        ctx.beginPath();
+        ctx.arc(250, 250, 200, 0, Math.PI * 2, false);
+        ctx.stroke();
+        // 画一个太阳
+        ctx.drawImage(sun, 0, 0, 500, 500);
+        window.requestAnimationFrame(draw);
+    }
+
+    init();
+}
+````
+
+**案例代码2：**
+
+````javascript
+// 获取 canvas 元素
+const canvas = document.getElementById("canvas");
+// 通过判断 getContext 方法是否存在来判断浏览器的支持性
+if (canvas.getContext) {
+    // 获取绘图上下文
+    const ctx = canvas.getContext("2d");
+    const ball = {
+        x: 100,
+        y: 100,
+        vx: 1,
+        vy: 3,
+        radius: 25,
+        color: "blue",
+        draw: function () {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+            ctx.closePath();
+            ctx.fillStyle = this.color;
+            ctx.fill();
+        },
+    };
+    function draw() {
+        // 制作拖效果，使用绘制带透明度的矩形代替 clearRect
+        // ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // 用带透明度的矩形代替清空
+        ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ball.draw();
+
+        // 添加加速度
+        ball.vy *= 0.99;
+        ball.vy += 0.15;
+        // 添加速率
+        ball.x += ball.vx;
+        ball.y += ball.vy;
+
+        // 添加边界反弹
+        if (ball.x + ball.vx > canvas.width || ball.x + ball.vx < 0) {
+            ball.vx = -ball.vx;
+        }
+        if (ball.y + ball.vy > canvas.width || ball.y + ball.vy < 0) {
+            ball.vy = -ball.vy;
+        }
+        if (ball.y + ball.vy > canvas.width + ball.radius / 4) return;
+        window.requestAnimationFrame(draw);
+    }
+    window.requestAnimationFrame(draw);
+    ball.draw();
+}
+````
+
+
+
+## 结语
+
+本文只是个人阅读笔记，原文是掘金作者 [ndz](https://juejin.cn/user/976022056736765/posts) 的[ 案例+图解带你一文读懂Canvas🔥🔥（2W+字）](https://juejin.cn/post/7161696291469131806)

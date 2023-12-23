@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>canvas - animation - 案例2 - 小球动画</title>
+    <style>
+      /* 给画布增加一个阴影和圆角的样式 */
+      canvas {
+        box-shadow: 0px 0px 5px #ccc;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="500" height="500">
+      当前浏览器不支持canvas 元素，请升级或更换浏览器！
+    </canvas>
+    <script>
+      // 获取 canvas 元素
+      const canvas = document.getElementById("canvas");
+      // 通过判断 getContext 方法是否存在来判断浏览器的支持性
+      if (canvas.getContext) {
+        // 获取绘图上下文
+        const ctx = canvas.getContext("2d");
+        const ball = {
+          x: 100,
+          y: 100,
+          vx: 1,
+          vy: 3,
+          radius: 25,
+          color: "blue",
+          draw: function () {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+            ctx.closePath();
+            ctx.fillStyle = this.color;
+            ctx.fill();
+          },
+        };
+        function draw() {
+          // 制作拖效果，使用绘制带透明度的矩形代替 clearRect
+          // ctx.clearRect(0, 0, canvas.width, canvas.height);
+          // 用带透明度的矩形代替清空
+          ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          ball.draw();
+
+          // 添加加速度
+          ball.vy *= 0.99;
+          ball.vy += 0.15;
+          // 添加速率
+          ball.x += ball.vx;
+          ball.y += ball.vy;
+
+          // 添加边界反弹
+          if (ball.x + ball.vx > canvas.width || ball.x + ball.vx < 0) {
+            ball.vx = -ball.vx;
+          }
+          if (ball.y + ball.vy > canvas.width || ball.y + ball.vy < 0) {
+            ball.vy = -ball.vy;
+          }
+          if (ball.y + ball.vy > canvas.width + ball.radius / 4) return;
+          window.requestAnimationFrame(draw);
+        }
+        window.requestAnimationFrame(draw);
+        ball.draw();
+      }
+    </script>
+  </body>
+</html>
