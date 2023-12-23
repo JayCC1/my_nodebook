@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>canvas - transform - 使用 transform 实现旋转效果</title>
+  </head>
+  <body>
+    <canvas
+      id="canvas"
+      width="550"
+      height="500"
+      style="box-shadow: 0px 0px 5px #ccc; border-radius: 8px"
+    >
+      当前浏览器不支持canvas元素，请升级或更换浏览器！
+    </canvas>
+    <script>
+      // 获取Canvas
+      const canvas = document.getElementById("canvas");
+      // 获取绘制上下文
+      const ctx = canvas.getContext("2d");
+      // 填充颜色
+      ctx.fillStyle = "orange";
+      const baseAngle = Math.PI / 180;
+      const radian = 30 * baseAngle;
+      const sin = Math.sin(radian);
+      const cos = Math.cos(radian);
+
+      //Y轴逐渐拉伸，得到上图右边状态
+      ctx.transform(cos, sin, -sin, cos, 0, 0);
+
+      ctx.fillRect(0, 0, 200, 200);
+    </script>
+  </body>
+</html>
