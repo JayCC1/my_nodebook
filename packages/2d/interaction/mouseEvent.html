@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>canvas - 案例2 - 鼠标点击移动事件</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      canvas {
+        box-shadow: 0px 0px 5px #ccc;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="1000" height="500">
+      当前浏览器不支持 canvas 元素，请升级或更换浏览器！
+    </canvas>
+    <script>
+      // 获取 canvas 元素
+      const canvas = document.getElementById("canvas");
+      const width = canvas.clientWidth;
+      const height = canvas.clientHeight;
+
+      // 获取绘制上下文
+      const ctx = canvas.getContext("2d");
+      // 图片资源数组
+      const images = [
+        {
+          name: "白月魁",
+          url: "../static/test/bailaoban.jpg",
+        },
+        {
+          name: "鸣人",
+          url: "../static/test/mingren.png",
+        },
+        {
+          name: "路飞",
+          url: "../static/test/lufei.jpeg",
+        },
+        {
+          name: "哪吒",
+          url: "../static/test/nazha.jpeg",
+        },
+        {
+          name: "千寻",
+          url: "../static/test/qianxun.jpg",
+        },
+      ];
+      // 图片绘制实例对象数组
+      let imageData = [];
+      // 鼠标点击时坐标对象
+      let clickCoordinate = { x: 0, y: 0 };
+      let target = -1;
+
+      // ========================= 绘制图片相关操作 =========================
+      // 将图像绘制到 canvas 画布上
+      images.forEach((item) => {
+        // 创建 image 元素
+        const image = new Image();
+        image.src = item.url;
+        const name = item.name;
+        image.onload = () => {
+          // 控制宽度为200(等宽)
+          const dWidth = 200;
+          // 高度按宽度 200 的比例缩放
+          const dHeight = (dWidth / image.width) * image.height;
+          const x = Math.random() * (width - dWidth);
+          const y = Math.random() * (height - dHeight);
+          const imageObj = { image, name, x, y, dWidth, dHeight };
+          draw(imageObj);
+          imageData.unshift(imageObj);
+        };
+      });
+
+      // 绘制图片
+      function draw(imageObj) {
+        ctx.drawImage(
+          imageObj.image,
+          imageObj.x,
+          imageObj.y,
+          imageObj.dWidth,
+          imageObj.dHeight
+        );
+      }
+
+      // ========================= 交互相关操作 =========================
+      // 为 canvas 添加鼠标按下事件
+      canvas.addEventListener("mousedown", mousedownFn, false);
+
+      // 鼠标按下触发的方法
+      function mousedownFn(e) {
+        // 获取元素按下时相对canvas坐标系中的坐标
+        // pageX、pageY ==> 点击时相对于页面文档的坐标位置
+        // offsetLeft、offsetTop..等表示元素外边框(border-box)值至其定位父容器内边框（content-box）之间的距离(了解链接https://juejin.cn/post/6844903745512275981?searchId=202312242118305DF6A4301AD3003FEC66)
+        //element.offsetLeft = offsetParent.paddingLeft + element.left + element.marginLeft + (element与element.offsetParent之间所有 在正常文档流且position属性不为relative的元素 marginLeft、borderLeft、paddingLeft之和)
+        clickCoordinate.x = e.pageX - canvas.offsetLeft;
+        clickCoordinate.y = e.pageY - canvas.offsetTop;
+        // 判断选中的元素是哪一个
+        checkElement();
+        // 为 canvas 添加鼠标移动和鼠标抬起事件
+        canvas.addEventListener("mousemove", mousemoveFn, false);
+        canvas.addEventListener("mouseup", mouseupFn, false);
+      }
+
+      // 鼠标移动触发
+      function mousemoveFn(e) {
+        if (target === -1) return;
+        const moveX = e.pageX - canvas.offsetLeft;
+        const moveY = e.pageY - canvas.offsetTop;
+        // 计算移动元素的坐标
+        imageData[target].x = imageData[target].x + (moveX - clickCoordinate.x);
+        imageData[target].y = imageData[target].y + (moveY - clickCoordinate.y);
+        // 清空画布
+        ctx.clearRect(0, 0, width, height);
+        // 清空画布以后重新绘制
+        imageData.forEach((i) => draw(i));
+        // 赋值
+        clickCoordinate.x = moveX;
+        clickCoordinate.y = moveY;
+      }
+
+      // 鼠标抬起触发
+      function mouseupFn() {
+        canvas.removeEventListener("mousemove", mousemoveFn, false);
+        canvas.removeEventListener("mouseup", mouseupFn, false);
+      }
+
+      function checkElement() {
+        target = -1;
+        target = imageData.findIndex((item) => {
+          const minX = item.x;
+          const maxX = item.x + item.dWidth;
+          const minY = item.y;
+          const maxY = item.y + item.dHeight;
+          return (
+            minX <= clickCoordinate.x &&
+            clickCoordinate.x <= maxX &&
+            minY <= clickCoordinate.y &&
+            clickCoordinate.y <= maxY
+          );
+        });
+        target !== -1 && console.log("点击的元素是：", imageData[target].name);
+      }
+    </script>
+  </body>
+</html>
