@@ -4,19 +4,52 @@ Canvas 最早是由 Apple 引入 WebKit，用于Mac OS X 的 Dashboard，随后�
 
 ## API
 
-#### 1、getContext(param)
+#### 1、getContext(contextType, contextAttributes)
 
 获取渲染上下文和绘画功能
 
-**接收(param)参数：**
+**接收参数：**
 
-- 2d：建立一个二维渲染上下文。这种情况可以用 CanvasRenderingContext2D()来替换getContext('2d')。
+- **contextType**：
 
-- webgl（或 experimental-webgl）： 创建一个 WebGLRenderingContext 三维渲染上下文对象。只在实现WebGL 版本1(OpenGL ES 2.0)的浏览器上可用。
+​	为绘制上下文的类型，类型参数有：
 
-- webgl2（或 experimental-webgl2）：创建一个 WebGL2RenderingContext 三维渲染上下文对象。只在实现 WebGL 版本2 (OpenGL ES 3.0)的浏览器上可用。
+> 1. 2d：建立一个二维渲染上下文。这种情况可以用 CanvasRenderingContext2D()来替换getContext('2d')。
+> 2. webgl（或 experimental-webgl）： 创建一个 WebGLRenderingContext 三维渲染上下文对象。只在实现WebGL 版本1(OpenGL ES 2.0)的浏览器上可用。
+> 3. webgl2（或 experimental-webgl2）：创建一个 WebGL2RenderingContext 三维渲染上下文对象。只在实现 WebGL 版本2 (OpenGL ES 3.0)的浏览器上可用。
+> 4. bitmaprenderer：创建一个只提供将canvas内容替换为指定ImageBitmap功能的ImageBitmapRenderingContext。
 
-- bitmaprenderer：创建一个只提供将canvas内容替换为指定ImageBitmap功能的ImageBitmapRenderingContext。
+​	
+
+- **contextAttributes：**
+
+​	为绘制上下文的属性，这些属性相对比较多，可以设置单个也可以同时设置多个，下面列一下，方便大家了解：
+
+> 1. 2D类型的参数有： 
+>
+>    (1)、`alpha` 它的值为Boolean类型，如果设置为false, 浏览器将认Canvas背景总是不透明的，这样可以做到一些性能提效。
+>
+>    (2)、`willReadFrequently`，值也为Boolean类型，用于表明是否要重复操作，频繁调用`getImageData()`方法时能节省内存，但是仅Gecko内核浏览器支持。
+>
+>    (3)、`storage`用于表明使用哪种方式存储，默认值 persisten，表示持久化存储。
+>
+> 2. 3D类型的参数有： 
+>
+>    (1)、`alpha` 值为Boolean类型，指示画布是否包含alpha缓冲区。 
+>
+>    (2)、`antialias` 值为Boolean类型，指示是否开启抗锯齿。 
+>
+>    (3)、`depth` 值为Boolean类型，表示绘图缓冲区的深度缓冲区至少为16位。 
+>
+>    (4)、`failIfMajorPerformanceCaveat`值为Boolean类型，指示如果系统性能较低，是否创建上下文。 
+>
+>    (5)、`powerPreference`：对用户代理的提示，指示GPU的哪种配置适合WebGL上下文。可能的值是： `default`: 自动选择模式，自动决定哪种GPU配置最合适，为默认值。 `high-performance`: 高性能模式，优先考虑渲染性能而不是功耗。 `low-power`: 节能模式，优先考虑节能而不是渲染性能。 
+>
+>    (6)、`premultipliedAlpha` 值为Boolean类型，表示页面合成器将假定绘图缓冲区包含具有预乘alpha的颜色。 
+>
+>    (7)、`preserveDrawingBuffer` 值为Boolean类型，如果值为true，则不会清除缓冲区并保留其值，直到被清除或被使用者覆盖。 
+>
+>    (8)、`stencil` 值为Boolean类型，表示绘图缓冲区具有至少8位的模板缓冲区。
 
 
 
@@ -714,6 +747,7 @@ direction 属性会对 textAlign 属性产生影响。
 
 1. 如果 direction 属性设置为 ``ltr``,则 textAlign 属性的 ``left`` 和 ``start`` 的效果相同，``right`` 和 ``end`` 的效果相同
 2. 如果 direction 属性设置为 ``rtl`` 则 textAlign 属性的 ``left`` 和 ``end`` 的效果相同，``right`` 和 ``start`` 的效果相同
+2. 当设置为 ``rtl`` 时，**特殊符号结尾**（如``!``、``。``等）会显示在文本的最左边。
 
 **代码案例：**
 
@@ -1121,7 +1155,7 @@ Canvas 的状态是存储在栈中的，每次调用 ``save()`` 方法后，当�
 
 #### (3) scale(x,y)
 
-缩放
+缩放，如位置``x``、``y``、``dx``、``dy``等按比例都进行缩放。
 
 **参数说明：**
 
@@ -2403,7 +2437,7 @@ img.onload = function () {
 
 如果不需要与用户互动，可以使用 ``setInterval()`` 方法，它可以定期执行指定的代码。如果需要做游戏，可以使用键盘或者鼠标事件配合上 ``setTimeout()`` 方法来实现。通过设置事件监听，可以捕捉用户的交互，并执行相应的动作。
 
-下面我们采用 ``window.requestAnimationFrame()`` 来实现一个动画效果。requestAnimationFrame() 方法提供了更加平缓且有效率的方法来执行动画，当系统准备好重绘条件后才会调用绘制动画帧。一般每秒钟回调函数执行 60 次，也有可能会被降低，因为通常情况下 requestAnimationFrame()方法会遵循 W3C 的建议，浏览器中的回调函数执行次数通常与浏览器屏幕刷新次数相匹配。还有为了提高性能和电池寿命，通常 requestAnimationFrame() 方法运行在后台标签页或者隐藏在后台时，requestAnimationFrame() 方法会暂停调用以提升性能和电池寿命。
+下面我们采用 ``window.requestAnimationFrame()`` 来实现一个动画效果。requestAnimationFrame() 方法提供了更加平缓且有效率的方法来执行动画，当系统准备好重绘条件后才会调用绘制动画帧。一般每秒钟回调函数执行 60 次，也有可能会被降低，因为通常情况下 requestAnimationFrame()方法会遵循 W3C 的建议，浏览器中的回调函数执行次数通常与浏览器屏幕刷新次数相匹配。还有为了提高性能和电池寿命，通常 requestAnimationFrame() 方法运行在后台标签页或者隐藏在``<iframe>``标签里时，requestAnimationFrame() 方法会暂停调用以提升性能和电池寿命。
 
 **案例代码1：**
 
