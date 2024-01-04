@@ -13,16 +13,32 @@
       canvas {
         box-shadow: 0px 0px 5px #ccc;
         border-radius: 8px;
+        float: left;
+      }
+      img {
+        width: 800px;
+        height: 500px;
+        float: right;
+      }
+      button {
+        position: absolute;
+        top: 550px;
+        left: 50%;
+        margin-left: -40px;
       }
     </style>
   </head>
   <body>
-    <canvas id="canvas" width="1000" height="500">
+    <canvas id="canvas" width="800" height="500">
       当前浏览器不支持 canvas 元素，请升级或更换浏览器！
     </canvas>
+    <img id="img" src="" alt="canvas图像" />
+    <button id="btn">转化为图片且下载</button>
     <script>
       // 获取 canvas 元素
       const canvas = document.getElementById("canvas");
+      const Img = document.getElementById("img");
+      const Btn = document.getElementById("btn");
       const width = canvas.clientWidth;
       const height = canvas.clientHeight;
 
@@ -32,23 +48,23 @@
       const images = [
         {
           name: "白月魁",
-          url: "../static/test/bailaoban.jpg",
+          url: "https://raw.githubusercontent.com/JayCC1/my_nodebook/main/packages/2d/static/test/bailaoban.jpg",
         },
         {
           name: "鸣人",
-          url: "../static/test/mingren.png",
+          url: "https://raw.githubusercontent.com/JayCC1/my_nodebook/main/packages/2d/static/test/mingren.png",
         },
         {
           name: "路飞",
-          url: "../static/test/lufei.jpeg",
+          url: "https://raw.githubusercontent.com/JayCC1/my_nodebook/main/packages/2d/static/test/lufei.jpeg",
         },
         {
           name: "哪吒",
-          url: "../static/test/nazha.jpeg",
+          url: "https://raw.githubusercontent.com/JayCC1/my_nodebook/main/packages/2d/static/test/nazha.jpeg",
         },
         {
           name: "千寻",
-          url: "../static/test/qianxun.jpg",
+          url: "https://raw.githubusercontent.com/JayCC1/my_nodebook/main/packages/2d/static/test/qianxun.jpg",
         },
       ];
       // 图片绘制实例对象数组
@@ -62,6 +78,7 @@
       images.forEach((item) => {
         // 创建 image 元素
         const image = new Image();
+        image.setAttribute("crossOrigin", "anonymous");
         image.src = item.url;
         const name = item.name;
         image.onload = () => {
@@ -89,9 +106,13 @@
       }
 
       // ========================= 交互相关操作 =========================
+      // ========================= 绑定元素监听事件 =========================
       // 为 canvas 添加鼠标按下事件
       canvas.addEventListener("mousedown", mousedownFn, false);
+      // 为按钮添加点击事件
+      Btn.addEventListener("click", clickFn, false);
 
+      // ========================= 声明函数 =========================
       // 鼠标按下触发的方法
       function mousedownFn(e) {
         // 获取元素按下时相对canvas坐标系中的坐标
@@ -145,6 +166,17 @@
           );
         });
         target !== -1 && console.log("点击的元素是：", imageData[target].name);
+      }
+
+      // ========================= canvas 图片保存 =========================
+      // 点击截图函数
+      function clickFn() {
+        // 将 canvas 转换成 base64 的url
+        // toDataURL ==> 返回一个包含图片展示的 data URI
+        let url = canvas.toDataURL("image/png");
+        console.log(url);
+        // 将 canvas 转化为图片
+        Img.src = url;
       }
     </script>
   </body>
