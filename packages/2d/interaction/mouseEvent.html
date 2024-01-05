@@ -177,6 +177,27 @@
         console.log(url);
         // 将 canvas 转化为图片
         Img.src = url;
+        // 将 base64 转换成文件对象
+        let arr = url.split(",");
+        let mime = arr[0].match(/:(.*?);/)[1]; // 此处得到 文件类型
+        let bstr = atob(arr[1]); // 解码 base64
+
+        let n = bstr.length;
+        let u8arr = new Uint8Array(n);
+        while (n--) {
+          u8arr[n] = bstr.charCodeAt(n);
+        }
+        // 通过以下方式将以上变量生成文件对象，三个参数分别为文件内容、文件名、文件类型
+        let file = new File([u8arr], "filename", { type: mime });
+        // 将文件对象通过 a标签下载
+        let aDom = document.createElement("a"); // 创建一个 a 标签
+        aDom.download = file.name; // 设置文件名
+        let href = URL.createObjectURL(file); // 将 file 对象转成 UTF-16 字符串
+        aDom.href = href; // 放入href
+        document.body.appendChild(aDom); // 将 a 标签插入 body
+        aDom.click(); // 触发 a 标签的点击
+        document.body.removeChild(aDom); // 移除刚才插入的 a 标签
+        URL.revokeObjectURL(href); // 释放刚才生成的 UTF-16 字符串
       }
     </script>
   </body>
