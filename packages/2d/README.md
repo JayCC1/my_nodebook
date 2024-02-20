@@ -867,37 +867,40 @@ console.log("🚀 ~ 文案宽度：", text1.width);
 
 
 
-**总结：**
+>  **总结：**
+>
+> - 返回的 TextMetrics对象不受最大宽度等外界因素所影响。
+>
+>
+> **TextMetrics属性解析：**
+>
+> **所有属性都是使用 CSS 像素计算的，并且都是只读**
+>
+> - TextMetrics.width：基于当前上下文字体，计算内联字符串的宽度。
+>
+> - TextMetrics.actualBoundingBoxLeft：从 textAlign 属性确定的对齐点到文本矩形边界左侧的距离，使用 CSS 像素计算；正值表示文本矩形边界左侧在该对齐点的左侧。
+>
+> - TextMetrics.actualBoundingBoxRight：从 textAlign 属性确定的对齐点到文本矩形边界右侧的距离。
+>
+> - TextMetrics.fontBoundingBoxAscent：从 textBaseline 属性标明的水平线到渲染文本的所有字体的矩形最高边界顶部的距离。
+>
+> - TextMetrics.fontBoundingBoxDescent：从 textBaseline 属性标明的水平线到渲染文本的所有字体的矩形边界最底部的距离。
+>
+> - TextMetrics.actualBoundingBoxAscent：从 textBaseline 属性标明的水平线到渲染文本的矩形边界顶部的距离。
+>
+> - Textetrics.actualBoundingBoxDescent：从 textBaseline 属性标明的水平线到渲染文本的矩形边界底部的距离。
+>
+> - TextMetrics.emHeightAscent：从 textBaseline 属性标明的水平线到线框中 em 方块顶部的距离。
+>
+> - TextMetrics.emHeightDescent：从 textBaseline 属性标明的水平线到线框中 em 方块底部的距离。
+>
+> - TextMetrics.hangingBaseline：从 textBaseline 属性标明的水平线到线框的 hanging 基线的距离。
+>
+> - TextMetrics.alphabeticBaseline：从 textBaseline 属性标明的水平线到线框的 alphabetic 基线的距离。
+>
+> - TextMetrics.ideographicBaseline：从 textBaseline 属性标明的水平线到线框的 ideographic 基线的距离。
 
-返回的 TextMetrics对象不受最大宽度等外界因素所影响。
 
-**TextMetrics属性解析：**
-
-**所有属性都是使用 CSS 像素计算的，并且都是只读**
-
-- TextMetrics.width：基于当前上下文字体，计算内联字符串的宽度。
-
-- TextMetrics.actualBoundingBoxLeft：从 textAlign 属性确定的对齐点到文本矩形边界左侧的距离，使用 CSS 像素计算；正值表示文本矩形边界左侧在该对齐点的左侧。
-
-- TextMetrics.actualBoundingBoxRight：从 textAlign 属性确定的对齐点到文本矩形边界右侧的距离。
-
-- TextMetrics.fontBoundingBoxAscent：从 textBaseline 属性标明的水平线到渲染文本的所有字体的矩形最高边界顶部的距离。
-
-- TextMetrics.fontBoundingBoxDescent：从 textBaseline 属性标明的水平线到渲染文本的所有字体的矩形边界最底部的距离。
-
-- TextMetrics.actualBoundingBoxAscent：从 textBaseline 属性标明的水平线到渲染文本的矩形边界顶部的距离。
-
-- Textetrics.actualBoundingBoxDescent：从 textBaseline 属性标明的水平线到渲染文本的矩形边界底部的距离。
-
-- TextMetrics.emHeightAscent：从 textBaseline 属性标明的水平线到线框中 em 方块顶部的距离。
-
-- TextMetrics.emHeightDescent：从 textBaseline 属性标明的水平线到线框中 em 方块底部的距离。
-
-- TextMetrics.hangingBaseline：从 textBaseline 属性标明的水平线到线框的 hanging 基线的距离。
-
-- TextMetrics.alphabeticBaseline：从 textBaseline 属性标明的水平线到线框的 alphabetic 基线的距离。
-
-- TextMetrics.ideographicBaseline：从 textBaseline 属性标明的水平线到线框的 ideographic 基线的距离。
 
 
 
@@ -1118,12 +1121,12 @@ ctx.fillRect(10, 300, 300, 100);
 
 Canvas 的状态是存储在栈中的，每次调用 ``save()`` 方法后，当前的状态都会被推送到栈中保存起来。
 
-**一个绘画状态囊括的属性：**
-
-- 应用的变形：``移动`` 、``旋转`` 、``缩放`` 、``strokeStyle`` 、``fillStyle`` 、``globalAlpha`` 、``lineWidth`` 、``lineCap`` 、``lineJoin`` 、``miterLimit`` 、``lineDashOffset`` 、``shadowOffsetX`` 、``shadowOffsetY`` 、``shadowBlur`` 、``shadowColor`` 、``globalCompositeOperation`` 、``font`` 、``textAlign`` 、``textBaseline`` 、``direction`` 、``imageSmoothingEnabled`` 等。
-- 应用的裁切路径：``clipping path`` 
-
-**注意：保存和恢复可以多次调用，需要注意的是每一次调用 restore 方法，上一个保存的状态就从栈中弹出，所有设定都恢复。**
+> **一个绘画状态囊括的属性：**
+>
+> - 应用的变形：``移动`` 、``旋转`` 、``缩放`` 、``strokeStyle`` 、``fillStyle`` 、``globalAlpha`` 、``lineWidth`` 、``lineCap`` 、``lineJoin`` 、``miterLimit`` 、``lineDashOffset`` 、``shadowOffsetX`` 、``shadowOffsetY`` 、``shadowBlur`` 、``shadowColor`` 、``globalCompositeOperation`` 、``font`` 、``textAlign`` 、``textBaseline`` 、``direction`` 、``imageSmoothingEnabled`` 等。
+> - 应用的裁切路径：``clipping path`` 
+>
+> **注意：保存和恢复可以多次调用，需要注意的是每一次调用 restore 方法，上一个保存的状态就从栈中弹出，所有设定都恢复。**
 
 
 
@@ -2560,6 +2563,142 @@ if (canvas.getContext) {
     window.requestAnimationFrame(draw);
     ball.draw();
 }
+````
+
+
+
+## 八、canvas 辅助工具api
+
+### 1、toDataURL(type,encoderOptions)
+
+``toDataURL()`` 方法可以返回一个包含图片的 ``Data URL``，也就是前缀为 ``data:`` 协议的URL，其允许内容创建者向文档中嵌入小文件。
+
+**参数说明：**
+
+- type:``type`` 为图片格式，默认为 ``image/png``,也可指定为：``image/jpg``、``image/webp``等格式
+- encoderOptions：``encoderOptions`` 为图片的质量，默认值``0.92``。在指定图片格式为``image/jpeg``或``image/webp`` 的情况下，可以从 **0** 到 **1** 的区间选择图片的质量。如果不在这个范围内，则使用默认值``0.92``。
+
+**案例说明：**
+
+````javascript
+// 点击截图函数
+function clickFn(){
+  // 将canvas转换成base64的url
+  let url = canvas.toDataURL("image/png"); 
+  // 把Canvas 转化为图片
+  Img.src = url;
+  // 将base64转换为文件对象
+  let arr = url.split(",")
+  // 正则表达式 /:(.*?);/
+  // 是用来匹配包含冒号（:）和分号（;）的文本中的特定内容。具体来说，它会匹配从冒号开始，到分号结束之间的任何字符（.代表任意字符，*?表示懒惰匹配，即尽可能少地匹配字符）
+  let mime = arr[0].match(/:(.*?);/)[1] // 此处得到的为文件类型
+  let bstr = atob(arr[1]) // 此处将base64解码
+  let n = bstr.length
+  let u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  // 通过以下方式将以上变量生成文件对象，三个参数分别为文件内容、文件名、文件类型
+  let file = new File([u8arr], "filename", { type: mime });
+  // 将文件对象通过a标签下载
+  let aDom = document.createElement("a"); // 创建一个 a 标签
+  aDom.download = file.name; // 设置文件名
+  let href = URL.createObjectURL(file); // 将file对象转成 UTF-16 字符串
+  aDom.href = href; // 放入href
+  document.body.appendChild(aDom); // 将a标签插入 body
+  aDom.click(); // 触发 a 标签的点击
+  document.body.removeChild(aDom); // 移除刚才插入的 a 标签
+  URL.revokeObjectURL(href); // 释放刚才生成的 UTF-16 字符串
+};
+
+````
+
+
+
+> **注意：**
+>
+> 当 canvas toDataURL() 转图片生成空白图片问题总结可能是由以下原因导致：
+>
+> - 跨域问题：如果你的 canvas 元素中的图像来源于其他域，浏览器**可能会**阻止``toDataURL()``方法获取像素数据。这是处于安全考虑。
+> - 画布为空或不可见：如果 canvas 元素是隐藏的或其尺寸为 0x0，那么``toDataURL()``方法可能会返回空的数据URL。
+> - 不支持的**MIME**类型：``toDataURL``方法接受一个 MIME 类型作为参数，如果提供的类型不被支持，那么可能会返回空的数据URL。
+> - 浏览器兼容性问题：虽然``toDataURL()``方法在大多数现代浏览器中都得到了支持，但在一些较旧的或特定的浏览器中可能存在问题。
+>
+> 解决方案：
+>
+> - 处理跨域问题：如果你需要从其他域加载图像，你需要确保服务器设置了正确的 CORS (Cross-Origin Resource Sharing) 头部，以允许跨域请求。同时，你需要在请求的 URL 中添加 **crossorigin** 属性，并设置其值为 **anonymous**。例如：
+>
+>   ```javascript
+>   var img = new Image();
+>   img.crossOrigin = 'anonymous';
+>   img.src = 'http://example.com/image.png';
+>   ```
+>
+> - 检查画布可见性和尺寸：确保你的 canvas 元素是可见的，并且尺寸不为 0x0。你可以通过以下代码来检查和设置 canvas 的尺寸：
+>
+>   ````javascript
+>   const canvas = document.getElementById('myCanvas');
+>   if(canvas.width === 0 || canvas.height === 0) {
+>       canvas.width = 500;
+>       canvas.height = 500;
+>   }
+>   ````
+>
+> - 使用合适的 MIME 类型：文档中查找``toDataURL()``方法接受的 MIME 类型，选择适合的场景需要的类型。
+>
+> - 检查浏览器兼容性：你可以查看你所使用的浏览器的兼容性信息，并尝试使用不同的方法或库（如 excanvas）来提供对较旧浏览器的支持。同时，确保你的代码在各种浏览器中进行了充分的测试。
+
+
+
+### 2、getImageData(sx,sy,sw,sh)
+
+``getImageData()`` 方法可以返回一个 ``ImageData`` 对象。
+
+**ImageData**：该对象是用来描述 canvas 区域隐含的像素数据，此区域通过矩形表示，起始点为``(sx,sy)``、宽为``sw``、高为``sh``
+
+**参数说明：**
+
+- sx：将要提取的图像数据矩形区域的左上角 x 坐标
+
+- sy：将要提取的图像数据矩形区域的左上角 y 坐标
+
+- sw：将要提取的图像数据矩形区域的宽度
+
+- sh：将要提取的图像数据矩形区域的高度
+
+
+
+### 3、putImageData(imagedata, dx, dy, dirtyX, dirtyWidth, dirtyHeight)
+
+``putImageData()``方法和``getImageData()``方法正好相反，可以将数据从已有的``ImageData``对象绘制为位图。如果提供了一个绘制的矩形，则值绘制该矩形的像素。
+
+**参数说明：**
+
+- ImageData：包含像素值的数组对象。
+- dx：源图像数据在目标画布中 x 轴方向的偏移量。
+- dy：源图像数据在目标画布中 y 轴方向的偏移量。
+- dirtyX：可选参数，在源图像数据中，矩形区域左上角的位置。默认是整个图像数据的左上角（x 坐标）。
+- dirtyY：可选参数，在源图像数据中，矩形区域左上角的位置。默认是整个图像数据的左上角（y 坐标）。
+- dirtyWidth：可选参数，在源图像数据中，矩形区域的宽度。默认是图像数据的宽度。
+- dirtyHeight：可选参数，在源图像数据中，矩形区域的高度。默认是图像数据的高度。
+
+**案例说明：**
+
+````javascript
+// 为 canvas 添加一个黑白滤镜
+const blackWhite = function() {
+    ctx.drawImage(img, 0, 0, 450, 800);
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+    for (var i = 0; i < data.length; i += 4) {
+      var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+      data[i]     = avg; // red
+      data[i + 1] = avg; // green
+      data[i + 2] = avg; // blue
+    }
+    ctx.putImageData(imageData, 0, 0);
+};
+
 ````
 
 
