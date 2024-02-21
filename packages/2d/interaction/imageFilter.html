@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>canvas - 主题</title>
+    <style>
+      canvas {
+        box-shadow: 0px 0px 5px #ccc;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="450" height="800">
+      当前浏览器不支持 canvas 元素，请升级或更换浏览器！
+    </canvas>
+    <div class="btnBox">
+      <button id="original">还原</button>
+      <button id="blackWhite">黑白主题</button>
+      <button id="exposure">曝光主题</button>
+    </div>
+    <script>
+      // 获取 canvas 元素
+      const canvas = document.getElementById("canvas");
+      const originalEl = document.getElementById("original");
+      const blackWhiteEl = document.getElementById("blackWhite");
+      const exposureEl = document.getElementById("exposure");
+      const sepiaEl = document.getElementById("sepia");
+
+      // 通过判断 getContext 方法是否存在来判断浏览器的支持性
+      if (canvas.getContext) {
+        // 获取绘图上下文
+        const ctx = canvas.getContext("2d");
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.src =
+          "https://img1.baidu.com/it/u=4141276181,3458238270&fm=253&fmt=auto&app=138&f=JPEG";
+        img.onload = () => {
+          ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+          ctx.drawImage(img, 0, 0, canvas.clientWidth, canvas.clientHeight);
+        };
+
+        // ************************** 函数方法声明 **************************
+        // 还原方法声明
+        function original() {
+          ctx.drawImage(img, 0, 0, canvas.clientWidth, canvas.clientHeight);
+        }
+        // 曝光方法声明，具体是用红绿和蓝的平均值来实现
+        function exposure() {
+          ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+          ctx.drawImage(img, 0, 0, canvas.clientWidth, canvas.clientHeight);
+          const imageData = ctx.getImageData(
+            0,
+            0,
+            canvas.clientWidth,
+            canvas.clientHeight
+          );
+          const data = imageData.data;
+          for (let i = 0; i < data.length; i += 4) {
+            let avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+            data[i] = 255 - data[i]; // red
+            data[i + 1] = 255 - data[i + 1]; // green
+            data[i + 2] = 255 - data[i + 2]; // blue
+          }
+          ctx.putImageData(imageData, 0, 0);
+        }
+        // 黑白滤镜方法声明，具体是减掉颜色的最大色值255来实现
+        function blackWhite() {
+          ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+          ctx.drawImage(img, 0, 0, canvas.clientWidth, canvas.clientHeight);
+          const imageData = ctx.getImageData(
+            0,
+            0,
+            canvas.clientWidth,
+            canvas.clientHeight
+          );
+          const data = imageData.data;
+          for (let i = 0; i < data.length; i += 4) {
+            const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+            data[i] = avg; // red
+            data[i + 1] = avg; // green
+            data[i + 2] = avg; // blue
+          }
+          ctx.putImageData(imageData, 0, 0);
+        }
+
+        // ************************** 事件绑定 **************************
+        // 还原按钮绑定点击事件
+        originalEl.addEventListener("click", original);
+        // 曝光按钮绑定点击事件
+        exposureEl.addEventListener("click", exposure);
+        // 黑白按钮绑定点击事件
+        blackWhiteEl.addEventListener("click", blackWhite);
+      }
+    </script>
+  </body>
+</html>
